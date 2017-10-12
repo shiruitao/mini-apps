@@ -1,0 +1,24 @@
+
+  <view>
+    <view class="viewsearch">
+      <input class="viewsearch" name="input" placeholder="搜索框"/>
+    </view>
+    <view class="viewphoto">
+      <image class="viewphoto" src="{{photoposter}}"/>
+    </view>
+    <view class="bottomfix">
+      <view class="viewbottomfix" bindtap="hometap" style="color:{{homecolor}}">
+        <image class="photobottomfix" src="{{photohome}}"/>
+        <text class="textbottomfix">{{titlehome}}</text>
+      </view>
+      <view class="viewbottomfix" bindtap="shoptap" style="color:{{shopcolor}}">
+        <image class="photobottomfix" src="{{photoshop}}"/>
+        <text class="textbottomfix">{{titleshop}}</text>
+      </view>
+      <view class="viewbottomfix" bindtap="mytap" style="color:{{mycolor}}">
+        <image class="photobottomfix" src="{{photomy}}"/>
+        <text class="textbottomfix">{{titlemy}}</text>
+      </view>
+    </view>
+
+  </view>

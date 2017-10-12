@@ -1,0 +1,127 @@
+/**
+*  2017-10-11   Shi Ruitao
+*/
+<style lang="less">
+.viewsearch {
+  display: flex;
+  height: 1.5rem;
+  width: 90%;
+  justify-content: center;
+  // background-color: lightcyan;
+  border-bottom: 1px solid lightgrey;
+}
+
+.viewphoto {
+  height: 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightcyan;
+}
+
+.bottomfix {
+  width: 100%;
+  height: 3rem;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 0.5px solid grey;
+}
+
+.viewbottomfix {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.textbottomfix {
+  font-size: 0.7rem;
+  margin-bottom: 0.1rem;
+}
+
+.photobottomfix {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+</style>
+<template>
+  <view>
+    <view class="viewsearch">
+      <input class="viewsearch" name="input" placeholder="搜索框" />
+    </view>
+    <view class="viewphoto">
+      <image class="viewphoto" src="{{photoposter}}" />
+    </view>
+    <view class="bottomfix">
+      <view class="viewbottomfix" @tap="hometap" style="color:{{homecolor}}">
+        <image class="photobottomfix" src="{{photohome}}" />
+        <text class="textbottomfix">{{titlehome}}</text>
+      </view>
+      <view class="viewbottomfix" @tap="shoptap" style="color:{{shopcolor}}">
+        <image class="photobottomfix" src="{{photoshop}}" />
+        <text class="textbottomfix">{{titleshop}}</text>
+      </view>
+      <view class="viewbottomfix" @tap="mytap" style="color:{{mycolor}}">
+        <image class="photobottomfix" src="{{photomy}}" />
+        <text class="textbottomfix">{{titlemy}}</text>
+      </view>
+    </view>
+
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '超市'
+  }
+  data = {
+    photoposter: '../images/poster.jpg',
+    photohome: '../images/homeclick.svg',
+    photoshop: '../images/shop.svg',
+    photomy: '../images/my.svg',
+    homecolor: '#e8884d',
+    shopcolor: '',
+    mycolor: '',
+    titlehome: '首页',
+    titleshop: '购物车',
+    titlemy: '我的'
+  }
+  methods = {
+    hometap() {
+      let self = this
+      self.homecolor = '#e8884d'
+      self.shopcolor = 'black'
+      self.mycolor = 'black'
+      self.photohome = '../images/homeclick.svg'
+      self.photoshop = '../images/shop.svg'
+      self.photomy = '../images/my.svg'
+    },
+    shoptap() {
+      let self = this
+      self.homecolor = 'black'
+      self.shopcolor = '#e8884d'
+      self.mycolor = 'black'
+      self.photohome = '../images/home.svg'
+      self.photoshop = '../images/shopclick.svg'
+      self.photomy = '../images/my.svg'
+    },
+    mytap() {
+      let self = this
+      self.homecolor = 'black'
+      self.shopcolor = 'black'
+      self.mycolor = '#e8884d'
+      self.photohome = '../images/home.svg'
+      self.photoshop = '../images/shop.svg'
+      self.photomy = '../images/myclick.svg'
+    }
+  }
+}
+</script>
