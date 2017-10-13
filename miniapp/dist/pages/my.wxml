@@ -1,0 +1,10 @@
+
+  <view class="viewAll">
+    <view class="viewInformation">
+      <image class="viewHead" src="{{headPortrait}}"/>
+      <text class="textName">name</text>
+    </view>
+    <view class="viewlist">
+      <text class="textName">name</text>
+    </view>
+  </view>

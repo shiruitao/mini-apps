@@ -1,0 +1,54 @@
+
+  <view class="overall">
+    <view class="viewsearch">
+      <input class="viewsearch" name="input" placeholder="搜索框"/>
+    </view>
+
+    <view>
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
+        <block  wx:for="{{imgUrls}}" wx:key="index">
+          <swiper-item>
+            <image src="{{item}}" class="viewphoto"/>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="class">
+      <view class="classline">
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.salt}}"/>
+          <text class="classtext">调味品</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.edibleOil}}"/>
+          <text class="classtext">食用油</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.rice}}"/>
+          <text class="classtext">米面</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.beans}}"/>
+          <text class="classtext">豆类</text>
+        </view>
+      </view>
+      <view class="classline">
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.sauce}}"/>
+          <text class="classtext">酱乳类</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.hotPot}}"/>
+          <text class="classtext">火锅食材</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.snacks}}"/>
+          <text class="classtext">小零食</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.use}}"/>
+          <text class="classtext">餐具用品</text>
+        </view>
+      </view>
+    </view>
+  </view>

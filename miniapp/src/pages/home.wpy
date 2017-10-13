@@ -1,23 +1,26 @@
 /**
-*  2017-10-11   Shi Ruitao
+*  2017-10-12   Shi Ruitao
 */
 <style lang="less">
+.overall {
+  display: flex;
+  flex-direction: column;
+}
+
 .viewsearch {
   display: flex;
   height: 1.5rem;
   width: 90%;
   justify-content: center;
-  // background-color: lightcyan;
   border-bottom: 1px solid lightgrey;
 }
 
 .viewphoto {
-  height: 6rem;
+  height: 8rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightcyan;
 }
 
 .bottomfix {
@@ -49,30 +52,92 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+
+.class {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom:0.3rem solid lightgrey; 
+}
+
+.classline {
+  display: flex;
+  flex-direction: row;
+  height: 3rem;
+  width: 100%;
+}
+
+.classIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin-top: 0.4rem;
+}
+
+.classStyle {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.classtext {
+  font-size: 0.5rem;
+  padding-top: 0.3rem;
+}
 </style>
 <template>
-  <view>
+  <view class="overall">
     <view class="viewsearch">
       <input class="viewsearch" name="input" placeholder="搜索框" />
     </view>
-    <view class="viewphoto">
-      <image class="viewphoto" src="{{photoposter}}" />
-    </view>
-    <view class="bottomfix">
-      <view class="viewbottomfix" @tap="hometap" style="color:{{homecolor}}">
-        <image class="photobottomfix" src="{{photohome}}" />
-        <text class="textbottomfix">{{titlehome}}</text>
-      </view>
-      <view class="viewbottomfix" @tap="shoptap" style="color:{{shopcolor}}">
-        <image class="photobottomfix" src="{{photoshop}}" />
-        <text class="textbottomfix">{{titleshop}}</text>
-      </view>
-      <view class="viewbottomfix" @tap="mytap" style="color:{{mycolor}}">
-        <image class="photobottomfix" src="{{photomy}}" />
-        <text class="textbottomfix">{{titlemy}}</text>
-      </view>
-    </view>
 
+    <view>
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
+        <block wx:for="{{imgUrls}}" wx:key="index">
+          <swiper-item>
+            <image src="{{item}}" class="viewphoto" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="class">
+      <view class="classline">
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.salt}}" />
+          <text class="classtext">调味品</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.edibleOil}}" />
+          <text class="classtext">食用油</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.rice}}" />
+          <text class="classtext">米面</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.beans}}" />
+          <text class="classtext">豆类</text>
+        </view>
+      </view>
+      <view class="classline">
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.sauce}}" />
+          <text class="classtext">酱乳类</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.hotPot}}" />
+          <text class="classtext">火锅食材</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.snacks}}" />
+          <text class="classtext">小零食</text>
+        </view>
+        <view class="classIn">
+          <image class="classStyle" src="{{icon.use}}" />
+          <text class="classtext">餐具用品</text>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -84,43 +149,48 @@ export default class Index extends wepy.page {
   }
   data = {
     photoposter: '../images/poster.jpg',
-    photohome: '../images/homeclick.svg',
-    photoshop: '../images/shop.svg',
-    photomy: '../images/my.svg',
-    homecolor: '#e8884d',
-    shopcolor: '',
-    mycolor: '',
-    titlehome: '首页',
-    titleshop: '购物车',
-    titlemy: '我的'
+    indicatorDots: true,
+    autoplay: true,
+    interval: 4000,
+    duration: 500,
+    indicatorActiveColor: '#e8884d',
+    icon: {
+      salt: '../image/salt.png',
+      edibleOil: '../image/edibleOil.png',
+      rice: '../image/rice.png',
+      beans: '../image/beans.png',
+      sauce: '../image/sauce.png',
+      hotPot: '../image/hotPot.png',
+      snacks: '../image/snacks.png',
+      use: '../image/use.png'
+    },
+    imgUrls: [
+      '../images/Yosemite.jpg',
+      '../images/Yosemite 2.jpg',
+      '../images/Yosemite 3.jpg',
+      '../images/Yosemite 4.jpg'
+    ]
   }
   methods = {
-    hometap() {
-      let self = this
-      self.homecolor = '#e8884d'
-      self.shopcolor = 'black'
-      self.mycolor = 'black'
-      self.photohome = '../images/homeclick.svg'
-      self.photoshop = '../images/shop.svg'
-      self.photomy = '../images/my.svg'
+    changeIndicatorDots: function(e) {
+      this.setData({
+        indicatorDots: !this.data.indicatorDots
+      })
     },
-    shoptap() {
-      let self = this
-      self.homecolor = 'black'
-      self.shopcolor = '#e8884d'
-      self.mycolor = 'black'
-      self.photohome = '../images/home.svg'
-      self.photoshop = '../images/shopclick.svg'
-      self.photomy = '../images/my.svg'
+    changeAutoplay: function(e) {
+      this.setData({
+        autoplay: !this.data.autoplay
+      })
     },
-    mytap() {
-      let self = this
-      self.homecolor = 'black'
-      self.shopcolor = 'black'
-      self.mycolor = '#e8884d'
-      self.photohome = '../images/home.svg'
-      self.photoshop = '../images/shop.svg'
-      self.photomy = '../images/myclick.svg'
+    intervalChange: function(e) {
+      this.setData({
+        interval: e.detail.value
+      })
+    },
+    durationChange: function(e) {
+      this.setData({
+        duration: e.detail.value
+      })
     }
   }
 }

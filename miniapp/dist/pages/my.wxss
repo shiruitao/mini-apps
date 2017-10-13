@@ -1,0 +1,29 @@
+
+.viewAll {
+  display: flex;
+  flex-direction: column;
+}
+
+.viewInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #e8884d;
+  width: 100%;
+}
+
+.viewHead {
+  height: 2rem;
+  width: 2rem;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.textName {
+  font-size: 0.7rem;
+}
+.viewlist{
+  height: 1rem;
+  width: 100%;
+  border: 1px solid grey;
+}
