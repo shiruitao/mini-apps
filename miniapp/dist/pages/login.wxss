@@ -1,0 +1,20 @@
+
+.view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 17rem;
+  background-color: lightcyan;
+}
+
+.image {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+.text{
+  font-size: 0.8rem;
+  margin-top: 1rem; 
+}

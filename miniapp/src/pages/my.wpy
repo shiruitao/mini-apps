@@ -8,24 +8,42 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #e8884d;
+  align-items: center;
+  background-color: lightcoral;
   width: 100%;
+  height: 7rem;
 }
 
 .viewHead {
-  height: 2rem;
-  width: 2rem;
-  border: 1px solid white;
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid lightcoral;
+  margin-bottom: 0.3rem;
   border-radius: 50%;
 }
 
 .textName {
   font-size: 0.7rem;
 }
-.viewlist{
-  height: 1rem;
+
+.viewList {
+  display: flex;
+  flex-direction: column;
+}
+
+.viewListIn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2rem;
   width: 100%;
-  border: 1px solid grey;
+  border-bottom: 1px solid lightgrey;
+}
+.listPhoto{
+  padding-left: 0.5rem;
+  padding-right: 0.3rem;
+  height: 0.9rem;
+  width: 0.8rem;
 }
 </style>
 <template>
@@ -34,8 +52,23 @@
       <image class="viewHead" src="{{headPortrait}}" />
       <text class="textName">name</text>
     </view>
-    <view class="viewlist">
-      <text class="textName">name</text>
+    <view class="viewList">
+      <view class="viewListIn" @tap="pageIndent">
+        <image class="listPhoto" src="{{indent}}" />
+        <text class="textName">我的订单</text>
+      </view>
+      <view class="viewListIn" @tap="pageAddress">
+        <image class="listPhoto" src="{{address}}" />
+        <text class="textName">收货地址</text>
+      </view>
+      <view class="viewListIn" @tap="shop">
+        <image class="listPhoto" src="{{shop}}" />
+        <text class="textName">购物车</text>
+      </view>
+      <view class="viewListIn">
+        <image class="listPhoto" src="{{phone}}" />
+        <text class="textName">联系我们</text>
+      </view>
     </view>
   </view>
 </template>
@@ -47,7 +80,29 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '个人中心'
   }
   data = {
-    headPortrait: '../images/head.png'
+    headPortrait: '../my/head.png',
+    indent: '../my/indent.png',
+    address: '../my/address.png',
+    shop: '../images/shop.png',
+    phone: '../my/phone.png'
+
+  }
+  methods= {
+    pageIndent() {
+      wepy.navigateTo({
+        url: './my/indent'
+      })
+    },
+    pageAddress() {
+      wepy.navigateTo({
+        url: './my/address'
+      })
+    },
+    shop() {
+      wepy.switchTab({
+        url: './shop'
+      })
+    }
   }
 }
 </script>

@@ -1,0 +1,5 @@
+
+  <view class="view">
+    <text class="text">看毛看! 什么都没有</text>
+    <image class="image" src="{{go}}"/>
+  </view>

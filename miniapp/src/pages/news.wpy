@@ -1,0 +1,28 @@
+/**
+*  2017-10-14   Shi Ruitao
+*/
+<style lang="less">
+
+
+</style>
+<template>
+<view>
+  <view>
+    
+  </view>
+</view>
+
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '动态'
+  }
+  data = {
+  }
+  methods = {
+  }
+}
+</script>

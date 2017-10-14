@@ -9,10 +9,47 @@
 
 .viewsearch {
   display: flex;
-  height: 1.5rem;
-  width: 90%;
+  flex-direction: row;
+  border-top: 1px solid gray;
+  background-color: #A3D0C3;
   justify-content: center;
-  border-bottom: 1px solid lightgrey;
+  align-items: center;
+  height: 2.2rem;
+}
+
+.viewInput {
+  display: flex;
+  justify-content: center;
+  height: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.viewsearchIn {
+  border: 2px solid #7BA7AB;
+  border-radius: 5px;
+  height: 90%;
+  width: 14rem;
+  background: #F9F0DA;
+  color: #9E9C9C;
+}
+
+.searchButton {
+  // top: 0;
+  // right: 0;
+  background: #7BA7AB;
+  border-radius: 5px;
+  height: 1.6rem;
+  width: 13%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.5rem;
+}
+
+.searchButtonPho {
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .viewphoto {
@@ -23,41 +60,12 @@
   align-items: center;
 }
 
-.bottomfix {
-  width: 100%;
-  height: 3rem;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 0.5px solid grey;
-}
-
-.viewbottomfix {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-}
-
-.textbottomfix {
-  font-size: 0.7rem;
-  margin-bottom: 0.1rem;
-}
-
-.photobottomfix {
-  width: 1.5rem;
-  height: 1.5rem;
-}
 
 .class {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom:0.3rem solid lightgrey; 
+  border-bottom: 0.3rem solid lightgrey;
 }
 
 .classline {
@@ -87,9 +95,16 @@
 </style>
 <template>
   <view class="overall">
-    <view class="viewsearch">
-      <input class="viewsearch" name="input" placeholder="搜索框" />
-    </view>
+    <form>
+      <view class="viewsearch">
+        <view class="viewInput">
+          <input class="viewsearchIn" style="font-size:0.8rem" name="input" placeholder="搜索您想要的商品..." />
+        </view>
+        <button class="searchButton" @tap="{}">
+          <image class="searchButtonPho" src="{{'../image/search.png'}}" />
+        </button>
+      </view>
+    </form>
 
     <view>
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
@@ -102,37 +117,37 @@
     </view>
     <view class="class">
       <view class="classline">
-        <view class="classIn">
+        <view class="classIn" @tap="page1">
           <image class="classStyle" src="{{icon.salt}}" />
           <text class="classtext">调味品</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" @tap="page2">
           <image class="classStyle" src="{{icon.edibleOil}}" />
           <text class="classtext">食用油</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" @tap="page3">
           <image class="classStyle" src="{{icon.rice}}" />
           <text class="classtext">米面</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" @tap="page4">
           <image class="classStyle" src="{{icon.beans}}" />
           <text class="classtext">豆类</text>
         </view>
       </view>
       <view class="classline">
-        <view class="classIn">
+        <view class="classIn" @tap="page5">
           <image class="classStyle" src="{{icon.sauce}}" />
           <text class="classtext">酱乳类</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" @tap="page6">
           <image class="classStyle" src="{{icon.hotPot}}" />
           <text class="classtext">火锅食材</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" @tap="page7">
           <image class="classStyle" src="{{icon.snacks}}" />
           <text class="classtext">小零食</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" @tap="page8">
           <image class="classStyle" src="{{icon.use}}" />
           <text class="classtext">餐具用品</text>
         </view>
@@ -190,6 +205,52 @@ export default class Index extends wepy.page {
     durationChange: function(e) {
       this.setData({
         duration: e.detail.value
+      })
+    },
+    formSubmit: function(e) {
+      console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    },
+    formReset: function() {
+      console.log('form发生了reset事件')
+    },
+    page1() {
+      wepy.navigateTo({
+        url: './class/salt'
+      })
+    },
+    page2() {
+      wepy.navigateTo({
+        url: './class/edibleOil'
+      })
+    },
+    page3() {
+      wepy.navigateTo({
+        url: './class/rice'
+      })
+    },
+    page4() {
+      wepy.navigateTo({
+        url: './class/beans'
+      })
+    },
+    page5() {
+      wepy.navigateTo({
+        url: './class/sauce'
+      })
+    },
+    page6() {
+      wepy.navigateTo({
+        url: './class/hotPot'
+      })
+    },
+    page7() {
+      wepy.navigateTo({
+        url: './class/snacks'
+      })
+    },
+    page8() {
+      wepy.navigateTo({
+        url: './class/use'
       })
     }
   }

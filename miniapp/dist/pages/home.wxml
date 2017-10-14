@@ -1,8 +1,15 @@
 
   <view class="overall">
-    <view class="viewsearch">
-      <input class="viewsearch" name="input" placeholder="搜索框"/>
-    </view>
+    <form>
+      <view class="viewsearch">
+        <view class="viewInput">
+          <input class="viewsearchIn" style="font-size:0.8rem" name="input" placeholder="搜索您想要的商品..."/>
+        </view>
+        <button class="searchButton" bindtap="{}">
+          <image class="searchButtonPho" src="{{'../image/search.png'}}"/>
+        </button>
+      </view>
+    </form>
 
     <view>
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
@@ -15,37 +22,37 @@
     </view>
     <view class="class">
       <view class="classline">
-        <view class="classIn">
+        <view class="classIn" bindtap="page1">
           <image class="classStyle" src="{{icon.salt}}"/>
           <text class="classtext">调味品</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" bindtap="page2">
           <image class="classStyle" src="{{icon.edibleOil}}"/>
           <text class="classtext">食用油</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" bindtap="page3">
           <image class="classStyle" src="{{icon.rice}}"/>
           <text class="classtext">米面</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" bindtap="page4">
           <image class="classStyle" src="{{icon.beans}}"/>
           <text class="classtext">豆类</text>
         </view>
       </view>
       <view class="classline">
-        <view class="classIn">
+        <view class="classIn" bindtap="page5">
           <image class="classStyle" src="{{icon.sauce}}"/>
           <text class="classtext">酱乳类</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" bindtap="page6">
           <image class="classStyle" src="{{icon.hotPot}}"/>
           <text class="classtext">火锅食材</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" bindtap="page7">
           <image class="classStyle" src="{{icon.snacks}}"/>
           <text class="classtext">小零食</text>
         </view>
-        <view class="classIn">
+        <view class="classIn" bindtap="page8">
           <image class="classStyle" src="{{icon.use}}"/>
           <text class="classtext">餐具用品</text>
         </view>

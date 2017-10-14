@@ -8,22 +8,40 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #e8884d;
+  align-items: center;
+  background-color: lightcoral;
   width: 100%;
+  height: 7rem;
 }
 
 .viewHead {
-  height: 2rem;
-  width: 2rem;
-  border: 1px solid white;
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid lightcoral;
+  margin-bottom: 0.3rem;
   border-radius: 50%;
 }
 
 .textName {
   font-size: 0.7rem;
 }
-.viewlist{
-  height: 1rem;
+
+.viewList {
+  display: flex;
+  flex-direction: column;
+}
+
+.viewListIn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2rem;
   width: 100%;
-  border: 1px solid grey;
+  border-bottom: 1px solid lightgrey;
+}
+.listPhoto{
+  padding-left: 0.5rem;
+  padding-right: 0.3rem;
+  height: 0.9rem;
+  width: 0.8rem;
 }

@@ -4,7 +4,22 @@
       <image class="viewHead" src="{{headPortrait}}"/>
       <text class="textName">name</text>
     </view>
-    <view class="viewlist">
-      <text class="textName">name</text>
+    <view class="viewList">
+      <view class="viewListIn" bindtap="pageIndent">
+        <image class="listPhoto" src="{{indent}}"/>
+        <text class="textName">我的订单</text>
+      </view>
+      <view class="viewListIn" bindtap="pageAddress">
+        <image class="listPhoto" src="{{address}}"/>
+        <text class="textName">收货地址</text>
+      </view>
+      <view class="viewListIn" bindtap="shop">
+        <image class="listPhoto" src="{{shop}}"/>
+        <text class="textName">购物车</text>
+      </view>
+      <view class="viewListIn">
+        <image class="listPhoto" src="{{phone}}"/>
+        <text class="textName">联系我们</text>
+      </view>
     </view>
   </view>
