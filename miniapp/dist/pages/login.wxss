@@ -14,7 +14,27 @@
   border-radius: 50%;
   border: 1px solid white;
 }
-.text{
+
+.text {
   font-size: 0.8rem;
-  margin-top: 1rem; 
+  margin-top: 1rem;
+}
+
+.button {
+  height: 1rem;
+  width: 2rem;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid goldenrod;
+  border-radius: 20px; 
+  background: lightgreen;
+  height: 1.5rem;
+  width: 4rem;
+}
+.textbutton {
+  font-size: 0.8rem;
 }

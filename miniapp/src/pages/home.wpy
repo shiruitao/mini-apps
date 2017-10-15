@@ -92,15 +92,95 @@
   font-size: 0.5rem;
   padding-top: 0.3rem;
 }
+
+.viewCom {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 3px solid lightgrey;
+}
+
+.comText {
+  font-size: 0.7rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.2rem;
+}
+
+.moneyBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.moneyText {
+  font-size: 0.9rem;
+  color: red;
+}
+
+.buyButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.5rem;
+  color: white;
+  background-color: red;
+}
+
+.viewMoney {
+  display: flex; // justify-content: center;
+  align-items: center;
+  width: 4rem;
+  padding-left: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.viewButton {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  margin-bottom: 0.3rem;
+  margin-right: 0.5rem;
+}
+
+.viewOperation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5rem;
+  margin-bottom: 0.3rem;
+}
+
+.buttonOperation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+.viewNum{
+  display: flex;
+  justify-content: center;
+  border: 1px solid lightgrey;
+  height: 1.2rem;
+  width: 1.5rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+}
 </style>
 <template>
   <view class="overall">
-    <form>
+    <form bindsubmit="formSubmit">
       <view class="viewsearch">
         <view class="viewInput">
           <input class="viewsearchIn" style="font-size:0.8rem" name="input" placeholder="搜索您想要的商品..." />
         </view>
-        <button class="searchButton" @tap="{}">
+        <button class="searchButton" formType="submit">
           <image class="searchButtonPho" src="{{'../image/search.png'}}" />
         </button>
       </view>
@@ -153,6 +233,29 @@
         </view>
       </view>
     </view>
+
+    <view class="viewCom">
+      <block wx:for="{{commodity}}" wx:key="index">
+        <view class="viewCom">
+          <image class="viewphoto" src="{{item.comPhoto}}" />
+          <text class="comText">{{item.comText}}</text>
+          <view class="moneyBtn">
+            <view class="viewMoney">
+              <text class="moneyText">¥ {{item.money}}</text>
+            </view>
+            <view class="viewOperation">
+              <button class="buttonOperation" @tap="sub">-</button>
+              <view class="viewNum"><text class="number">{{number}}</text></view>
+              <button class="buttonOperation" @tap="add">+</button>
+            </view>
+            <view class="viewButton">
+              <button class="buyButton" @tap="wait">加入购物车</button>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
   </view>
 </template>
 
@@ -169,6 +272,7 @@ export default class Index extends wepy.page {
     interval: 4000,
     duration: 500,
     indicatorActiveColor: '#e8884d',
+    number: 1,
     icon: {
       salt: '../image/salt.png',
       edibleOil: '../image/edibleOil.png',
@@ -184,6 +288,11 @@ export default class Index extends wepy.page {
       '../images/Yosemite 2.jpg',
       '../images/Yosemite 3.jpg',
       '../images/Yosemite 4.jpg'
+    ],
+    commodity: [
+      { comPhoto: '../images/Yosemite.jpg', comText: '好山好水', money: 3500 },
+      { comPhoto: '../images/Yosemite.jpg', comText: '好山好水', money: 3500 },
+      { comPhoto: '../images/Yosemite.jpg', comText: '好山好水', money: 3500 }
     ]
   }
   methods = {
@@ -209,9 +318,6 @@ export default class Index extends wepy.page {
     },
     formSubmit: function(e) {
       console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    },
-    formReset: function() {
-      console.log('form发生了reset事件')
     },
     page1() {
       wepy.navigateTo({
@@ -252,6 +358,16 @@ export default class Index extends wepy.page {
       wepy.navigateTo({
         url: './class/use'
       })
+    },
+    add() {
+      let self = this
+      self.number++
+    },
+    sub() {
+      let self = this
+      if (self.number > 1) {
+        self.number--
+      }
     }
   }
 }

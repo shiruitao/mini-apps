@@ -17,10 +17,10 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/login',
+      'pages/my',
       'pages/home',
       'pages/news',
       'pages/shop',
-      'pages/my',
       // class
       'pages/class/salt',
       'pages/class/edibleOil',

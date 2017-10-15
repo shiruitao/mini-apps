@@ -39,7 +39,8 @@
   width: 100%;
   border-bottom: 1px solid lightgrey;
 }
-.listPhoto{
+
+.listPhoto {
   padding-left: 0.5rem;
   padding-right: 0.3rem;
   height: 0.9rem;
@@ -49,8 +50,9 @@
 <template>
   <view class="viewAll">
     <view class="viewInformation">
-      <image class="viewHead" src="{{headPortrait}}" />
-      <text class="textName">name</text>
+      <image class="viewHead" src="{{head}}" />
+      <text class="textName">{{name}}</text>
+      <!-- <button @tap ="onBack">登录</button> -->
     </view>
     <view class="viewList">
       <view class="viewListIn" @tap="pageIndent">
@@ -80,14 +82,15 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '个人中心'
   }
   data = {
-    headPortrait: '../my/head.png',
+    head: '../my/head.png',
+    name: '',
     indent: '../my/indent.png',
     address: '../my/address.png',
     shop: '../images/shop.png',
     phone: '../my/phone.png'
 
   }
-  methods= {
+  methods = {
     pageIndent() {
       wepy.navigateTo({
         url: './my/indent'
@@ -102,6 +105,30 @@ export default class Index extends wepy.page {
       wepy.switchTab({
         url: './shop'
       })
+    }
+    // login() {
+    //   let self = this
+    //   self.head = 'head'
+    //   self.name = 'name'
+    // },
+    // onBack() {
+    //   wepy.navigateTo({
+    //     url: './login'
+    //   })
+    // }
+  }
+  onLoad() { }
+  onShow() {
+    let self = this
+    try {
+      let Head = wepy.getStorageSync('head')
+      let Name = wepy.getStorageSync('name')
+      if (Head) {
+        self.head = Head
+        self.name = Name
+      }
+    } catch (err) {
+
     }
   }
 }
