@@ -2,16 +2,178 @@
 *  2017-10-12   Shi Ruitao
 */
 <style lang="less">
+.cart-box {
+  padding-bottom: 100rpx;
+}
 
+.cart-list {
+  position: relative;
+  padding: 20rpx 20rpx 20rpx 285rpx;
+  height: 185rpx;
+  border-bottom: 1rpx solid #e9e9e9;
+}
 
+.cart-list .cart-pro-select {
+  position: absolute;
+  left: 20rpx;
+  top: 90rpx;
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.cart-list .cart-thumb {
+  position: absolute;
+  top: 20rpx;
+  left: 85rpx;
+  width: 185rpx;
+  height: 185rpx;
+}
+
+.cart-list .cart-pro-name {
+  display: inline-block;
+  width: 300rpx;
+  height: 105rpx;
+  line-height: 50rpx;
+  overflow: hidden;
+}
+
+.cart-list .cart-pro-price {
+  display: inline-block;
+  float: right;
+  height: 105rpx;
+  line-height: 50rpx;
+}
+
+.cart-list .cart-count-box {
+  position: absolute;
+  left: 285;
+  bottom: 20rpx;
+  width: 250rpx;
+  height: 80rpx;
+}
+
+.cart-list .cart-count-box text {
+  display: inline-block;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.cart-count-down,
+.cart-count-add {
+  font-size: 44rpx;
+  width: 50rpx;
+  height: 100%;
+}
+
+.cart-count-num {
+  width: 150rpx;
+}
+
+.cart-del {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 44rpx;
+}
+
+.cart-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0 100rpx 0 80rpx;
+  box-sizing: border-box;
+  background: #AB956D;
+  color: #fff;
+}
+
+.total-select {
+  position: absolute;
+  left: 20rpx;
+  top: 25rpx;
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.order-icon {
+  position: absolute;
+  right: 40rpx;
+  top: 25rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.order-icon image,
+.order-icon navigator {
+  display: block;
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.cart-toatl-price {
+  float: right;
+  width: 120rpx;
+}
+
+.cart-no-data {
+  padding: 40rpx 0;
+  color: #999;
+  text-align: center;
+}
 </style>
 <template>
-<view>
-  <view>
-    
-  </view>
-</view>
+  <view class="main">
+    <view wx:if="{{hasList}}">
+      <view class="cart-box">
+        <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
+          <icon wx:if="{{item.selected}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
+          <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
 
+          <!-- 点击商品图片可跳转到商品详情 -->
+          <!-- <navigator url="../details/details?id={{item.id}}"> -->
+          <image class="cart-thumb" src="{{item.image}}"></image>
+          <!-- </navigator> -->
+
+          <text class="cart-pro-name">{{item.title}}</text>
+          <text class="cart-pro-price">￥{{item.price}}</text>
+
+          <!-- 增加减少数量 -->
+          <view class="cart-count-box">
+            <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">-</text>
+            <text class="cart-count-num">{{item.num}}</text>
+            <text class="cart-count-add" bindtap="addCount" data-index="{{index}}">+</text>
+          </view>
+
+          <!-- 删除按钮 -->
+          <text class="cart-del" bindtap="deleteList" data-index="{{index}}">×</text>
+        </view>
+      </view>
+
+      <!-- 底部操作栏 -->
+      <view class="cart-footer">
+        <icon wx:if="{{selectAllStatus}}" type="success_circle" color="red" class="total-select" bindtap="selectAll" />
+        <icon wx:else type="circle" color="black" class="total-select" bindtap="selectAll" />
+        <view class="order-icon">
+          <!-- <navigator url="../orders/orders">
+            <image src="../images/pay.png"></image>
+          </navigator> -->
+        </view>
+        <text>全选</text>
+
+        <!-- 总价 -->
+        <text class="cart-toatl-price">￥ {{totalPrice}}</text>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="cart-no-data">购物车空</view>
+    </view>
+  </view>
 </template>
 
 <script>
@@ -21,8 +183,134 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '购物车'
   }
   data = {
+    carts: [
+      { id: 1, title: '苹果', image: '../images/Yosemite 2.jpg', num: 4, price: 1, selected: true },
+      { id: 2, title: '草莓', image: '../images/Yosemite 3.jpg', num: 1, price: 3, selected: true }
+    ],
+    hasList: true,          // 列表是否有数据
+    totalPrice: 0,           // 总价，初始为0
+    selectAllStatus: true,    // 全选状态，默认全选
+    obj: {
+      name: 'hello'
+    }
   }
   methods = {
+    /**
+     * 当前商品选中事件
+     */
+    selectList(e) {
+      let self = this
+      const index = e.currentTarget.dataset.index    // 获取data- 传进来的index
+      let carts = self.data.carts                    // 获取购物车列表
+      const selected = carts[index].selected         // 获取当前商品的选中状态
+      carts[index].selected = !selected              // 改变状态
+      self.setData({
+        carts: carts
+      })
+      self.methods.getTotalPrice(self)                           // 重新获取总价
+    },
+    getTotalPrice(self) {
+      let carts = self.data.carts                  // 获取购物车列表
+      let total = 0
+      for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
+        if (carts[i].selected) {                     // 判断选中才会计算价格
+          total += carts[i].num * carts[i].price   // 所有价格加起来
+        }
+      }
+      self.setData({                                // 最后赋值到data中渲染到页面
+        carts: carts,
+        totalPrice: total.toFixed(2)
+      })
+    },
+
+    /**
+     * 删除购物车当前商品
+     */
+    deleteList(e) {
+      let self = this
+      const index = e.currentTarget.dataset.index
+      let carts = self.data.carts
+      carts.splice(index, 1)
+      self.setData({
+        carts: carts
+      })
+      if (!carts.length) {
+        self.setData({
+          hasList: false
+        })
+      } else {
+        self.methods.getTotalPrice(self)
+      }
+    },
+
+    /**
+     * 购物车全选事件
+     */
+    selectAll(e) {
+      let self = this
+      let selectAllStatus = self.data.selectAllStatus    // 是否全选状态
+      selectAllStatus = !selectAllStatus
+      let carts = self.data.carts
+
+      for (let i = 0; i < carts.length; i++) {
+        carts[i].selected = selectAllStatus              // 改变所有商品状态
+      }
+      self.setData({
+        selectAllStatus: selectAllStatus,
+        carts: carts
+      })
+      self.methods.getTotalPrice(self)                              // 重新获取总价
+    },
+
+    /**
+     * 绑定加数量事件
+     */
+    addCount(e) {
+      let self = this
+      const index = e.currentTarget.dataset.index
+      let carts = self.data.carts
+      let num = carts[index].num
+      num = num + 1
+      carts[index].num = num
+      self.setData({
+        carts: carts
+      })
+      self.methods.getTotalPrice(self)
+    },
+
+    /**
+     * 绑定减数量事件
+     */
+    minusCount(e) {
+      let self = this
+      const index = e.currentTarget.dataset.index
+      const obj = e.currentTarget.dataset.obj
+      let carts = self.data.carts
+      let num = carts[index].num
+      if (num <= 1) {
+        return false
+      }
+      num = num - 1
+      carts[index].num = num
+      self.setData({
+        carts: carts
+      })
+      self.methods.getTotalPrice(self)
+    }
+  }
+  onShow() {
+
+  }
+
+  /**
+   * 计算总价
+   */
+  onLoad() {
+    let self = this
+    self.setData({
+      hasList: true
+    })
+    self.getTotalPrice()
   }
 }
 </script>

@@ -99,7 +99,7 @@
   border-bottom: 3px solid lightgrey;
 }
 
-.comText {
+.title {
   font-size: 0.7rem;
   padding-top: 0.2rem;
   padding-bottom: 0.3rem;
@@ -127,7 +127,7 @@
 }
 
 .viewMoney {
-  display: flex; // justify-content: center;
+  display: flex;
   align-items: center;
   width: 4rem;
   padding-left: 0.2rem;
@@ -157,7 +157,8 @@
   height: 1.2rem;
   width: 1.2rem;
 }
-.viewNum{
+
+.viewNum {
   display: flex;
   justify-content: center;
   border: 1px solid lightgrey;
@@ -166,7 +167,8 @@
   margin-left: 0.2rem;
   margin-right: 0.2rem;
 }
-.number {
+
+.num {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -237,19 +239,21 @@
     <view class="viewCom">
       <block wx:for="{{commodity}}" wx:key="index">
         <view class="viewCom">
-          <image class="viewphoto" src="{{item.comPhoto}}" />
-          <text class="comText">{{item.comText}}</text>
+          <image class="viewphoto" src="{{item.image}}" />
+          <text class="title">{{item.title}}</text>
           <view class="moneyBtn">
             <view class="viewMoney">
               <text class="moneyText">¥ {{item.money}}</text>
             </view>
             <view class="viewOperation">
-              <button class="buttonOperation" @tap="sub">-</button>
-              <view class="viewNum"><text class="number">{{number}}</text></view>
-              <button class="buttonOperation" @tap="add">+</button>
+              <button class="buttonOperation" @tap="sub" data-index="{{index}}">-</button>
+              <view class="viewNum">
+                <text class="num">{{num}}</text>
+              </view>
+              <button class="buttonOperation" @tap="add" data-index="{{index}}">+</button>
             </view>
             <view class="viewButton">
-              <button class="buyButton" @tap="wait">加入购物车</button>
+              <button class="buyButton" formType="submit" @tap="wait">加入购物车</button>
             </view>
           </view>
         </view>
@@ -272,7 +276,7 @@ export default class Index extends wepy.page {
     interval: 4000,
     duration: 500,
     indicatorActiveColor: '#e8884d',
-    number: 1,
+    num: 1,
     icon: {
       salt: '../image/salt.png',
       edibleOil: '../image/edibleOil.png',
@@ -286,13 +290,11 @@ export default class Index extends wepy.page {
     imgUrls: [
       '../images/Yosemite.jpg',
       '../images/Yosemite 2.jpg',
-      '../images/Yosemite 3.jpg',
-      '../images/Yosemite 4.jpg'
     ],
     commodity: [
-      { comPhoto: '../images/Yosemite.jpg', comText: '好山好水', money: 3500 },
-      { comPhoto: '../images/Yosemite.jpg', comText: '好山好水', money: 3500 },
-      { comPhoto: '../images/Yosemite.jpg', comText: '好山好水', money: 3500 }
+      { image: '../images/Yosemite.jpg', title: '好山好水', money: 3500 },
+      { image: '../images/Yosemite.jpg', title: '好山好水', money: 3500 },
+      { image: '../images/Yosemite.jpg', title: '好山好水', money: 3500 }
     ]
   }
   methods = {
@@ -361,12 +363,12 @@ export default class Index extends wepy.page {
     },
     add() {
       let self = this
-      self.number++
+      self.num++
     },
     sub() {
       let self = this
-      if (self.number > 1) {
-        self.number--
+      if (self.num > 1) {
+        self.num--
       }
     }
   }

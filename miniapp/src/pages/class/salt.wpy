@@ -7,24 +7,123 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
-.image{
-  height: 8rem;
-  width: 8rem;
-}
-.text {
-  font-size: 1rem;
+
+.viewCom {
   display: flex;
   flex-direction: column;
+  border-bottom: 3px solid lightgrey;
+}
+
+.viewphoto {
+  height: 8rem;
+  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.comText {
+  font-size: 0.7rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.2rem;
+}
+
+.moneyBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.viewMoney {
+  display: flex;
+  align-items: center;
+  width: 4rem;
+  padding-left: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.moneyText {
+  font-size: 0.9rem;
+  color: red;
+}
+
+.viewOperation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5rem;
+  margin-bottom: 0.3rem;
+}
+
+.buttonOperation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.viewNum {
+  display: flex;
+  justify-content: center;
+  border: 1px solid lightgrey;
+  height: 1.2rem;
+  width: 1.5rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.viewButton {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  margin-bottom: 0.3rem;
+  margin-right: 0.5rem;
+}
+
+.buyButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.5rem;
+  color: white;
+  background-color: red;
 }
 </style>
 <template>
   <view class="view">
-    <text class="text">看毛看! 什么都没有</text>
-    <image class="image" src="{{go}}"/>
+    <view class="viewCom">
+      <block wx:for="{{commodity}}" wx:key="index">
+        <view class="viewCom">
+          <image class="viewphoto" src="{{item.comPhoto}}" />
+          <text class="comText">{{item.comText}}</text>
+          <view class="moneyBtn">
+            <view class="viewMoney">
+              <text class="moneyText">¥ {{item.money}}</text>
+            </view>
+            <view class="viewOperation">
+              <button class="buttonOperation" @tap="sub">-</button>
+              <view class="viewNum">
+                <text class="number">{{number}}</text>
+              </view>
+              <button class="buttonOperation" @tap="add">+</button>
+            </view>
+            <view class="viewButton">
+              <button class="buyButton" formType="submit" @tap="wait">加入购物车</button>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
   </view>
 </template>
 
@@ -35,9 +134,25 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '购物车'
   }
   data = {
-    go: '../../my/go.jpg'
+    number: 1,
+
+    commodity: [
+      { comPhoto: '../../images/Yosemite.jpg', comText: '好山好水', money: 3500 },
+      { comPhoto: '../../images/Yosemite.jpg', comText: '好山好水', money: 3500 },
+      { comPhoto: '../../images/Yosemite.jpg', comText: '好山好水', money: 3500 }
+    ]
   }
   methods = {
+    add() {
+      let self = this
+      self.number++
+    },
+    sub() {
+      let self = this
+      if (self.number > 1) {
+        self.number--
+      }
+    }
   }
 }
 </script>

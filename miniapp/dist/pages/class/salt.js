@@ -34,8 +34,21 @@ var Index = function (_wepy$page) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Index.__proto__ || Object.getPrototypeOf(Index)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
       navigationBarTitleText: '购物车'
     }, _this.data = {
-      go: '../../my/go.jpg'
-    }, _this.methods = {}, _temp), _possibleConstructorReturn(_this, _ret);
+      number: 1,
+
+      commodity: [{ comPhoto: '../../images/Yosemite.jpg', comText: '好山好水', money: 3500 }, { comPhoto: '../../images/Yosemite.jpg', comText: '好山好水', money: 3500 }, { comPhoto: '../../images/Yosemite.jpg', comText: '好山好水', money: 3500 }]
+    }, _this.methods = {
+      add: function add() {
+        var self = this;
+        self.number++;
+      },
+      sub: function sub() {
+        var self = this;
+        if (self.number > 1) {
+          self.number--;
+        }
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   return Index;
@@ -44,4 +57,4 @@ var Index = function (_wepy$page) {
 
 Page(require('./../../npm/wepy/lib/wepy.js').default.$createPage(Index , 'pages/class/salt'));
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNhbHQuanMiXSwibmFtZXMiOlsiSW5kZXgiLCJjb25maWciLCJuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0IiwiZGF0YSIsImdvIiwibWV0aG9kcyIsInBhZ2UiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFDQTs7Ozs7Ozs7Ozs7O0lBQ3FCQSxLOzs7Ozs7Ozs7Ozs7OztvTEFDbkJDLE0sR0FBUztBQUNQQyw4QkFBd0I7QUFEakIsSyxRQUdUQyxJLEdBQU87QUFDTEMsVUFBSTtBQURDLEssUUFHUEMsTyxHQUFVLEU7Ozs7RUFQdUIsZUFBS0MsSTs7a0JBQW5CTixLIiwiZmlsZSI6InNhbHQuanMiLCJzb3VyY2VzQ29udGVudCI6WyJcbmltcG9ydCB3ZXB5IGZyb20gJ3dlcHknXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBJbmRleCBleHRlbmRzIHdlcHkucGFnZSB7XG4gIGNvbmZpZyA9IHtcbiAgICBuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0OiAn6LSt54mp6L2mJ1xuICB9XG4gIGRhdGEgPSB7XG4gICAgZ286ICcuLi8uLi9teS9nby5qcGcnXG4gIH1cbiAgbWV0aG9kcyA9IHtcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNhbHQuanMiXSwibmFtZXMiOlsiSW5kZXgiLCJjb25maWciLCJuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0IiwiZGF0YSIsIm51bWJlciIsImNvbW1vZGl0eSIsImNvbVBob3RvIiwiY29tVGV4dCIsIm1vbmV5IiwibWV0aG9kcyIsImFkZCIsInNlbGYiLCJzdWIiLCJwYWdlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQ0E7Ozs7Ozs7Ozs7OztJQUNxQkEsSzs7Ozs7Ozs7Ozs7Ozs7b0xBQ25CQyxNLEdBQVM7QUFDUEMsOEJBQXdCO0FBRGpCLEssUUFHVEMsSSxHQUFPO0FBQ0xDLGNBQVEsQ0FESDs7QUFHTEMsaUJBQVcsQ0FDVCxFQUFFQyxVQUFVLDJCQUFaLEVBQXlDQyxTQUFTLE1BQWxELEVBQTBEQyxPQUFPLElBQWpFLEVBRFMsRUFFVCxFQUFFRixVQUFVLDJCQUFaLEVBQXlDQyxTQUFTLE1BQWxELEVBQTBEQyxPQUFPLElBQWpFLEVBRlMsRUFHVCxFQUFFRixVQUFVLDJCQUFaLEVBQXlDQyxTQUFTLE1BQWxELEVBQTBEQyxPQUFPLElBQWpFLEVBSFM7QUFITixLLFFBU1BDLE8sR0FBVTtBQUNSQyxTQURRLGlCQUNGO0FBQ0osWUFBSUMsT0FBTyxJQUFYO0FBQ0FBLGFBQUtQLE1BQUw7QUFDRCxPQUpPO0FBS1JRLFNBTFEsaUJBS0Y7QUFDSixZQUFJRCxPQUFPLElBQVg7QUFDQSxZQUFJQSxLQUFLUCxNQUFMLEdBQWMsQ0FBbEIsRUFBcUI7QUFDbkJPLGVBQUtQLE1BQUw7QUFDRDtBQUNGO0FBVk8sSzs7OztFQWJ1QixlQUFLUyxJOztrQkFBbkJiLEsiLCJmaWxlIjoic2FsdC5qcyIsInNvdXJjZXNDb250ZW50IjpbIlxuaW1wb3J0IHdlcHkgZnJvbSAnd2VweSdcbmV4cG9ydCBkZWZhdWx0IGNsYXNzIEluZGV4IGV4dGVuZHMgd2VweS5wYWdlIHtcbiAgY29uZmlnID0ge1xuICAgIG5hdmlnYXRpb25CYXJUaXRsZVRleHQ6ICfotK3nianovaYnXG4gIH1cbiAgZGF0YSA9IHtcbiAgICBudW1iZXI6IDEsXG5cbiAgICBjb21tb2RpdHk6IFtcbiAgICAgIHsgY29tUGhvdG86ICcuLi8uLi9pbWFnZXMvWW9zZW1pdGUuanBnJywgY29tVGV4dDogJ+WlveWxseWlveawtCcsIG1vbmV5OiAzNTAwIH0sXG4gICAgICB7IGNvbVBob3RvOiAnLi4vLi4vaW1hZ2VzL1lvc2VtaXRlLmpwZycsIGNvbVRleHQ6ICflpb3lsbHlpb3msLQnLCBtb25leTogMzUwMCB9LFxuICAgICAgeyBjb21QaG90bzogJy4uLy4uL2ltYWdlcy9Zb3NlbWl0ZS5qcGcnLCBjb21UZXh0OiAn5aW95bGx5aW95rC0JywgbW9uZXk6IDM1MDAgfVxuICAgIF1cbiAgfVxuICBtZXRob2RzID0ge1xuICAgIGFkZCgpIHtcbiAgICAgIGxldCBzZWxmID0gdGhpc1xuICAgICAgc2VsZi5udW1iZXIrK1xuICAgIH0sXG4gICAgc3ViKCkge1xuICAgICAgbGV0IHNlbGYgPSB0aGlzXG4gICAgICBpZiAoc2VsZi5udW1iZXIgPiAxKSB7XG4gICAgICAgIHNlbGYubnVtYmVyLS1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ==
