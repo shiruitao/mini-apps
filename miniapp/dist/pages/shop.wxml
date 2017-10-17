@@ -31,9 +31,9 @@
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="red" class="total-select" bindtap="selectAll"/>
         <icon wx:else type="circle" color="black" class="total-select" bindtap="selectAll"/>
         <view class="order-icon">
-          <!-- <navigator url="../orders/orders">
-            <image src="../images/pay.png"></image>
-          </navigator> -->
+          <!-- <navigator url="../orders/orders"> -->
+            <image src="../images/pay.png"/>
+          
         </view>
         <text>全选</text>
 

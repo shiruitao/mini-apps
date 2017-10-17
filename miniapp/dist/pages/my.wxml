@@ -3,7 +3,6 @@
     <view class="viewInformation">
       <image class="viewHead" src="{{head}}"/>
       <text class="textName">{{name}}</text>
-      <!-- <button bindtap="onBack">登录</button> -->
     </view>
     <view class="viewList">
       <view class="viewListIn" bindtap="pageIndent">

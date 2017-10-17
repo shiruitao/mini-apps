@@ -52,7 +52,6 @@
     <view class="viewInformation">
       <image class="viewHead" src="{{head}}" />
       <text class="textName">{{name}}</text>
-      <!-- <button @tap ="onBack">登录</button> -->
     </view>
     <view class="viewList">
       <view class="viewListIn" @tap="pageIndent">
@@ -106,30 +105,16 @@ export default class Index extends wepy.page {
         url: './shop'
       })
     }
-    // login() {
-    //   let self = this
-    //   self.head = 'head'
-    //   self.name = 'name'
-    // },
-    // onBack() {
-    //   wepy.navigateTo({
-    //     url: './login'
-    //   })
-    // }
   }
-  onLoad() { }
-  onShow() {
+  onLoad() {
     let self = this
-    try {
-      let Head = wepy.getStorageSync('head')
-      let Name = wepy.getStorageSync('name')
-      if (Head) {
-        self.head = Head
-        self.name = Name
+    wepy.getUserInfo({
+      success: function(res) {
+        self.name = res.userInfo.nickName
+        self.head = res.userInfo.avatarUrl
       }
-    } catch (err) {
-
-    }
+    })
   }
+  onShow() {}
 }
 </script>
