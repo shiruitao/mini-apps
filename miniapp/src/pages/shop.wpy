@@ -118,7 +118,7 @@
 
 .cart-toatl-price {
   float: right;
-  width: 4rem;
+  width: 6rem;
 }
 
 .cart-no-data {
@@ -178,18 +178,17 @@
 
 <script>
 import wepy from 'wepy'
+import carts from '../commodity/commodity.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '购物车'
   }
   data = {
-    carts: [
-      // { id: 1, title: '苹果', image: '../images/Yosemite 2.jpg', num: 4, price: 1, selected: true },
-      // { id: 2, title: '草莓', image: '../images/Yosemite 3.jpg', num: 1, price: 3.6, selected: true }
-    ],
+    carts: [],
     hasList: false,          // 列表是否有数据
     totalPrice: 0.0,           // 总价，初始为0
     selectAllStatus: true,    // 全选状态，默认全选
+    num: 1,
     obj: {
       name: 'hello'
     }
@@ -306,6 +305,11 @@ export default class Index extends wepy.page {
   /**
    * 计算总价
    */
+  onShow() {
+    let self = this
+    self.selected = true
+    self.carts = carts
+  }
   onLoad() {
     let self = this
     self.hasList = true

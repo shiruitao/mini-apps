@@ -226,7 +226,7 @@
               <text class="priceText">¥ {{item.price}}</text>
             </view>
             <view class="viewButton">
-              <button class="buyButton" formType="submit" @tap="goods">加入购物车</button>
+              <button class="buyButton" formType="submit" data-index="{{index}}" @tap="goods">加入购物车</button>
             </view>
           </view>
         </view>
@@ -238,7 +238,7 @@
 
 <script>
 import wepy from 'wepy'
-import commodity from '../commodity/commodity.js'
+// import commodity from '../commodity/commodity.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '超市'
@@ -250,6 +250,10 @@ export default class Index extends wepy.page {
     interval: 4000,
     duration: 500,
     indicatorActiveColor: '#e8884d',
+    image: '',
+    title: '',
+    price: '',
+    selected: '',
     num: 1,
     icon: {
       salt: '../image/salt.png',
@@ -265,19 +269,27 @@ export default class Index extends wepy.page {
       '../images/Yosemite.jpg',
       '../images/Yosemite 2.jpg'
     ],
-    commodity: [
-      // { image: '../images/Yosemite.jpg', title: '好山好水', price: 3500 },
-      // { image: '../images/Yosemite.jpg', title: '好山好水', price: 3500 },
-      // { image: '../images/Yosemite.jpg', title: '好山好水', price: 3500 }
-    ]
+    commodity: []
   }
   methods = {
     goods(e) {
       let self = this
-      let item = self.commodity[e.currentTarget.id]
-      wepy.navigateTo({
-        url: `./shop?image=${item.image}&title=${item.title}&price=${item.price}&num=${item.num}&selected=${item.selected}`
-      })
+      // let item = self.commodity[e.currentTarget.id]
+      const index = e.currentTarget.dataset.index
+      let commodity = self.data.commodity
+      let image = commodity[index].image
+      let title = commodity[index].title
+      let price = commodity[index].price
+      let selected = commodity[index].selected
+      // self.image = image
+      // self.title = title
+      // self.price = price
+      // self.selected = selected
+      module.exports = { image, title, price, selected }
+      console.log('加入购物车')
+      // wepy.switchTab({
+      //   url: `./shop?image=${self.image}&title=${self.title}&price=${self.price}&num=${self.num}&selected=${self.selected}`
+      // })
     },
     changeIndicatorDots: function(e) {
       this.setData({
@@ -345,7 +357,16 @@ export default class Index extends wepy.page {
   }
   onLoad() {
     let self = this
-    self.commodity = commodity
+    // self.commodity = commodity
+    wepy.request({
+      url: 'http://127.0.0.1/get',
+      methods: 'POST',
+      success: function(res) {
+        console.log(res.data, 2)
+        self.commodity = res.data
+      }
+    })
+    console.log(self.commodity, 23)
   }
 }
 </script>
