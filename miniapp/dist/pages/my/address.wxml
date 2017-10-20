@@ -1,5 +1,5 @@
 
-  <view style="display: flex flex-direction: column">
+  <view style="display: flex; flex-direction: column; height: {{height}}px; width: {{width}}px">
     <view class="viewListIn">
       <input class="textName" name="name" placeholder="姓名"/>
     </view>
@@ -7,7 +7,8 @@
       <input class="textName" name="phone" placeholder="电话"/>
     </view>
     <view class="viewListIn">
-      <input class="textName" name="address" placeholder="详细地址"/>
+      <!-- <input class="textName" name="address" placeholder="详细地址" /> -->
+      <textarea class="textName" bindblur="bindTextAreaBlur" auto-height placeholder="详细地址"/>
     </view>
     <button class="button" formTepy="submit" bindtap="address">保存</button>
   </view>

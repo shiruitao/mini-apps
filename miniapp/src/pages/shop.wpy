@@ -49,24 +49,35 @@
   left: 285;
   bottom: 20rpx;
   width: 250rpx;
-  height: 80rpx;
+  height: 60rpx;
 }
 
 .cart-list .cart-count-box text {
   display: inline-block;
-  line-height: 80rpx;
+  line-height: 60rpx;
   text-align: center;
 }
 
-.cart-count-down,
-.cart-count-add {
+.cart-count-down {
+  background-color: #AB956D;
+  color: white;
   font-size: 44rpx;
-  width: 50rpx;
+  width: 70rpx;
+  height: 100%;
+
+}
+.cart-count-add {
+  background-color: #AB956D;
+  color: white;
+  font-size: 44rpx;
+  width: 70rpx;
   height: 100%;
 }
 
 .cart-count-num {
-  width: 150rpx;
+  font-size: 40rpx;
+  width: 80rpx;
+  height: 93%;
 }
 
 .cart-del {

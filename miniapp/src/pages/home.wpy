@@ -14,21 +14,23 @@
   background-color: #A3D0C3;
   justify-content: center;
   align-items: center;
-  height: 2.2rem;
+  height: 2.5rem;
+  width: 100%;
 }
 
 .viewInput {
   display: flex;
   justify-content: center;
-  height: 1.5rem;
-  margin-left: 1.5rem;
+  width: 100%;
+  height: 80%;
+  margin-left: 1rem;
 }
 
 .viewsearchIn {
   border: 2px solid #7BA7AB;
   border-radius: 5px;
   height: 90%;
-  width: 14rem;
+  width: 100%;
   background: #F9F0DA;
   color: #9E9C9C;
 }
@@ -36,8 +38,8 @@
 .searchButton {
   background: #7BA7AB;
   border-radius: 5px;
-  height: 1.6rem;
-  width: 13%;
+  height: 2rem;
+  width: 15%;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -51,7 +53,7 @@
 }
 
 .viewphoto {
-  height: 8rem;
+  height: 9.5rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -62,6 +64,7 @@
 .class {
   display: flex;
   flex-direction: column;
+  height: 8rem;
   width: 100%;
   border-bottom: 0.3rem solid lightgrey;
 }
@@ -69,7 +72,7 @@
 .classline {
   display: flex;
   flex-direction: row;
-  height: 3rem;
+  height: 80%;
   width: 100%;
 }
 
@@ -82,12 +85,12 @@
 }
 
 .classStyle {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.7rem;
+  height: 1.7rem;
 }
 
 .classtext {
-  font-size: 0.5rem;
+  font-size: 70%;
   padding-top: 0.3rem;
 }
 
@@ -98,20 +101,21 @@
 }
 
 .title {
-  font-size: 0.7rem;
+  font-size: 100%;
   padding-top: 0.2rem;
   padding-bottom: 0.3rem;
-  padding-left: 0.2rem;
+  padding-left: 0.5rem;
 }
 
 .priceBtn {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 }
 
 .priceText {
-  font-size: 0.9rem;
+  font-size: 150%;
   color: red;
 }
 
@@ -119,7 +123,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 0.5rem;
+  font-size: 90%;
   color: white;
   background-color: red;
 }
@@ -127,17 +131,18 @@
 .viewprice {
   display: flex;
   align-items: center;
-  width: 4rem;
-  padding-left: 0.2rem;
+  flex: 1;
+  padding-left: 0.5rem;
   margin-bottom: 0.3rem;
 }
 
 .viewButton {
   display: flex;
   align-items: center;
-  margin-left: 11rem;
+  margin-left: 30%;
   margin-bottom: 0.3rem;
   margin-right: 0.5rem;
+  flex: 1;
 }
 
 .buttonOperation {
@@ -238,7 +243,7 @@
 
 <script>
 import wepy from 'wepy'
-// import commodity from '../commodity/commodity.js'
+import commodity from '../commodity/commodity.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '超市'
@@ -266,8 +271,8 @@ export default class Index extends wepy.page {
       use: '../image/use.png'
     },
     imgUrls: [
-      '../images/Yosemite.jpg',
-      '../images/Yosemite 2.jpg'
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508474772093&di=2a094a7ef3b9158036adc82aae0f18c6&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fgamephotolib%2F1411%2F04%2Fc0%2F40533215_1415069787897.jpg',
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509069524&di=4e7b6496805f6c5cc4cfc26fc1396243&imgtype=jpg&er=1&src=http%3A%2F%2Fimages.ali213.net%2Fpicfile%2Fpic%2F2010-01-08%2F16264985383.jpg'
     ],
     commodity: []
   }
@@ -355,6 +360,8 @@ export default class Index extends wepy.page {
       })
     }
   }
+  onShow() {
+  }
   onLoad() {
     let self = this
     // self.commodity = commodity
@@ -366,6 +373,7 @@ export default class Index extends wepy.page {
         self.commodity = res.data
       }
     })
+    self.commodity = commodity
     console.log(self.commodity, 23)
   }
 }

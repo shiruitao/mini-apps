@@ -3,19 +3,19 @@
     <view class="viewCom">
       <block  wx:for="{{commodity}}" wx:key="index">
         <view class="viewCom">
-          <image class="viewphoto" src="{{item.comPhoto}}"/>
-          <text class="comText">{{item.comText}}</text>
+          <image class="viewphoto" src="{{item.image}}"/>
+          <text class="comText">{{item.title}}</text>
           <view class="moneyBtn">
             <view class="viewMoney">
-              <text class="moneyText">¥ {{item.money}}</text>
+              <text class="moneyText">¥ {{item.price}}</text>
             </view>
-            <view class="viewOperation">
+            <!-- <view class="viewOperation">
               <button class="buttonOperation" bindtap="sub">-</button>
               <view class="viewNum">
-                <text class="number">{{number}}</text>
+                <text class="number">{{item.num}}</text>
               </view>
               <button class="buttonOperation" bindtap="add">+</button>
-            </view>
+            </view> -->
             <view class="viewButton">
               <button class="buyButton" formType="submit" bindtap="wait">加入购物车</button>
             </view>
