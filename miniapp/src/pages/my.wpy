@@ -125,6 +125,14 @@ export default class Index extends wepy.page {
       }
     })
   }
-  onShow() {}
+  onShow() {
+    let self = this
+    wepy.getUserInfo({
+      success: function(res) {
+        self.name = res.userInfo.nickName
+        self.head = res.userInfo.avatarUrl
+      }
+    })
+  }
 }
 </script>
