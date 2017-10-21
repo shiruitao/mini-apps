@@ -175,7 +175,7 @@
             <image src="../images/pay.png"></image>
           <!-- </navigator> -->
         </view>
-        <text>全选</text>
+        <text bindtap="selectAll">全选</text>
 
         <!-- 总价 -->
         <text class="cart-toatl-price">￥ {{totalPrice}}</text>
@@ -290,7 +290,7 @@ export default class Index extends wepy.page {
     minusCount(e) {
       let self = this
       const index = e.currentTarget.dataset.index
-      const obj = e.currentTarget.dataset.obj
+      // const obj = e.currentTarget.dataset.obj
       let carts = self.data.carts
       let num = carts[index].num
       if (num <= 1) {
@@ -312,7 +312,11 @@ export default class Index extends wepy.page {
     const _ = require('lodash')
     let self = this
     self.hasList = true
-    // self.carts = carts
+    try {
+      wepy.getStorageSync('commodity')
+    } catch (e) {
+      // Do something when catch error
+    }
     try {
       var value = wepy.getStorageSync('commodity')
       console.log(value, 'value')
@@ -325,6 +329,11 @@ export default class Index extends wepy.page {
       // Do something when catch error
     }
     self.methods.getTotalPrice(self)
+    try {
+      wepy.removeStorageSync('commodity')
+    } catch (e) {
+      // Do something when catch error
+    }
   }
   onLoad() {
     // let self = this

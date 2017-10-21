@@ -2,12 +2,17 @@
 *  2017-10-14   Shi Ruitao
 */
 <style lang="less">
-
+.main{
+  display: flex;
+  width: 100%;
+  background-image: 'http://588ku.com/print/3917112.html', 100%, 100%;
+  background-attachment:fixed;
+}
 
 </style>
 <template>
-<view>
-  <view>
+<view class="main" style="height: {{height}}px; width: {{width}}px">
+  <view >
     
   </view>
 </view>
@@ -18,11 +23,38 @@
 import wepy from 'wepy'
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '动态'
+    navigationBarTitleText: '动态',
+    enablePullDownRefresh: true
   }
   data = {
+    height: 0,
+    width: 0
   }
   methods = {
+  }
+  onPullDownRefresh() {
+    wepy.startPullDownRefresh()
+    setTimeout(function() {
+      wepy.stopPullDownRefresh()
+    }, 1000)
+  }
+  onLoad() {
+    let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.height = res.windowHeight
+        self.width = res.windowWidth
+      }
+    })
+  }
+  onShow() {
+    let self = this
+    wepy.getUserInfo({
+      success: function(res) {
+        self.name = res.userInfo.nickName
+        self.head = res.userInfo.avatarUrl
+      }
+    })
   }
 }
 </script>

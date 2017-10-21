@@ -35,7 +35,7 @@
             <image src="../images/pay.png"/>
           <!-- </navigator> -->
         </view>
-        <text>全选</text>
+        <text bindtap="selectAll">全选</text>
 
         <!-- 总价 -->
         <text class="cart-toatl-price">￥ {{totalPrice}}</text>
