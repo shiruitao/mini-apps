@@ -118,7 +118,7 @@
 .cart-toatl-price {
   position: absolute;
   float: right;
-  left: 400rpx;
+  left: 350rpx;
 }
 .cart-toatl-count {
   position: absolute;
