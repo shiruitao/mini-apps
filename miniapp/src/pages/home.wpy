@@ -273,8 +273,9 @@ export default class Index extends wepy.page {
       use: '../image/use.png'
     },
     imgUrls: [
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508474772093&di=2a094a7ef3b9158036adc82aae0f18c6&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fgamephotolib%2F1411%2F04%2Fc0%2F40533215_1415069787897.jpg',
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509069524&di=4e7b6496805f6c5cc4cfc26fc1396243&imgtype=jpg&er=1&src=http%3A%2F%2Fimages.ali213.net%2Fpicfile%2Fpic%2F2010-01-08%2F16264985383.jpg'
+      'https://img11.360buyimg.com/babel/jfs/t10276/362/1287822046/93410/f75a7664/59df518aN37f8489b.jpg',
+      'https://img.alicdn.com/tfs/TB16j9ph2BNTKJjy0FdXXcPpVXa-520-280.jpg_q90',
+      'https://img.alicdn.com/simba/img/TB1Sn01X7T85uJjSZFhSuwPEVXa.jpg'
     ],
     commodity: []
   }
@@ -288,7 +289,11 @@ export default class Index extends wepy.page {
         wepy.setStorageSync('commodity', commodity)
       } catch (e) {
       }
-      console.log('加入购物车')
+      wepy.showToast({
+        title: '加入成功',
+        icon: 'success',
+        duration: 1000
+      })
     },
     changeIndicatorDots: function(e) {
       this.setData({

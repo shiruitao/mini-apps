@@ -31,7 +31,9 @@ export default class extends wepy.app {
       'pages/class/use',
       // my
       'pages/my/indent',
-      'pages/my/address'
+      'pages/my/address',
+      // news
+      'pages/class/newContent'
     ],
     window: {
       backgroundTextStyle: 'light',

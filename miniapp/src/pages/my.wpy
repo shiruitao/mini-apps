@@ -9,15 +9,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: lightcoral;
+  background-color: lightblue;
   width: 100%;
   height: 50%;
 }
 
 .viewHead {
-  height: 3rem;
-  width: 3rem;
+  height: 3.5rem;
+  width: 3.5rem;
   border: 1px solid lightcoral;
+  box-shadow: 0px 0px 35px 0px red;
   margin-bottom: 0.3rem;
   border-radius: 50%;
 }
@@ -68,7 +69,7 @@
         <image class="listPhoto" src="{{shop}}" />
         <text class="textName">购物车</text>
       </view>
-      <view class="viewListIn">
+      <view class="viewListIn" @tap="contact">
         <image class="listPhoto" src="{{phone}}" />
         <text class="textName">联系我们</text>
       </view>
@@ -107,6 +108,20 @@ export default class Index extends wepy.page {
     shop() {
       wepy.switchTab({
         url: './shop'
+      })
+    },
+    contact() {
+      wepy.showModal({
+        title: '手机:',
+        content: '18331290663',
+        // success: function(res) {
+        //   if (res.confirm) {
+        //     console.log('用户点击确定')
+        //   } 
+        //   else if (res.cancel) {
+        //     console.log('用户点击取消')
+        //   }
+        // }
       })
     }
   }

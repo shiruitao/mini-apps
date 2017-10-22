@@ -93,49 +93,54 @@
 
 .cart-footer {
   position: fixed;
+  display: flex;
+  align-items: center;
   bottom: 0;
-  left: 0;
   width: 100%;
   height: 90rpx;
-  line-height: 90rpx;
-  padding: 0 100rpx 0 80rpx;
-  box-sizing: border-box;
   background: #AB956D;
   color: #fff;
 }
 
 .total-select {
-  position: absolute;
-  left: 20rpx;
-  top: 25rpx;
-  width: 45rpx;
-  height: 45rpx;
+  padding-left: 20rpx;
 }
 
 .order-icon {
-  position: absolute;
-  right: 40rpx;
-  top: 25rpx;
-  width: 80rpx;
-  height: 80rpx;
+  display: flex;
+  width: 40%;
+  padding-bottom: 25rpx; 
 }
-
-.order-icon image,
-.order-icon navigator {
-  display: block;
-  width: 45rpx;
-  height: 45rpx;
+.count {
+  padding-right: 5rpx;
 }
 
 .cart-toatl-price {
+  position: absolute;
   float: right;
-  width: 6rem;
+  left: 400rpx;
+}
+.cart-toatl-count {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  background-color: orangered;
+  width: 25%;
+  height: 80rpx;
+  left: 550rpx;
+  margin-right: 10rpx;
 }
 
 .cart-no-data {
   padding: 40rpx 0;
   color: #999;
   text-align: center;
+}
+.selectAll {
+  padding-left: 10rpx; 
 }
 </style>
 <template>
@@ -170,15 +175,11 @@
       <view class="cart-footer">
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
         <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
-        <view class="order-icon">
-          <!-- <navigator url="../orders/orders"> -->
-            <image src="../images/pay.png"></image>
-          <!-- </navigator> -->
-        </view>
-        <text bindtap="selectAll">全选</text>
-
-        <!-- 总价 -->
+        <text class="selectAll" bindtap="selectAll">全选</text>
         <text class="cart-toatl-price">￥ {{totalPrice}}</text>
+        <view class="cart-toatl-count">
+          <text style="font-size: 30rpx;">结算</text>
+        </view>
       </view>
     </view>
     <view wx:else>
@@ -240,6 +241,7 @@ export default class Index extends wepy.page {
       const index = e.currentTarget.dataset.index
       let carts = self.data.carts
       carts.splice(index, 1)
+      console.log(carts)
       self.setData({
         carts: carts
       })
@@ -290,7 +292,6 @@ export default class Index extends wepy.page {
     minusCount(e) {
       let self = this
       const index = e.currentTarget.dataset.index
-      // const obj = e.currentTarget.dataset.obj
       let carts = self.data.carts
       let num = carts[index].num
       if (num <= 1) {
@@ -323,16 +324,19 @@ export default class Index extends wepy.page {
       if (value) {
         value = _.toArray(value)
         value = {image: value[0], title: value[1], price: value[2], num: value[3], selected: value[4]}
-        self.carts.push(value)
+        let carts = self.carts
+        carts.push(value)
+        self.carts = carts
+        self.setData({
+          carts: carts
+        })
       }
     } catch (e) {
-      // Do something when catch error
     }
     self.methods.getTotalPrice(self)
     try {
       wepy.removeStorageSync('commodity')
     } catch (e) {
-      // Do something when catch error
     }
   }
   onLoad() {

@@ -30,15 +30,11 @@
       <view class="cart-footer">
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll"/>
         <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll"/>
-        <view class="order-icon">
-          <!-- <navigator url="../orders/orders"> -->
-            <image src="../images/pay.png"/>
-          <!-- </navigator> -->
-        </view>
-        <text bindtap="selectAll">全选</text>
-
-        <!-- 总价 -->
+        <text class="selectAll" bindtap="selectAll">全选</text>
         <text class="cart-toatl-price">￥ {{totalPrice}}</text>
+        <view class="cart-toatl-count">
+          <text style="font-size: 30rpx;">结算</text>
+        </view>
       </view>
     </view>
     <view  wx:else>

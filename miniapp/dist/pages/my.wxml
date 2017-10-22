@@ -17,7 +17,7 @@
         <image class="listPhoto" src="{{shop}}"/>
         <text class="textName">购物车</text>
       </view>
-      <view class="viewListIn">
+      <view class="viewListIn" bindtap="contact">
         <image class="listPhoto" src="{{phone}}"/>
         <text class="textName">联系我们</text>
       </view>

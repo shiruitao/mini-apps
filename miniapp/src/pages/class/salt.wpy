@@ -115,7 +115,11 @@ export default class Index extends wepy.page {
         wepy.setStorageSync('commodity', commodity)
       } catch (e) {
       }
-      console.log('加入购物车')
+      wepy.showToast({
+        title: '加入成功',
+        icon: 'success',
+        duration: 1000
+      })
     }
   }
   onShow() {

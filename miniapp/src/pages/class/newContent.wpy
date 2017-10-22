@@ -1,0 +1,16 @@
+<style>
+
+</style>
+
+<template>
+  
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '发表动态'
+  }
+}
+</script>

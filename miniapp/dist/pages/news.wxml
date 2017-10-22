@@ -1,6 +1,7 @@
 
-<view class="main" style="height: {{height}}px; width: {{width}}px">
-  <view>
-    
+<view class="main">
+  <view class="photo">
+    <image class="issue" src="{{issue}}" bindtap="issue"/>
+    <image class="photo" src="{{photo}}"/>  
   </view>
 </view>
