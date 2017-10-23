@@ -150,28 +150,17 @@
         <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
           <icon wx:if="{{item.selected}}" type="success_circle" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />
           <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList" />
-
-          <!-- 点击商品图片可跳转到商品详情 -->
-          <!-- <navigator url="../details/details?id={{item.id}}"> -->
           <image class="cart-thumb" src="{{item.image}}"></image>
-          <!-- </navigator> -->
-
           <text class="cart-pro-name">{{item.title}}</text>
           <text class="cart-pro-price">￥{{item.price}}</text>
-
-          <!-- 增加减少数量 -->
           <view class="cart-count-box">
             <text class="cart-count-down" bindtap="minusCount" data-obj="{{obj}}" data-index="{{index}}">-</text>
             <text class="cart-count-num">{{item.num}}</text>
             <text class="cart-count-add" bindtap="addCount" data-index="{{index}}">+</text>
           </view>
-
-          <!-- 删除按钮 -->
           <image class="cart-del" bindtap="deleteList"  data-index="{{index}}" src="{{delete}}"/>
         </view>
       </view>
-
-      <!-- 底部操作栏 -->
       <view class="cart-footer">
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="#fff" class="total-select" bindtap="selectAll" />
         <icon wx:else type="circle" color="#fff" class="total-select" bindtap="selectAll" />
@@ -183,14 +172,13 @@
       </view>
     </view>
     <view wx:else>
-      <view class="cart-no-data">购物车空</view>
+      <view class="cart-no-data">购物车空~</view>
     </view>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
-// import carts from '../commodity/commodity.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '购物车'
@@ -198,81 +186,70 @@ export default class Index extends wepy.page {
   data = {
     carts: [],
     delete: '../my/delete.png',
-    hasList: false,          // 列表是否有数据
-    totalPrice: 0.0,           // 总价，初始为0
-    selectAllStatus: true,    // 全选状态，默认全选
+    hasList: false,
+    totalPrice: 0.0,
+    selectAllStatus: true,
     num: 1,
     obj: {
       name: 'hello'
     }
   }
   methods = {
-    /**
-     * 当前商品选中事件
-     */
     selectList(e) {
       let self = this
-      const index = e.currentTarget.dataset.index    // 获取data- 传进来的index
-      let carts = self.carts                    // 获取购物车列表
-      const selected = self.carts[index].selected         // 获取当前商品的选中状态
-      self.carts[index].selected = !selected              // 改变状态
+      const index = e.currentTarget.dataset.index
+      let carts = self.carts
+      const selected = self.carts[index].selected
+      self.carts[index].selected = !selected
       self.setData({
         carts: carts
       })
-      self.methods.getTotalPrice(self)                           // 重新获取总价
+      self.methods.getTotalPrice(self)
     },
     getTotalPrice(self) {
       let total = 0
-      for (let i = 0; i < self.carts.length; i++) {         // 循环列表得到每个数据
-        if (self.carts[i].selected) {                     // 判断选中才会计算价格
-          total += self.carts[i].num * self.carts[i].price   // 所有价格加起来
+      for (let i = 0; i < self.carts.length; i++) {
+        if (self.carts[i].selected) {
+          total += self.carts[i].num * self.carts[i].price
         }
       }
-      self.setData({                                // 最后赋值到data中渲染到页面
+      self.setData({
         totalPrice: total.toFixed(1)
       })
       self.totalPrice = total.toFixed(1)
     },
-    /**
-     * 删除购物车当前商品
-     */
     deleteList(e) {
       let self = this
       const index = e.currentTarget.dataset.index
       let carts = self.data.carts
       carts.splice(index, 1)
-      console.log(carts)
       self.setData({
         carts: carts
       })
       if (!carts.length) {
-        self.setData({
-          hasList: false
-        })
+        try {
+          wepy.removeStorageSync('commodity')
+        } catch (e) {
+        }
+        self.hasList = false
+        console.log(self.hasList)
       } else {
         self.methods.getTotalPrice(self)
       }
     },
 
-    /**
-     * 购物车全选事件
-     */
     selectAll() {
       let self = this
-      let selectAllStatus = self.selectAllStatus    // 是否全选状态
+      let selectAllStatus = self.selectAllStatus
       selectAllStatus = !selectAllStatus
       let carts = self.carts
       for (let i = 0; i < carts.length; i++) {
-        carts[i].selected = selectAllStatus              // 改变所有商品状态
+        carts[i].selected = selectAllStatus
       }
       self.selectAllStatus = selectAllStatus
-      // carts: carts
-      self.methods.getTotalPrice(self)                              // 重新获取总价
+      self.methods.getTotalPrice(self)
     },
 
-    /**
-     * 绑定加数量事件
-     */
     addCount(e) {
       let self = this
       const index = e.currentTarget.dataset.index
@@ -286,9 +263,6 @@ export default class Index extends wepy.page {
       self.methods.getTotalPrice(self)
     },
 
-    /**
-     * 绑定减数量事件
-     */
     minusCount(e) {
       let self = this
       const index = e.currentTarget.dataset.index
@@ -306,22 +280,18 @@ export default class Index extends wepy.page {
     }
 
   }
-  /**
-   * 计算总价
-   */
+
   onShow() {
     const _ = require('lodash')
     let self = this
-    self.hasList = true
     try {
       wepy.getStorageSync('commodity')
     } catch (e) {
-      // Do something when catch error
     }
     try {
       var value = wepy.getStorageSync('commodity')
-      console.log(value, 'value')
       if (value) {
+        self.hasList = true
         value = _.toArray(value)
         value = {image: value[0], title: value[1], price: value[2], num: value[3], selected: value[4]}
         let carts = self.carts
@@ -340,9 +310,6 @@ export default class Index extends wepy.page {
     }
   }
   onLoad() {
-    // let self = this
-    // console.log(self.carts, 'carts')
-    // self.methods.getTotalPrice(self)
   }
 }
 </script>

@@ -11,7 +11,7 @@
   height: 400rpx;
 }
 .issue {
-  position: absolute;
+  position: fixed;
   top: 20rpx;
   right: 20rpx;
   width: 60rpx;
@@ -22,7 +22,12 @@
 <view class="main">
   <view class="photo">
     <image class="issue" src="{{issue}}" @tap="issue" />
-    <image class="photo" src="{{photo}}" />  
+    <image class="photo" src="{{photo}}" />
+  </view>
+  <view class="photo">
+    <image class="photo" src="{{photo}}" />
+    <image class="photo" src="{{photo}}" />
+    <image class="photo" src="{{photo}}" />
   </view>
 </view>
 
@@ -52,7 +57,7 @@ export default class Index extends wepy.page {
     wepy.startPullDownRefresh()
     setTimeout(function() {
       wepy.stopPullDownRefresh()
-    }, 1000)
+    }, 1500)
   }
   onLoad() {
     let self = this

@@ -18,7 +18,7 @@
   height: 5rem;
   width: 5rem;
   border: 1px solid lightcoral;
-  box-shadow: 0px 0px 35px 0px red;
+  box-shadow: 0px 0px 30px 0px rgba(256, 56, 56, 0.5);
   margin-bottom: 0.5rem;
   border-radius: 50%;
 }

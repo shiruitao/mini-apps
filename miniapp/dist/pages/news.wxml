@@ -2,6 +2,11 @@
 <view class="main">
   <view class="photo">
     <image class="issue" src="{{issue}}" bindtap="issue"/>
-    <image class="photo" src="{{photo}}"/>  
+    <image class="photo" src="{{photo}}"/>
+  </view>
+  <view class="photo">
+    <image class="photo" src="{{photo}}"/>
+    <image class="photo" src="{{photo}}"/>
+    <image class="photo" src="{{photo}}"/>
   </view>
 </view>

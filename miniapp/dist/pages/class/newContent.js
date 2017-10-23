@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = undefined;
+
 
 var _wepy = require('./../../npm/wepy/lib/wepy.js');
 
@@ -39,5 +39,7 @@ var Index = function (_wepy$page) {
   return Index;
 }(_wepy2.default.page);
 
-exports.default = Index;
+
+Page(require('./../../npm/wepy/lib/wepy.js').default.$createPage(Index , 'pages/class/newContent'));
+
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5ld0NvbnRlbnQuanMiXSwibmFtZXMiOlsiSW5kZXgiLCJjb25maWciLCJuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0IiwicGFnZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUNBOzs7Ozs7Ozs7Ozs7SUFDcUJBLEs7Ozs7Ozs7Ozs7Ozs7O29MQUNuQkMsTSxHQUFTO0FBQ1BDLDhCQUF3QjtBQURqQixLOzs7O0VBRHdCLGVBQUtDLEk7O2tCQUFuQkgsSyIsImZpbGUiOiJuZXdDb250ZW50LmpzIiwic291cmNlc0NvbnRlbnQiOlsiXG5pbXBvcnQgd2VweSBmcm9tICd3ZXB5J1xuZXhwb3J0IGRlZmF1bHQgY2xhc3MgSW5kZXggZXh0ZW5kcyB3ZXB5LnBhZ2Uge1xuICBjb25maWcgPSB7XG4gICAgbmF2aWdhdGlvbkJhclRpdGxlVGV4dDogJ+WPkeihqOWKqOaAgSdcbiAgfVxufVxuIl19
