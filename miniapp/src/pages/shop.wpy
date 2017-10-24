@@ -65,7 +65,6 @@
   font-size: 44rpx;
   width: 70rpx;
   height: 100%;
-
 }
 .cart-count-add {
   background-color: #AB956D;
@@ -206,6 +205,7 @@ export default class Index extends wepy.page {
       })
       self.methods.getTotalPrice(self)
     },
+
     getTotalPrice(self) {
       let total = 0
       for (let i = 0; i < self.carts.length; i++) {
@@ -218,6 +218,7 @@ export default class Index extends wepy.page {
       })
       self.totalPrice = total.toFixed(1)
     },
+
     deleteList(e) {
       let self = this
       const index = e.currentTarget.dataset.index
@@ -278,7 +279,6 @@ export default class Index extends wepy.page {
       })
       self.methods.getTotalPrice(self)
     }
-
   }
 
   onShow() {

@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column; 
 }
+.back-view {
+  width: 100%;
+  height: 460rpx;
+}
 .photo {
   width: 100%;
   height: 400rpx;
@@ -17,18 +21,85 @@
   width: 60rpx;
   height: 60rpx;
 }
+.head {
+  position: absolute;
+  top: 310rpx;
+  right: 20rpx;
+  height: 150rpx;
+  width: 150rpx;
+}
+.name {
+  position: absolute;
+  top: 330rpx;
+  right: 200rpx;
+  font-size: 30rpx;
+  color: white;
+}
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid lightgrey;
+}
+.card-head {
+  position: relative;
+  padding-top: 10rpx;
+  padding-left: 20rpx;
+  width: 90rpx;
+  height: 90rpx;
+}
+.card-name {
+  position: relative;
+  top: -60rpx;
+  left: 20rpx;
+  font-size: 30rpx;
+  color: blue;
+}
+.card-view-information {
+  position: relative;
+  top: -60rpx;
+  left: 130rpx;
+  width: 80%;
+}
+.card-text {
+  font-size: 30rpx;
+}
+.card-view-photo {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 15rpx;
+}
+.card-photo {
+  width: 200rpx;
+  height: 200rpx;
+}
 </style>
 <template>
-<view class="main">
-  <view class="photo">
-    <image class="issue" src="{{issue}}" @tap="issue" />
-    <image class="photo" src="{{photo}}" />
+<view class="main" style="width: {{width}}">
+  <view class="back-view">
+    <view class="photo">
+      <image class="issue" src="{{issue}}" @tap="issue" />
+      <image class="photo" src="{{photo}}" />
+    </view>
   </view>
-  <view class="photo">
-    <image class="photo" src="{{photo}}" />
-    <image class="photo" src="{{photo}}" />
-    <image class="photo" src="{{photo}}" />
+  <view class="card">
+    <!-- <block wx:for="{{news}}" wx:key="index"> -->
+      <view class="card-view-view">
+        <image class="card-head" src="{{head}}" />
+        <text class="card-name">{{name}}</text>
+        <view class="card-view-information">
+          <text class="card-text">一年前,学校广场上献血.200CC送一副修指甲的用具,400CC送个手表. 邻班一MM听说了感觉很幸福,跑过去问护士:"1000CC送什么?" 护士淡定的说:"送个棺材……"</text>
+          <view class="card-view-photo">
+            <block wx:for="{{imaUrl}}" wx:key="{{index}}">
+              <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item.url}}" />
+            </block>
+          </view>
+        </view>
+      </view>
+    <!-- </block> -->
   </view>
+  <image class="head" src="{{head}}"/>
+  <text class="name">{{name}}</text>
 </view>
 
 </template>
@@ -44,12 +115,33 @@ export default class Index extends wepy.page {
     height: 0,
     width: 0,
     issue: '../image/issue.png',
+    head: '',
+    name: '',
+    imaUrl: [
+      {url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508848562785&di=bb9789d7fc6bbd2fa8898c4873effd98&imgtype=0&src=http%3A%2F%2Fp18.qhimg.com%2Fbdr%2F__%2Fd%2F_open360%2Ffengjing0423%2F27.jpg'},
+      {url: 'https://img11.360buyimg.com/babel/jfs/t10276/362/1287822046/93410/f75a7664/59df518aN37f8489b.jpg'},
+      {url: 'https://img.alicdn.com/tfs/TB16j9ph2BNTKJjy0FdXXcPpVXa-520-280.jpg_q90'},
+      {url: 'https://img.alicdn.com/simba/img/TB1Sn01X7T85uJjSZFhSuwPEVXa.jpg'}
+    ],
     photo: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509244645&di=debd65bf16176135b691782fb939095f&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.xiazaizhijia.com%2Fwalls%2F20150908%2F1440x900_dd76839deec4325.jpg'
   }
   methods = {
     issue() {
       wepy.navigateTo({
         url: '../pages/class/newContent'
+      })
+    },
+    previewImage(e) {
+      let self = this
+      console.log('点击')
+      const index = e.currentTarget.dataset.index
+      let arr = []
+      for (let i = 0; i < self.imaUrl.length; i++) {
+        arr.push(self.imaUrl[i].url)
+      }
+      wepy.previewImage({
+        urls: arr,
+        current: `${self.imaUrl[index].url}`
       })
     }
   }
@@ -67,15 +159,13 @@ export default class Index extends wepy.page {
         self.width = res.windowWidth
       }
     })
-  }
-  onShow() {
-    let self = this
     wepy.getUserInfo({
       success: function(res) {
-        self.name = res.userInfo.nickName
         self.head = res.userInfo.avatarUrl
+        self.name = res.userInfo.nickName
       }
     })
   }
+  onShow() {}
 }
 </script>

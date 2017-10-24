@@ -1,12 +1,27 @@
 
-<view class="main">
-  <view class="photo">
-    <image class="issue" src="{{issue}}" bindtap="issue"/>
-    <image class="photo" src="{{photo}}"/>
+<view class="main" style="width: {{width}}">
+  <view class="back-view">
+    <view class="photo">
+      <image class="issue" src="{{issue}}" bindtap="issue"/>
+      <image class="photo" src="{{photo}}"/>
+    </view>
   </view>
-  <view class="photo">
-    <image class="photo" src="{{photo}}"/>
-    <image class="photo" src="{{photo}}"/>
-    <image class="photo" src="{{photo}}"/>
+  <view class="card">
+    <!-- <block wx:for="{{news}}" wx:key="index"> -->
+      <view class="card-view-view">
+        <image class="card-head" src="{{head}}"/>
+        <text class="card-name">{{name}}</text>
+        <view class="card-view-information">
+          <text class="card-text">一年前,学校广场上献血.200CC送一副修指甲的用具,400CC送个手表. 邻班一MM听说了感觉很幸福,跑过去问护士:"1000CC送什么?" 护士淡定的说:"送个棺材……"</text>
+          <view class="card-view-photo">
+            <block  wx:for="{{imaUrl}}" wx:key="{{index}}">
+              <image class="card-photo" data-index="{{index}}" bindtap="previewImage" src="{{item.url}}"/>
+            </block>
+          </view>
+        </view>
+      </view>
+    <!-- </block> -->
   </view>
+  <image class="head" src="{{head}}"/>
+  <text class="name">{{name}}</text>
 </view>
