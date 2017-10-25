@@ -1,0 +1,23 @@
+
+  <form bindsubmit="formSubmit">
+    <view class="main" style="width: {{width}}px">
+      <view class="view-text">
+        <scroll-view scroll-y style="height: 200rpx">
+          <textarea maxlength="{{-1}}" style="width: 100%" name="news-text" placeholder="想发表的内容..." auto-focus/>
+        </scroll-view>
+      </view>
+      <scroll-view scroll-y style="height: 300rpx; width: 95%;">
+        <view class="view-all-photo">
+          <view  wx:for="{{src}}" wx:key="index" class="view-photo">
+            <image class="photo" src="{{item}}"/>
+          </view>
+          <view class="view-photo" bindtap="chooseImage">
+            <image class="photo" src="{{photo}}"/>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="view-button">
+        <button class="button" formType="submit" bindtap="news">发表</button>
+      </view>
+    </view>
+  </form>

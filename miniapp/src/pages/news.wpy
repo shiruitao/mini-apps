@@ -88,10 +88,10 @@
         <image class="card-head" src="{{head}}" />
         <text class="card-name">{{name}}</text>
         <view class="card-view-information">
-          <text class="card-text">一年前,学校广场上献血.200CC送一副修指甲的用具,400CC送个手表. 邻班一MM听说了感觉很幸福,跑过去问护士:"1000CC送什么?" 护士淡定的说:"送个棺材……"</text>
+          <text class="card-text">{{newsText}}</text>
           <view class="card-view-photo">
-            <block wx:for="{{imaUrl}}" wx:key="{{index}}">
-              <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item.url}}" />
+            <block wx:for="{{src}}" wx:key="{{index}}">
+              <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item}}" />
             </block>
           </view>
         </view>
@@ -106,7 +106,7 @@
 
 <script>
 import wepy from 'wepy'
-export default class Index extends wepy.page {
+export default class news extends wepy.page {
   config = {
     navigationBarTitleText: '动态',
     enablePullDownRefresh: true
@@ -117,6 +117,8 @@ export default class Index extends wepy.page {
     issue: '../image/issue.png',
     head: '',
     name: '',
+    src: [],
+    newsText: '',
     imaUrl: [
       {url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508848562785&di=bb9789d7fc6bbd2fa8898c4873effd98&imgtype=0&src=http%3A%2F%2Fp18.qhimg.com%2Fbdr%2F__%2Fd%2F_open360%2Ffengjing0423%2F27.jpg'},
       {url: 'https://img11.360buyimg.com/babel/jfs/t10276/362/1287822046/93410/f75a7664/59df518aN37f8489b.jpg'},
@@ -166,6 +168,26 @@ export default class Index extends wepy.page {
       }
     })
   }
-  onShow() {}
+  onShow() {
+    const _ = require('lodash')
+    let self = this
+    try {
+      var srcValue = wepy.getStorageSync('src')
+      srcValue = _.toArray(srcValue)
+      self.src = srcValue
+      self.setData({
+        src: srcValue
+      })
+    } catch (e) {
+    }
+    try {
+      var value = wepy.getStorageSync('text')
+      self.newsText = value
+      self.setData({
+        newsText: value
+      })
+    } catch (e) {
+    }
+  }
 }
 </script>

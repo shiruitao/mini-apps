@@ -285,10 +285,6 @@ export default class Index extends wepy.page {
     const _ = require('lodash')
     let self = this
     try {
-      wepy.getStorageSync('commodity')
-    } catch (e) {
-    }
-    try {
       var value = wepy.getStorageSync('commodity')
       if (value) {
         self.hasList = true

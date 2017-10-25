@@ -141,7 +141,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  margin-left: 530rpx;
+  margin-left: 500rpx;
   margin-bottom: 0.3rem;
   flex: 1;
 }
@@ -175,7 +175,7 @@
     </form>
 
     <view>
-      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
+      <swiper indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
         <block wx:for="{{imgUrls}}" wx:key="index">
           <swiper-item>
             <image src="{{item}}" class="viewphoto" />
@@ -232,9 +232,9 @@
               <text class="priceText">¥ {{item.price}}</text>
             </view>
             <view class="viewButton">
-              <navigator url="../pages/shop">
-                <button class="buyButton" formType="submit" data-index="{{index}}" @tap="goods">加入购物车</button>
-              </navigator>
+              <!-- <navigator url="../pages/shop"> -->
+              <button class="buyButton" formType="submit" data-index="{{index}}" @tap="goods">加入购物车</button>
+              <!-- </navigator> -->
             </view>
           </view>
         </view>
@@ -255,7 +255,7 @@ export default class Index extends wepy.page {
     photoposter: '../images/poster.jpg',
     indicatorDots: true,
     autoplay: true,
-    interval: 4000,
+    interval: 3000,
     duration: 500,
     indicatorActiveColor: '#e8884d',
     image: '',
@@ -364,7 +364,6 @@ export default class Index extends wepy.page {
   }
   onLoad() {
     let self = this
-    // self.commodity = commodity
     wepy.request({
       url: 'http://127.0.0.1/get',
       methods: 'POST',

@@ -1,9 +1,74 @@
 <style>
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.view-text {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  padding-top: 10rpx;
+  padding-bottom: 30rpx;
+}
+.view-all-photo{
+  display: flex;
+  flex-wrap: wrap;
+  height: 300rpx;
+  width: 95%;
+}
+.view-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 170rpx;
+  height: 170rpx;
+}
+.photo {
+  width: 150rpx;
+  height: 150rpx;
+}
+.view-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid lightgrey;
+}
+.button {
+  margin-top: 30rpx;
+  background-color: #32CD32;
+  font-size: 25rpx;
+  color: white;
+  width: 150rpx;
+}
 </style>
 
 <template>
-  
+  <form bindsubmit="formSubmit">
+    <view class="main" style="width: {{width}}px">
+      <view class="view-text">
+        <scroll-view scroll-y style="height: 200rpx">
+          <textarea maxlength="{{-1}}" style="width: 100%" name="news-text" placeholder="想发表的内容..." auto-focus/>
+        </scroll-view>
+      </view>
+      <scroll-view scroll-y style="height: 300rpx; width: 95%;">
+        <view class="view-all-photo">
+          <view wx:for="{{src}}" wx:key="index" class="view-photo">
+            <image class="photo" src="{{item}}"/>
+          </view>
+          <view class="view-photo" @tap="chooseImage">
+            <image class="photo" src="{{photo}}" />
+          </view>
+        </view>
+      </scroll-view>
+      <view class="view-button">
+        <button class="button" formType="submit" @tap="news">发表</button>
+      </view>
+    </view>
+  </form>
 </template>
 
 <script>
@@ -12,5 +77,61 @@ export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '发表动态'
   }
+  data = {
+    height: 0,
+    width: 0,
+    src: [],
+    photo: '../../image/addPhoto.png',
+    newsText: ''
+  }
+  methods = {
+    chooseImage() {
+      let self = this
+      console.log('addPhoto')
+      wepy.chooseImage({
+        count: 9, // 默认9
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function(res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          let arr = self.src
+          let arr1 = arr.concat(res.tempFilePaths)
+          self.src = arr1
+          self.setData({
+            src: arr1
+          })
+        }
+      })
+    },
+    news(e) {
+      let self = this
+      // let news = self.news
+      try {
+        wepy.setStorageSync('src', self.src)
+        wepy.setStorageSync('text', self.newsText)
+      } catch (e) {
+      }
+      wepy.showToast({
+        title: '加入成功',
+        icon: 'success',
+        duration: 1000
+      })
+    },
+    formSubmit: function(e) {
+      let self = this
+      self.newsText = e.detail.value
+      console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    }
+  }
+  onLoad() {
+    let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.height = res.windowHeight
+        self.width = res.windowWidth
+      }
+    })
+  }
+  onShow() {}
 }
 </script>

@@ -36,7 +36,7 @@ export default class extends wepy.app {
       'pages/class/newContent'
     ],
     window: {
-      backgroundTextStyle: 'light',
+      backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#b4dcea',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
