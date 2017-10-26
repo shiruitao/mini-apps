@@ -110,6 +110,7 @@
 .priceBtn {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -120,38 +121,25 @@
 }
 
 .buyButton {
-  // position: absolute;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   font-size: 90%;
   color: white;
   background-color: red;
+  margin-right: 15rpx;
 }
 
 .viewprice {
   display: flex;
   align-items: center;
-  flex: 1;
   padding-left: 0.5rem;
   margin-bottom: 0.3rem;
 }
 
 .viewButton {
-  position: absolute;
   display: flex;
   align-items: center;
-  margin-left: 500rpx;
   margin-bottom: 0.3rem;
-  flex: 1;
-}
-
-.buttonOperation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 1.2rem;
-  width: 1.2rem;
 }
 
 .num {
@@ -232,9 +220,7 @@
               <text class="priceText">¥ {{item.price}}</text>
             </view>
             <view class="viewButton">
-              <!-- <navigator url="../pages/shop"> -->
               <button class="buyButton" formType="submit" data-index="{{index}}" @tap="goods">加入购物车</button>
-              <!-- </navigator> -->
             </view>
           </view>
         </view>

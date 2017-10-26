@@ -69,9 +69,7 @@
               <text class="priceText">¥ {{item.price}}</text>
             </view>
             <view class="viewButton">
-              <!-- <navigator url="../pages/shop"> -->
               <button class="buyButton" formType="submit" data-index="{{index}}" bindtap="goods">加入购物车</button>
-              <!-- </navigator> -->
             </view>
           </view>
         </view>

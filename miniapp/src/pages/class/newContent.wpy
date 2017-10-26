@@ -51,7 +51,7 @@
     <view class="main" style="width: {{width}}px">
       <view class="view-text">
         <scroll-view scroll-y style="height: 200rpx">
-          <textarea maxlength="{{-1}}" style="width: 100%" name="news-text" placeholder="想发表的内容..." auto-focus/>
+          <textarea maxlength="{{-1}}" style="width: 100%" name="newsText" placeholder="想发表的内容..." auto-focus/>
         </scroll-view>
       </view>
       <scroll-view scroll-y style="height: 300rpx; width: 95%;">
@@ -103,12 +103,17 @@ export default class Index extends wepy.page {
         }
       })
     },
+    formSubmit: function(e) {
+      let self = this
+      self.newsText = e.detail.value
+      console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    },
     news(e) {
       let self = this
-      // let news = self.news
+      console.log('text:', self.newsText)
       try {
-        wepy.setStorageSync('src', self.src)
         wepy.setStorageSync('text', self.newsText)
+        wepy.setStorageSync('src', self.src)
       } catch (e) {
       }
       wepy.showToast({
@@ -116,11 +121,6 @@ export default class Index extends wepy.page {
         icon: 'success',
         duration: 1000
       })
-    },
-    formSubmit: function(e) {
-      let self = this
-      self.newsText = e.detail.value
-      console.log('form发生了submit事件，携带数据为：', e.detail.value)
     }
   }
   onLoad() {

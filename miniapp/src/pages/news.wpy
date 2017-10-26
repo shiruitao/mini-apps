@@ -75,33 +75,32 @@
 }
 </style>
 <template>
-<view class="main" style="width: {{width}}">
-  <view class="back-view">
-    <view class="photo">
-      <image class="issue" src="{{issue}}" @tap="issue" />
-      <image class="photo" src="{{photo}}" />
+  <view class="main" style="width: {{width}}">
+    <view class="back-view">
+      <view class="photo">
+        <image class="issue" src="{{issue}}" @tap="issue" />
+        <image class="photo" src="{{photo}}" />
+      </view>
     </view>
-  </view>
-  <view class="card">
-    <!-- <block wx:for="{{news}}" wx:key="index"> -->
-      <view class="card-view-view">
-        <image class="card-head" src="{{head}}" />
-        <text class="card-name">{{name}}</text>
-        <view class="card-view-information">
-          <text class="card-text">{{newsText}}</text>
-          <view class="card-view-photo">
-            <block wx:for="{{src}}" wx:key="{{index}}">
-              <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item}}" />
-            </block>
+    <view class="card">
+      <!-- <block wx:for="{{news}}" wx:key="index"> -->
+        <view class="card-view-view">
+          <image class="card-head" src="{{head}}" />
+          <text class="card-name">{{name}}</text>
+          <view class="card-view-information">
+            <text class="card-text">newsText</text>
+            <view class="card-view-photo">
+              <block wx:for="{{imaUrl}}" wx:key="{{index}}">
+                <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item.url}}" />
+              </block>
+            </view>
           </view>
         </view>
-      </view>
-    <!-- </block> -->
+      <!-- </block> -->
+    </view>
+    <image class="head" src="{{head}}"/>
+    <text class="name">{{name}}</text>
   </view>
-  <image class="head" src="{{head}}"/>
-  <text class="name">{{name}}</text>
-</view>
-
 </template>
 
 <script>
@@ -169,25 +168,22 @@ export default class news extends wepy.page {
     })
   }
   onShow() {
-    const _ = require('lodash')
-    let self = this
-    try {
-      var srcValue = wepy.getStorageSync('src')
-      srcValue = _.toArray(srcValue)
-      self.src = srcValue
-      self.setData({
-        src: srcValue
-      })
-    } catch (e) {
-    }
-    try {
-      var value = wepy.getStorageSync('text')
-      self.newsText = value
-      self.setData({
-        newsText: value
-      })
-    } catch (e) {
-    }
+    // const _ = require('lodash')
+    // let self = this
+    // try {
+    //   var value = wepy.getStorageSync('text')
+    //   self.newsText = value
+    //   self.setData({
+    //     newsText: value
+    //   })
+    //   var srcValue = wepy.getStorageSync('src')
+    //   srcValue = _.toArray(srcValue)
+    //   self.src = srcValue
+    //   self.setData({
+    //     src: srcValue
+    //   })
+    // } catch (e) {
+    // }
   }
 }
 </script>
