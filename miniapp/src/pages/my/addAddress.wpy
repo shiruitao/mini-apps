@@ -1,0 +1,77 @@
+/**
+*  2017-10-12   Shi Ruitao
+*/
+<style lang="less">
+.viewListIn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  margin-left: 1rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.textName {
+  font-size: 15px;
+  width: 18rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8884d;
+  height: 10%;
+  width: 25%;
+  margin-top: 1.5rem;
+}
+</style>
+<template>
+  <view style="display: flex; flex-direction: column; height: {{height}}px; width: {{width}}px">
+    <view class="viewListIn">
+      <input class="textName" name="name" placeholder="姓名" />
+    </view>
+    <view class="viewListIn">
+      <input class="textName" name="phone" placeholder="电话" />
+    </view>
+    <view class="viewListIn">
+      <textarea class="textName" bindblur="bindTextAreaBlur" auto-height placeholder="详细地址" />
+    </view>
+    <navigator url="../my/address" redirect="true">
+      <button class="button" formTepy="submit" @tap="address">保存</button>
+    </navigator>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '地址管理'
+  };
+  data = {
+    height: 0,
+    width: 0,
+    name: 1
+  };
+  methods = {
+    address() {
+      wepy.showToast({
+        title: '添加成功',
+        icon: 'success',
+        duration: 1000
+      })
+    }
+  };
+  onLoad() {
+    let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.height = res.windowHeight
+        self.width = res.windowWidth
+      }
+    })
+  }
+}
+</script>

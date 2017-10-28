@@ -32,6 +32,7 @@ export default class extends wepy.app {
       // my
       'pages/my/indent',
       'pages/my/address',
+      'pages/my/addAddress',
       // news
       'pages/class/newContent'
     ],

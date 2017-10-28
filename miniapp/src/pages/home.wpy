@@ -232,7 +232,6 @@
 
 <script>
 import wepy from 'wepy'
-import commodity from '../commodity/commodity.js'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: '超市'
@@ -246,9 +245,8 @@ export default class Index extends wepy.page {
     indicatorActiveColor: '#e8884d',
     image: '',
     title: '',
-    price: '',
+    price: 0.0,
     selected: '',
-    num: 1,
     icon: {
       salt: '../image/salt.png',
       edibleOil: '../image/edibleOil.png',
@@ -272,10 +270,18 @@ export default class Index extends wepy.page {
       const index = e.currentTarget.dataset.index
       let commodity = self.commodity[index]
       console.log(commodity)
-      try {
-        wepy.setStorageSync('commodity', commodity)
-      } catch (e) {
-      }
+      wepy.request({
+        url: 'http://127.0.0.1:7001/cartCreate',
+        method: 'POST',
+        data: {
+          title: commodity.title,
+          price: commodity.price,
+          image: commodity.image
+        },
+        success: function(res) {
+          console.log('success')
+        }
+      })
       wepy.showToast({
         title: '加入成功',
         icon: 'success',
@@ -351,13 +357,17 @@ export default class Index extends wepy.page {
   onLoad() {
     let self = this
     wepy.request({
-      url: 'http://127.0.0.1/get',
-      methods: 'POST',
+      url: 'http://127.0.0.1:7001/get',
+      method: 'GET',
       success: function(res) {
         self.commodity = res.data
+        self.setData({
+          commodity: res.data
+        })
+        console.log(res.data, 'res.data')
       }
     })
-    self.commodity = commodity
+    console.log(self.commodity, 'self.commodity')
   }
 }
 </script>

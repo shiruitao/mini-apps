@@ -23,8 +23,7 @@
 </style>
 <template>
   <view class="view">
-    <text class="text">看毛看! 什么都没有</text>
-    <image class="image" src="{{go}}"/>
+    <text class="text">to be continue</text>
   </view>
 </template>
 

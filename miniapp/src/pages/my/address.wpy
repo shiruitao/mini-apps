@@ -1,44 +1,46 @@
 /**
-*  2017-10-12   Shi Ruitao
+*  2017-15-12   Shi Ruitao
 */
 <style lang="less">
-.viewListIn {
+.view-name-phone {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 10%;
-  width: 100%;
-  margin-left: 1rem;
-  border-bottom: 1px solid lightgrey;
+  justify-content: space-between;
+  margin-top: 15rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
 }
-
-.textName {
-  font-size: 15px;
-  width: 18rem;
+.allText {
+  font-size: 35rpx;
 }
-
-.button {
+.view-address{
+  border-bottom: 1px solid grey;
+  padding: 15rpx 30rpx;
+}
+.view-button {
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #e8884d;
-  height: 10%;
-  width: 25%;
-  margin-top: 1.5rem;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  font-size: 30rpx;
+  background-color: lightsalmon;
+  color: white;
 }
 </style>
 <template>
-  <view style="display: flex; flex-direction: column; height: {{height}}px; width: {{width}}px">
-    <view class="viewListIn">
-      <input class="textName" name="name" placeholder="姓名" />
+  <view style="width: {{width}}px">
+    <view class="view-name-phone">
+      <text class="allText">时瑞涛</text>
+      <text class="allText">18331290663</text>
     </view>
-    <view class="viewListIn">
-      <input class="textName" name="phone" placeholder="电话" />
+    <view class="view-address">
+      <text class="allText">河北省保定市北市区永华北大街华北电力大学(一校区)</text>
     </view>
-    <view class="viewListIn">
-      <textarea class="textName" bindblur="bindTextAreaBlur" auto-height placeholder="详细地址" />
-    </view>
-    <button class="button" formTepy="submit" @tap="address">保存</button>
+    <navigator url="../my/addAddress" redirect="false">
+      <view class="view-button">添加地址</view>
+    </navigator>
   </view>
 </template>
 
