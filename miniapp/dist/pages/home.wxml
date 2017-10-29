@@ -1,17 +1,26 @@
 
   <view class="overall">
-    <form bindsubmit="formSubmit">
-      <view class="viewsearch">
-        <view class="viewInput">
-          <input class="viewsearchIn" style="font-size:0.8rem" name="input" placeholder="搜索您想要的商品..."/>
-        </view>
-        <button class="searchButton" formType="submit">
-          <image class="searchButtonPho" src="{{'../image/search.png'}}"/>
-        </button>
+    <view class="view-top">
+        <scroll-view scroll-x="true" class="view-class">
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+        </scroll-view>
+      <view class="view-search">
+        <image class="searchButtonPho" src="{{'../image/search.png'}}"/>
       </view>
-    </form>
-
-    <view>
+    </view>
+  
+    <view class="view-swiper">
       <swiper indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
         <block  wx:for="{{imgUrls}}" wx:key="index">
           <swiper-item>

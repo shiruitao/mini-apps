@@ -87,7 +87,7 @@ export default class Index extends wepy.page {
     height: 0,
     width: 0,
     head: '../my/head.png',
-    name: '',
+    name: '这里是昵称🇨🇳',
     indent: '../my/indent.png',
     address: '../my/address.png',
     shop: '../images/shop.png',

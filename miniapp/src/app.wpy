@@ -38,28 +38,28 @@ export default class extends wepy.app {
     ],
     window: {
       backgroundTextStyle: 'dark',
-      navigationBarBackgroundColor: '#b4dcea',
+      navigationBarBackgroundColor: 'white',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
     tabBar: {
-      color: '#2c2c2c',
-      selectedColor: '#e8884d',
+      color: '#333333',
+      selectedColor: '#f56d11',
       list: [{
         pagePath: 'pages/home',
         iconPath: './images/home.png',
         selectedIconPath: './images/homeclick.png',
         text: '首页'
       }, {
+        pagePath: 'pages/news',
+        iconPath: './images/news.png',
+        selectedIconPath: './images/newsclick.png',
+        text: '微购'
+      }, {
         pagePath: 'pages/shop',
         iconPath: './images/shop.png',
         selectedIconPath: './images/shopclick.png',
         text: '购物车'
-      }, {
-        pagePath: 'pages/news',
-        iconPath: './images/news.png',
-        selectedIconPath: './images/newsclick.png',
-        text: '动态'
       }, {
         pagePath: 'pages/my',
         iconPath: './images/my.png',

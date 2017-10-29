@@ -187,6 +187,7 @@ export default class Index extends wepy.page {
     delete: '../my/delete.png',
     hasList: false,
     totalPrice: 0.0,
+    num: 1,
     selectAllStatus: true,
     obj: {
       name: 'hello'
@@ -314,13 +315,6 @@ export default class Index extends wepy.page {
     await wepy.request({
       url: 'http://127.0.0.1:7001/cartGet',
       success: function(res) {
-        if (res.data.length) {
-          self.hasList = true
-          self.setData({
-            hasList: true
-          })
-        }
-        console.log(res.data)
         self.carts = res.data
         self.setData({
           carts: res.data
@@ -336,15 +330,11 @@ export default class Index extends wepy.page {
     wepy.request({
       url: 'http://127.0.0.1:7001/cartGet',
       success: function(res) {
-        if (res.data.length) {
-          self.hasList = true
-        }
         self.carts = res.data
         self.setData({
           carts: res.data
         })
         self.methods.getTotalPrice(self)
-        console.log(self.carts[0].num, 'self-onLoad')
       }
     })
   }

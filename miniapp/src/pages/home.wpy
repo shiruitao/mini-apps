@@ -5,59 +5,61 @@
 .overall {
   display: flex;
   flex-direction: column;
+  padding-top: 1.5rem;
 }
 
-.viewsearch {
+.view-top {
+  position: fixed;
+  top: 0;
+  background-color: white;
   display: flex;
   flex-direction: row;
-  border-top: 1px solid gray;
-  background-color: #A3D0C3;
-  justify-content: center;
   align-items: center;
-  height: 2.5rem;
+  height: 1.5rem;
   width: 100%;
 }
 
-.viewInput {
+.view-class {
+  display: flex;
+  align-items: center;
+  // overflow: scroll;
+  // height: 100%;
+  width: 85%;
+}
+.view-text-class{
+  height: 100%
+}
+.text-class {
+  font-size: 25rpx;
+  margin-left: 25rpx;
+  margin-right: 25rpx;
+}
+.view-search {
+  height: 70%;
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 80%;
-  margin-left: 1rem;
-}
-
-.viewsearchIn {
-  border: 2px solid #7BA7AB;
-  border-radius: 5px;
-  height: 90%;
-  width: 100%;
-  background: #F9F0DA;
-  color: #9E9C9C;
-}
-
-.searchButton {
-  background: #7BA7AB;
-  border-radius: 5px;
-  height: 2rem;
+  align-items: center;
   width: 15%;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 1.5rem;
+  border-left: 1px solid grey;
 }
 
 .searchButtonPho {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.view-swiper {
+  height: 9.5rem;
+  width: 100%;
+  z-index: -1;
 }
 
 .viewphoto {
   height: 9.5rem;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 }
 
 
@@ -151,18 +153,27 @@
 </style>
 <template>
   <view class="overall">
-    <form bindsubmit="formSubmit">
-      <view class="viewsearch">
-        <view class="viewInput">
-          <input class="viewsearchIn" style="font-size:0.8rem" name="input" placeholder="搜索您想要的商品..." />
-        </view>
-        <button class="searchButton" formType="submit">
-          <image class="searchButtonPho" src="{{'../image/search.png'}}" />
-        </button>
+    <view class="view-top">
+        <scroll-view scroll-x='true' class="view-class">
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+          <view class="view-text-class"><text class="text-class">特价</text></view>
+        </scroll-view>
+      <view class="view-search">
+        <image class="searchButtonPho" src="{{'../image/search.png'}}" />
       </view>
-    </form>
-
-    <view>
+    </view>
+  
+    <view class="view-swiper">
       <swiper indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
         <block wx:for="{{imgUrls}}" wx:key="index">
           <swiper-item>
@@ -307,9 +318,6 @@ export default class Index extends wepy.page {
       this.setData({
         duration: e.detail.value
       })
-    },
-    formSubmit: function(e) {
-      console.log('form发生了submit事件，携带数据为：', e.detail.value)
     },
     page1() {
       wepy.navigateTo({
