@@ -6,20 +6,31 @@
     </view>
     <view class="viewList">
       <view class="viewListIn" bindtap="pageOrder">
-        <image class="listPhoto" src="{{indent}}"/>
-        <text class="textName">我的订单</text>
+        <view class="view-arrow">
+          <image class="listPhoto" src="{{order}}"/>
+          <text class="textName">我的订单</text>
+        </view>
+        <view class="view-arrow" style="justify-content: flex-end; padding-right: 10px">
+          <image class="arrow" src="{{arrow}}"/>
+        </view>
       </view>
       <view class="viewListIn" bindtap="pageAddress">
-        <image class="listPhoto" src="{{address}}"/>
-        <text class="textName">收货地址</text>
+        <view class="view-arrow">
+          <image class="listPhoto" src="{{address}}"/>
+          <text class="textName">收货地址</text>
+        </view>
+        <view class="view-arrow" style="justify-content: flex-end; padding-right: 10px">
+          <image class="arrow" src="{{arrow}}"/>
+        </view>
       </view>
-      <view class="viewListIn" bindtap="pageShop">
-        <image class="listPhoto" src="{{shop}}"/>
-        <text class="textName">购物车</text>
-      </view>
-      <view class="viewListIn" bindtap="pageContact">
-        <image class="listPhoto" src="{{phone}}"/>
-        <text class="textName">联系我们</text>
+      <view class="viewListIn" bindtap="pageContact" style="margin-top: 30rpx">
+        <view class="view-arrow">
+          <image class="listPhoto" src="{{phone}}"/>
+          <text class="textName">联系我们</text>
+        </view>
+        <view class="view-arrow" style="justify-content: flex-end; padding-right: 10px">
+          <image class="arrow" src="{{arrow}}"/>
+        </view>
       </view>
     </view>
   </view>

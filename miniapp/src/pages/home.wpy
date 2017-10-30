@@ -21,18 +21,17 @@
 
 .view-class {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  // overflow: scroll;
-  // height: 100%;
+  height: 100%;
   width: 85%;
 }
-.view-text-class{
-  height: 100%
-}
+
 .text-class {
-  font-size: 25rpx;
-  margin-left: 25rpx;
-  margin-right: 25rpx;
+  width: 100px;
+  font-size: 30rpx;
+  padding-left: 35rpx;
+  padding-right: 35rpx; 
 }
 .view-search {
   height: 70%;
@@ -49,32 +48,34 @@
 }
 
 .view-swiper {
-  height: 9.5rem;
+  height: 8rem;
   width: 100%;
-  z-index: -1;
+  // z-index: -1;
+}
+
+.photo-swiper {
+  height: 100%;
+  width: 100%;
 }
 
 .viewphoto {
   height: 9.5rem;
   width: 100%;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
 }
 
 
 .class {
   display: flex;
   flex-direction: column;
-  height: 8rem;
+  height: 3rem;
   width: 100%;
-  border-bottom: 0.3rem solid lightgrey;
+  border-bottom: 0.5rem solid whitesmoke;
 }
 
 .classline {
   display: flex;
   flex-direction: row;
-  height: 80%;
+  height: 100%;
   width: 100%;
 }
 
@@ -92,21 +93,29 @@
 }
 
 .classtext {
-  font-size: 70%;
+  font-size: 11px;
   padding-top: 0.3rem;
 }
 
-.viewCom {
+.view-list-commodity {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.view-commdity {
+  width: 45%;
+  height: 500rpx;
   display: flex;
   flex-direction: column;
-  border-bottom: 3px solid lightgrey;
+  margin: 13rpx 13rpx;
 }
 
 .title {
-  font-size: 100%;
-  padding-top: 0.2rem;
-  padding-bottom: 0.3rem;
-  padding-left: 0.5rem;
+  font-size: 25rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 10rpx;
 }
 
 .priceBtn {
@@ -118,8 +127,11 @@
 }
 
 .priceText {
-  font-size: 150%;
+  position: absolute;
+  bottom: 0;
+  font-size: 30rpx;
   color: red;
+  padding-left: 10rpx;
 }
 
 .buyButton {
@@ -152,36 +164,32 @@
 }
 </style>
 <template>
-  <view class="overall">
+  <view class="overall" style="width: {{Width}}px">
     <view class="view-top">
-        <scroll-view scroll-x='true' class="view-class">
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-          <view class="view-text-class"><text class="text-class">特价</text></view>
-        </scroll-view>
+      <scroll-view scroll-x="true" style="white-space: nowrap; display: block" class="view-class">
+        <text class="text-class" style="color: {{colorA}};border-bottom: 3px solid {{colora}}" @tap="classA">特价</text>
+        <text class="text-class" style="color: {{colorB}};border-bottom: 3px solid {{colorb}}" @tap="classB">调味品</text>
+        <text class="text-class" style="color: {{colorC}};border-bottom: 3px solid {{colorc}}" @tap="classC">米面</text>
+        <text class="text-class" style="color: {{colorD}};border-bottom: 3px solid {{colord}}" @tap="classD">豆类</text>
+        <text class="text-class" style="color: {{colorE}};border-bottom: 3px solid {{colore}}" @tap="classE">酱乳类</text>
+        <text class="text-class" style="color: {{colorF}};border-bottom: 3px solid {{colorf}}" @tap="classF">火锅食材</text>
+        <text class="text-class" style="color: {{colorG}};border-bottom: 3px solid {{colorg}}" @tap="classG">餐具用品</text>
+      </scroll-view>
       <view class="view-search">
         <image class="searchButtonPho" src="{{'../image/search.png'}}" />
       </view>
     </view>
   
     <view class="view-swiper">
-      <swiper indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
+      <swiper class="photo-swiper" indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
         <block wx:for="{{imgUrls}}" wx:key="index">
           <swiper-item>
-            <image src="{{item}}" class="viewphoto" />
+            <image src="{{item}}" class="photo-swiper" />
           </swiper-item>
         </block>
       </swiper>
     </view>
+
     <view class="class">
       <view class="classline">
         <view class="classIn" @tap="page1">
@@ -201,39 +209,21 @@
           <text class="classtext">豆类</text>
         </view>
       </view>
-      <view class="classline">
-        <view class="classIn" @tap="page5">
-          <image class="classStyle" src="{{icon.sauce}}" />
-          <text class="classtext">酱乳类</text>
-        </view>
-        <view class="classIn" @tap="page6">
-          <image class="classStyle" src="{{icon.hotPot}}" />
-          <text class="classtext">火锅食材</text>
-        </view>
-        <view class="classIn" @tap="page7">
-          <image class="classStyle" src="{{icon.snacks}}" />
-          <text class="classtext">小零食</text>
-        </view>
-        <view class="classIn" @tap="page8">
-          <image class="classStyle" src="{{icon.use}}" />
-          <text class="classtext">餐具用品</text>
-        </view>
-      </view>
     </view>
 
-    <view class="viewCom">
+    <view class="view-list-commodity">
       <block wx:for="{{commodity}}" wx:key="index">
-        <view class="viewCom">
+        <view class="view-commdity">
           <image class="viewphoto" src="{{item.image}}" />
           <text class="title">{{item.title}}</text>
-          <view class="priceBtn">
-            <view class="viewprice">
+          <!-- <view class="priceBtn"> -->
+            <!-- <view class="viewprice"> -->
               <text class="priceText">¥ {{item.price}}</text>
-            </view>
-            <view class="viewButton">
+            <!-- </view> -->
+            <!-- <view class="viewButton">
               <button class="buyButton" formType="submit" data-index="{{index}}" @tap="goods">加入购物车</button>
-            </view>
-          </view>
+            </view> -->
+          <!-- </view> -->
         </view>
       </block>
     </view>
@@ -258,6 +248,23 @@ export default class Index extends wepy.page {
     title: '',
     price: 0.0,
     selected: '',
+    Width: 0,
+    colorA: '#f56d11',
+    colorB: '',
+    colorC: '',
+    colorD: '',
+    colorE: '',
+    colorF: '',
+    colorG: '',
+    colorH: '',
+    colora: '#f56d11',
+    colorb: 'white',
+    colorc: 'white',
+    colord: 'white',
+    colore: 'white',
+    colorf: 'white',
+    colorg: 'white',
+    colorh: 'white',
     icon: {
       salt: '../image/salt.png',
       edibleOil: '../image/edibleOil.png',
@@ -358,12 +365,169 @@ export default class Index extends wepy.page {
       wepy.navigateTo({
         url: './class/use'
       })
+    },
+    classA() {
+      let self = this
+      self.colorA = '#f56d11'
+      self.colora = '#f56d11'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classB() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = '#f56d11'
+      self.colorb = '#f56d11'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classC() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = '#f56d11'
+      self.colorc = '#f56d11'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classD() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = '#f56d11'
+      self.colord = '#f56d11'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classE() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = '#f56d11'
+      self.colore = '#f56d11'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classF() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = '#f56d11'
+      self.colorf = '#f56d11'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classG() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = '#f56d11'
+      self.colorg = '#f56d11'
+      self.colorH = 'black'
+      self.colorh = 'white'
+    },
+    classH() {
+      let self = this
+      self.colorA = 'black'
+      self.colora = 'white'
+      self.colorB = 'black'
+      self.colorb = 'white'
+      self.colorC = 'black'
+      self.colorc = 'white'
+      self.colorD = 'black'
+      self.colord = 'white'
+      self.colorE = 'black'
+      self.colore = 'white'
+      self.colorF = 'black'
+      self.colorf = 'white'
+      self.colorG = 'black'
+      self.colorg = 'white'
+      self.colorH = '#f56d11'
+      self.colorh = '#f56d11'
     }
   }
   onShow() {
   }
   onLoad() {
     let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.Width = res.windowWidth
+      }
+    })
     wepy.request({
       url: 'http://127.0.0.1:7001/get',
       method: 'GET',
@@ -375,7 +539,6 @@ export default class Index extends wepy.page {
         console.log(res.data, 'res.data')
       }
     })
-    console.log(self.commodity, 'self.commodity')
   }
 }
 </script>
