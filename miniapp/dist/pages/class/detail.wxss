@@ -1,0 +1,48 @@
+
+.view-main {
+  display: flex;
+  flex-direction: column;
+}
+.view-poster {
+  height: 450rpx;
+  width: 100%;
+}
+.image-poster {
+  height: 100%;
+  width: 100%;
+}
+.view-allText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.view-title {
+  width: 93%;
+  position: relative;
+  top: 20rpx;
+  display: flex;
+  align-items: center;
+  /* overflow: scroll; */
+}
+.text-title {
+  font-size: 15px;
+}
+.view-price {
+  position: relative;
+  top: 20rpx;
+  width: 93%;
+  display: flex;
+  /* align-items: center; */
+}
+.text-price {
+  font-size: 15px;
+  color: tomato;
+}
+.view-bottom {
+  position: fixed;
+  bottom: 0;
+  height: 40rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

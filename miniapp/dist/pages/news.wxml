@@ -1,16 +1,8 @@
 
-  <view class="main" style="width: {{width}}">
-    <view class="back-view">
-      <view class="photo">
-        <image class="issue" src="{{issue}}" bindtap="issue"/>
-        <image class="photo" src="{{photo}}"/>
-      </view>
-    </view>
+  <view class="main" style="width: {{width}}px">
     <view class="card">
       <!-- <block wx:for="{{news}}" wx:key="index"> -->
         <view class="card-view-view">
-          <image class="card-head" src="{{head}}"/>
-          <text class="card-name">{{name}}</text>
           <view class="card-view-information">
             <text class="card-text">newsText</text>
             <view class="card-view-photo">
@@ -22,6 +14,4 @@
         </view>
       <!-- </block> -->
     </view>
-    <image class="head" src="{{head}}"/>
-    <text class="name">{{name}}</text>
   </view>

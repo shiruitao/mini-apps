@@ -1,0 +1,124 @@
+<style>
+.view-main {
+  display: flex;
+  flex-direction: column;
+}
+.view-poster {
+  height: 450rpx;
+  width: 100%;
+}
+.image-poster {
+  height: 100%;
+  width: 100%;
+}
+.view-allText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.view-title {
+  width: 93%;
+  position: relative;
+  top: 20rpx;
+  display: flex;
+  align-items: center;
+  /* overflow: scroll; */
+}
+.text-title {
+  font-size: 15px;
+}
+.view-price {
+  position: relative;
+  top: 20rpx;
+  width: 93%;
+  display: flex;
+  /* align-items: center; */
+}
+.text-price {
+  font-size: 15px;
+  color: tomato;
+}
+.view-bottom {
+  position: fixed;
+  bottom: 0;
+  height: 40rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+</style>
+
+<template>
+  <view class="view-main">
+    <view class="view-poster">
+      <image class="image-poster" src="{{image}}"/>
+    </view>
+    <view class="view-allText">
+      <view class="view-title">
+        <text class="text-title">{{title}}</text>
+      </view>
+      <view class="view-price">
+        <text class="text-price">¥ {{price}}</text>
+      </view>
+     </view>
+     <view class="view-bottom">
+       <text @tap="carts">加入购物车</text>
+     </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class detail extends wepy.page {
+  config = {
+    navigationBarTitleText: '商品详情'
+  }
+  data = {
+    src: 'https://img.alicdn.com/tfs/TB16j9ph2BNTKJjy0FdXXcPpVXa-520-280.jpg_q90'
+  }
+  methods = {
+    carts(e) {
+      let self = this
+      const index = e.currentTarget.dataset.index
+      let commodity = self.commodity[index]
+      console.log(commodity)
+      wepy.request({
+        url: 'http://127.0.0.1:7001/cartCreate',
+        method: 'POST',
+        data: {
+          title: commodity.title,
+          price: commodity.price,
+          image: commodity.image
+        },
+        success: function(res) {
+          console.log('success')
+        }
+      })
+      wepy.showToast({
+        title: '加入成功',
+        icon: 'success',
+        duration: 1000
+      })
+    }
+  }
+  onLoad() {
+    let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.height = res.windowHeight
+        self.width = res.windowWidth
+      }
+    })
+    wepy.request({
+      url: 'http://127.0.0.1:7001/get',
+      method: 'GET',
+      success: function(res) {
+        self.commodity = res.data
+        self.setData({
+          commodity: res.data
+        })
+      }
+    })
+  }
+}
+</script>

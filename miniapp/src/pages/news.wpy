@@ -6,21 +6,7 @@
   display: flex;
   flex-direction: column; 
 }
-.back-view {
-  width: 100%;
-  height: 460rpx;
-}
-.photo {
-  width: 100%;
-  height: 400rpx;
-}
-.issue {
-  position: fixed;
-  top: 20rpx;
-  right: 20rpx;
-  width: 60rpx;
-  height: 60rpx;
-}
+
 .head {
   position: absolute;
   top: 310rpx;
@@ -75,18 +61,10 @@
 }
 </style>
 <template>
-  <view class="main" style="width: {{width}}">
-    <view class="back-view">
-      <view class="photo">
-        <image class="issue" src="{{issue}}" @tap="issue" />
-        <image class="photo" src="{{photo}}" />
-      </view>
-    </view>
+  <view class="main" style="width: {{width}}px">
     <view class="card">
       <!-- <block wx:for="{{news}}" wx:key="index"> -->
         <view class="card-view-view">
-          <image class="card-head" src="{{head}}" />
-          <text class="card-name">{{name}}</text>
           <view class="card-view-information">
             <text class="card-text">newsText</text>
             <view class="card-view-photo">
@@ -98,8 +76,6 @@
         </view>
       <!-- </block> -->
     </view>
-    <image class="head" src="{{head}}"/>
-    <text class="name">{{name}}</text>
   </view>
 </template>
 
@@ -113,7 +89,6 @@ export default class news extends wepy.page {
   data = {
     height: 0,
     width: 0,
-    issue: '../image/issue.png',
     head: '',
     name: '',
     src: [],
@@ -123,8 +98,7 @@ export default class news extends wepy.page {
       {url: 'https://img11.360buyimg.com/babel/jfs/t10276/362/1287822046/93410/f75a7664/59df518aN37f8489b.jpg'},
       {url: 'https://img.alicdn.com/tfs/TB16j9ph2BNTKJjy0FdXXcPpVXa-520-280.jpg_q90'},
       {url: 'https://img.alicdn.com/simba/img/TB1Sn01X7T85uJjSZFhSuwPEVXa.jpg'}
-    ],
-    photo: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509244645&di=debd65bf16176135b691782fb939095f&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.xiazaizhijia.com%2Fwalls%2F20150908%2F1440x900_dd76839deec4325.jpg'
+    ]
   }
   methods = {
     issue() {

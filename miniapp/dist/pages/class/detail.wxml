@@ -1,0 +1,17 @@
+
+  <view class="view-main">
+    <view class="view-poster">
+      <image class="image-poster" src="{{image}}"/>
+    </view>
+    <view class="view-allText">
+      <view class="view-title">
+        <text class="text-title">{{title}}</text>
+      </view>
+      <view class="view-price">
+        <text class="text-price">¥ {{price}}</text>
+      </view>
+     </view>
+     <view class="view-bottom">
+       <text bindtap="carts">加入购物车</text>
+     </view>
+  </view>
