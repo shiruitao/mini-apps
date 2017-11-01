@@ -139,10 +139,27 @@ export default class my extends wepy.page {
       // })
     },
     pageContact() {
-      wepy.showModal({
-        title: '手机:',
-        content: '18331290663'
+      wepy.setClipboardData({
+        data: '18331290663',
+        success: function(res) {
+          wepy.showActionSheet({
+            itemList: ['18331290663'],
+            success: function(res) {
+              if (res.tapIndex === 0) {
+                wepy.showToast({
+                  title: '已复制',
+                  icon: 'success',
+                  duration: 1000
+                })
+              }
+            }
+          })
+        }
       })
+      // wepy.showModal({
+      //   title: '手机:',
+      //   content: '18331290663'
+      // })
     }
   }
   onLoad() {

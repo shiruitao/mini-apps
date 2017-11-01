@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 1.5rem;
+  height: 1.7rem;
   width: 100%;
   z-index: 100;
 }
@@ -32,7 +32,8 @@
   width: 100px;
   font-size: 30rpx;
   padding-left: 35rpx;
-  padding-right: 35rpx; 
+  padding-right: 35rpx;
+  padding-bottom: 8rpx;
   color: #333333;
 
 }
@@ -51,7 +52,7 @@
 }
 
 .view-swiper {
-  height: 8rem;
+  height: 330rpx;
   width: 100%;
 }
 
@@ -86,6 +87,7 @@
   align-items: center;
   flex: 1;
   margin-top: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .classStyle {
@@ -270,7 +272,6 @@ export default class Index extends wepy.page {
       let self = this
       const index = e.currentTarget.dataset.index
       let commodity = self.commodity[index]
-      console.log(commodity)
       wepy.request({
         url: 'http://127.0.0.1:7001/cartCreate',
         method: 'POST',
@@ -349,11 +350,13 @@ export default class Index extends wepy.page {
         url: './class/use'
       })
     },
-    detail() {
-      // let self = this
+    detail(e) {
+      let self = this
+      const index = e.currentTarget.dataset.index
       wepy.navigateTo({
-        url: './class/detail'
+        url: `./class/detail?id=${self.commodity[index].id}`
       })
+      console.log(self.commodity[index].id, 'id')
     },
     classA() {
       let self = this
@@ -518,7 +521,7 @@ export default class Index extends wepy.page {
       }
     })
     wepy.request({
-      url: 'http://127.0.0.1:7001/get',
+      url: 'http://127.0.0.1:7001/getSelect',
       method: 'GET',
       success: function(res) {
         self.commodity = res.data

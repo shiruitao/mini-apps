@@ -12,8 +12,11 @@ module.exports = app => {
     * updata() {
       this.ctx.body = yield this.service.home.updata(this.ctx.request.body);
     }
-    * get() {
-      this.ctx.body = yield this.service.home.get(this.ctx.request.body);
+    * getSelect() {
+      this.ctx.body = yield this.service.home.getSelect(this.ctx.request.body);
+    }
+    * getGet() {
+      this.ctx.body = yield this.service.home.getGet(this.ctx.request.body);
     }
     // 购物车表
     * cartCreate() {

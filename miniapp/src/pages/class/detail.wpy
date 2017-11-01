@@ -2,6 +2,7 @@
 .view-main {
   display: flex;
   flex-direction: column;
+  background-color: #f5f6f8;
 }
 .view-poster {
   height: 450rpx;
@@ -15,24 +16,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 }
 .view-title {
   width: 93%;
-  position: relative;
-  top: 20rpx;
   display: flex;
   align-items: center;
-  /* overflow: scroll; */
+  background-color: white;
+  margin-top: 15rpx;
+  margin-bottom: 10rpx;
 }
 .text-title {
   font-size: 15px;
 }
 .view-price {
-  position: relative;
-  top: 20rpx;
   width: 93%;
   display: flex;
-  /* align-items: center; */
+  background-color: white;
 }
 .text-price {
   font-size: 15px;
@@ -41,28 +41,58 @@
 .view-bottom {
   position: fixed;
   bottom: 0;
-  height: 40rpx;
+  height: 100rpx;
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-around;
+  background-color: white;
+  border-top: 0.5px solid lightgrey;
+}
+.view-introduce {
+  width: 100%;
+}
+.view-bottom-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.text-bottom {
+  font-size: 11px;
+}
+.icon {
+  height: 18px;
+  width: 18px;
+  padding-right: 10rpx;
 }
 </style>
 
 <template>
-  <view class="view-main">
+  <view class="view-main" style="height: {{height}}px; width: {{width}}px">
     <view class="view-poster">
-      <image class="image-poster" src="{{image}}"/>
+      <image class="image-poster" src="{{cart.image}}"/>
     </view>
     <view class="view-allText">
       <view class="view-title">
-        <text class="text-title">{{title}}</text>
+        <text class="text-title">{{cart.title}}</text>
       </view>
       <view class="view-price">
-        <text class="text-price">¥ {{price}}</text>
+        <text class="text-price">¥ {{cart.price}}</text>
       </view>
      </view>
      <view class="view-bottom">
-       <text @tap="carts">加入购物车</text>
+      <view class="view-bottom-all" style="flex: 1" @tap="contact">
+        <image class="icon" src="../../images/contact.png"/>
+        <text class="text-bottom">客服</text>
+      </view>
+      <view class="view-bottom-all" style="flex: 1" @tap="favorite">
+        <image class="icon" src="{{favorite}}"/>
+        <text class="text-bottom">{{favor}}</text>
+      </view>
+      <view class="view-bottom-all" style="flex: 2; background-color: tomato" @tap="carts">
+        <text class="text-bottom" style="color: white">{{tip}}</text>
+      </view>
      </view>
   </view>
 </template>
@@ -74,21 +104,26 @@ export default class detail extends wepy.page {
     navigationBarTitleText: '商品详情'
   }
   data = {
-    src: 'https://img.alicdn.com/tfs/TB16j9ph2BNTKJjy0FdXXcPpVXa-520-280.jpg_q90'
+    index: 0,
+    cart: [],
+    height: 0,
+    width: 0,
+    favorite: '../../images/favorite.png',
+    cartIcon: '../../images/shop.png',
+    tip: '购物车',
+    favor: '收藏'
   }
   methods = {
     carts(e) {
       let self = this
-      const index = e.currentTarget.dataset.index
-      let commodity = self.commodity[index]
-      console.log(commodity)
+      self.cartIcon = '../../images/shopclick.png'
       wepy.request({
         url: 'http://127.0.0.1:7001/cartCreate',
         method: 'POST',
         data: {
-          title: commodity.title,
-          price: commodity.price,
-          image: commodity.image
+          title: self.cart.title,
+          price: self.cart.price,
+          image: self.cart.image
         },
         success: function(res) {
           console.log('success')
@@ -99,26 +134,39 @@ export default class detail extends wepy.page {
         icon: 'success',
         duration: 1000
       })
+      self.tip = '已加入购物车'
+    },
+    favorite() {
+      let self = this
+      self.favorite = '../../images/favoriteclick.png'
+      self.favor = '已收藏'
     }
   }
-  onLoad() {
+  async onLoad(data) {
     let self = this
+    self.index = data.id
+    console.log(self.index, 'index')
+    await wepy.request({
+      url: 'http://127.0.0.1:7001/getGet',
+      method: 'POST',
+      data: {
+        id: self.index
+      },
+      success: function(res) {
+        self.cart = res.data
+        self.setData({
+          cart: res.data
+        })
+        console.log(self.cart, 'cart')
+      }
+    })
     wepy.getSystemInfo({
       success(res) {
         self.height = res.windowHeight
         self.width = res.windowWidth
       }
     })
-    wepy.request({
-      url: 'http://127.0.0.1:7001/get',
-      method: 'GET',
-      success: function(res) {
-        self.commodity = res.data
-        self.setData({
-          commodity: res.data
-        })
-      }
-    })
+    this.$apply()
   }
 }
 </script>

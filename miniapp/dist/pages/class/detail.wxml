@@ -1,17 +1,27 @@
 
-  <view class="view-main">
+  <view class="view-main" style="height: {{height}}px; width: {{width}}px">
     <view class="view-poster">
-      <image class="image-poster" src="{{image}}"/>
+      <image class="image-poster" src="{{cart.image}}"/>
     </view>
     <view class="view-allText">
       <view class="view-title">
-        <text class="text-title">{{title}}</text>
+        <text class="text-title">{{cart.title}}</text>
       </view>
       <view class="view-price">
-        <text class="text-price">¥ {{price}}</text>
+        <text class="text-price">¥ {{cart.price}}</text>
       </view>
      </view>
      <view class="view-bottom">
-       <text bindtap="carts">加入购物车</text>
+      <view class="view-bottom-all" style="flex: 1" bindtap="contact">
+        <image class="icon" src="../../images/contact.png"/>
+        <text class="text-bottom">客服</text>
+      </view>
+      <view class="view-bottom-all" style="flex: 1" bindtap="favorite">
+        <image class="icon" src="{{favorite}}"/>
+        <text class="text-bottom">{{favor}}</text>
+      </view>
+      <view class="view-bottom-all" style="flex: 2; background-color: tomato" bindtap="carts">
+        <text class="text-bottom" style="color: white">{{tip}}</text>
+      </view>
      </view>
   </view>

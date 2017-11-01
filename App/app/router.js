@@ -3,7 +3,8 @@
 module.exports = app => {
   app.post('/create', 'home.create');
   app.post('/updata', 'home.updata');
-  app.get('/get', 'home.get');
+  app.get('/getSelect', 'home.getSelect');
+  app.post('/getGet', 'home.getGet');
   app.post('/delete', 'home.delete');
 
   app.post('/cartCreate', 'home.cartCreate');

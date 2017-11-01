@@ -11,10 +11,20 @@ module.exports = app => {
       }
       return true;
     }
-    * get(req) {
+    * getSelect(req) {
       let res;
       try {
         res = yield app.mysql.select('commodity', req);
+      } catch (e) {
+        this.ctx.logger.error(e);
+        return false;
+      }
+      return res;
+    }
+    * getGet(req) {
+      let res;
+      try {
+        res = yield app.mysql.get('commodity', req);
       } catch (e) {
         this.ctx.logger.error(e);
         return false;
