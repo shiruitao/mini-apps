@@ -30,6 +30,7 @@ export default class extends wepy.app {
       'pages/class/snacks',
       'pages/class/use',
       'pages/class/detail',
+      'pages/class/search',
       // my
       'pages/my/indent',
       'pages/my/address',

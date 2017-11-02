@@ -43,7 +43,7 @@
   justify-content: center;
   align-items: center;
   width: 15%;
-  border-left: 1px solid grey;
+  border-left: 1px solid lightgrey;
 }
 
 .searchButtonPho {
@@ -158,7 +158,7 @@
         <text class="text-class" style="color: {{colorF}};border-bottom: 3px solid {{colorf}}" @tap="classF">火锅食材</text>
         <text class="text-class" style="color: {{colorG}};border-bottom: 3px solid {{colorg}}" @tap="classG">餐具用品</text>
       </scroll-view>
-      <view class="view-search">
+      <view class="view-search" @tap="search">
         <image class="searchButtonPho" src="{{'../image/search.png'}}" />
       </view>
     </view>
@@ -174,7 +174,7 @@
     </view>
 
     <view class="class">
-      <view class="classline">
+      <!-- <view class="classline">
         <view class="classIn" @tap="page1">
           <image class="classStyle" src="{{icon.salt}}" />
           <text class="classtext">调味品</text>
@@ -191,7 +191,7 @@
           <image class="classStyle" src="{{icon.beans}}" />
           <text class="classtext">豆类</text>
         </view>
-      </view>
+      </view> -->
     </view>
 
     <view class="view-list-commodity">
@@ -288,6 +288,11 @@ export default class Index extends wepy.page {
         title: '加入成功',
         icon: 'success',
         duration: 1000
+      })
+    },
+    search() {
+      wepy.navigateTo({
+        url: './class/search'
       })
     },
     changeIndicatorDots: function(e) {

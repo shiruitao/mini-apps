@@ -1,0 +1,38 @@
+
+  <view class="view-main" style="width: {{width}}px">
+    <view class="view-search">
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <input class="border-input" name="input" placeholder="请输入商品名" auto-focus/>
+      </form>
+    </view>
+    <view class="view-history">
+      <view style="width: 95%; margin: 30rpx 0 20rpx 0">
+        <text style="font-size: 15px; color: #333333 position: relative; left: 30rpx">搜索历史</text>
+      </view>
+      <view class="view-class">
+        <!-- <block wx:for="{{}}" wx:key="index"> -->
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服</text>
+          </view>
+        <!-- </block> -->
+      </view>
+    </view>
+  </view>

@@ -20,18 +20,15 @@
 }
 .view-title {
   width: 93%;
-  display: flex;
+  margin-top: 4px;
   align-items: center;
   background-color: white;
-  margin-top: 15rpx;
-  margin-bottom: 10rpx;
 }
 .text-title {
-  font-size: 15px;
+  font-size: 13px;
 }
 .view-price {
   width: 93%;
-  display: flex;
   background-color: white;
 }
 .text-price {
@@ -66,10 +63,39 @@
   width: 18px;
   padding-right: 10rpx;
 }
+.view-detail {
+  width: 100%;
+  position: relative;
+  top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+.text-detail-title {
+  font-size: 15px;
+  border-left: 4px solid black;
+  padding-left: 3px;
+  margin-top: 3px;
+}
+.text-detail {
+  font-size: 11px;
+  margin: 10rpx 20rpx 20rpx 20rpx;
+  color: #333333;
+}
+.view-detail-photo {
+  position: relative;
+  top: 20rpx;
+  height: 450rpx;
+  width: 100%;
+}
+.image-detail {
+  height: 100%;
+  width: 100%;
+}
 </style>
 
 <template>
-  <view class="view-main" style="height: {{height}}px; width: {{width}}px">
+  <view class="view-main" style="width: {{width}}px">
     <view class="view-poster">
       <image class="image-poster" src="{{cart.image}}"/>
     </view>
@@ -80,8 +106,16 @@
       <view class="view-price">
         <text class="text-price">¥ {{cart.price}}</text>
       </view>
-     </view>
-     <view class="view-bottom">
+    </view>
+    
+    <view class="view-detail">
+      <text class="text-detail-title">商品详情</text>
+      <text class="text-detail">商品描述占位字符,商品描述占位字符,商品描述占位字符,商品描述占位字符,商品描述占位字符,商品描述占位字符,</text>
+    </view>
+    <view class="view-detail-photo">
+      <text style="font-size: 11px">商品详细图片位置</text>
+    </view>
+    <view class="view-bottom">
       <view class="view-bottom-all" style="flex: 1" @tap="contact">
         <image class="icon" src="../../images/contact.png"/>
         <text class="text-bottom">客服</text>
@@ -93,7 +127,7 @@
       <view class="view-bottom-all" style="flex: 2; background-color: tomato" @tap="carts">
         <text class="text-bottom" style="color: white">{{tip}}</text>
       </view>
-     </view>
+    </view>
   </view>
 </template>
 

@@ -1,0 +1,106 @@
+<style>
+.view-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50rpx;
+}
+.view-search {
+  width: 92%;
+  height: 2.5rem;
+  background-color: #f5f6f8;
+  border-radius: 20px;
+}
+.border-input {
+  width: 100%;
+  height: 100%;
+  margin-left: 30rpx;
+}
+.view-history {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.view-class {
+  display: flex;
+  flex-wrap: wrap;
+  width: 92%;
+}
+.view-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.9rem;
+  border-radius: 20px;
+  background-color: #f5f6f8;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.text-class {
+  font-size: 12px;
+  margin: 30rpx;
+}
+</style>
+
+<template>
+  <view class="view-main" style="width: {{width}}px">
+    <view class="view-search">
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <input class="border-input" name="input" placeholder="请输入商品名" auto-focus/>
+      </form>
+    </view>
+    <view class="view-history">
+      <view style="width: 95%; margin: 30rpx 0 20rpx 0">
+        <text style="font-size: 15px; color: #333333 position: relative; left: 30rpx">搜索历史</text>
+      </view>
+      <view class="view-class">
+        <!-- <block wx:for="{{}}" wx:key="index"> -->
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服</text>
+          </view>
+          <view class="view-wrap">
+            <text class="text-class">衣服衣服</text>
+          </view>
+        <!-- </block> -->
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class search extends wepy.page {
+  config = {
+    navigationBarTitleText: '搜索发现'
+  }
+  data = {
+    height: 0,
+    width: 0
+  }
+  onLoad() {
+    let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.height = res.windowHeight
+        self.width = res.windowWidth
+      }
+    })
+  }
+}
+</script>

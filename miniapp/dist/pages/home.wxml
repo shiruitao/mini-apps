@@ -10,7 +10,7 @@
         <text class="text-class" style="color: {{colorF}};border-bottom: 3px solid {{colorf}}" bindtap="classF">火锅食材</text>
         <text class="text-class" style="color: {{colorG}};border-bottom: 3px solid {{colorg}}" bindtap="classG">餐具用品</text>
       </scroll-view>
-      <view class="view-search">
+      <view class="view-search" bindtap="search">
         <image class="searchButtonPho" src="{{'../image/search.png'}}"/>
       </view>
     </view>
@@ -26,24 +26,24 @@
     </view>
 
     <view class="class">
-      <view class="classline">
+      <!-- <view class="classline">
         <view class="classIn" bindtap="page1">
-          <image class="classStyle" src="{{icon.salt}}"/>
+          <image class="classStyle" src="{{icon.salt}}" />
           <text class="classtext">调味品</text>
         </view>
         <view class="classIn" bindtap="page2">
-          <image class="classStyle" src="{{icon.edibleOil}}"/>
+          <image class="classStyle" src="{{icon.edibleOil}}" />
           <text class="classtext">食用油</text>
         </view>
         <view class="classIn" bindtap="page3">
-          <image class="classStyle" src="{{icon.rice}}"/>
+          <image class="classStyle" src="{{icon.rice}}" />
           <text class="classtext">米面</text>
         </view>
         <view class="classIn" bindtap="page4">
-          <image class="classStyle" src="{{icon.beans}}"/>
+          <image class="classStyle" src="{{icon.beans}}" />
           <text class="classtext">豆类</text>
         </view>
-      </view>
+      </view> -->
     </view>
 
     <view class="view-list-commodity">

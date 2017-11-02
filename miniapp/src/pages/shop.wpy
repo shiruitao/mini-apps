@@ -150,7 +150,7 @@
 }
 </style>
 <template>
-  <view class="main">
+  <view>
     <view wx:if="{{!carts.length}}">
       <view class="cart-no-data" style="height: {{height}}px; width: {{width}}px">购物车空~</view>
     </view>
