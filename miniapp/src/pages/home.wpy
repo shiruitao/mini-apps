@@ -25,17 +25,23 @@
   flex-direction: row;
   align-items: center;
   height: 100%;
-  width: 85%;
+  width: 100%;
+}
+
+.view-scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .text-class {
-  width: 100px;
+  width: 80px;
+  height: 90%;
   font-size: 30rpx;
-  padding-left: 35rpx;
-  padding-right: 35rpx;
-  padding-bottom: 8rpx;
-  color: #333333;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .view-search {
   height: 70%;
@@ -67,8 +73,8 @@
 }
 
 .class {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   height: 3rem;
   width: 100%;
   border-bottom: 0.5rem solid whitesmoke;
@@ -145,18 +151,34 @@
   height: 0;
   color: transparent;
 }
+
+.in1{
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  animation: move 3s infinite linear normal;
+}
+@keyframes move{
+  0% { background:red;}
+  40% {margin-top:0px; margin-left:94%; background:blue;}
+  50% {margin-top:10%; margin-left:94%; background:yellow;}
+  90% {margin-top:10%; margin-left:0px; background:green;}
+  100% {margin-top:0px; margin-left:0px; background:red;}
+}
+.in1{
+  background-color: tomato;
+}
+
 </style>
 <template>
   <view class="overall" style="width: {{Width}}px">
     <view class="view-top">
-      <scroll-view scroll-x="true" style="white-space: nowrap; display: block" class="view-class">
-        <text class="text-class" style="color: {{colorA}};border-bottom: 3px solid {{colora}}" @tap="classA">特价</text>
-        <text class="text-class" style="color: {{colorB}};border-bottom: 3px solid {{colorb}}" @tap="classB">调味品</text>
-        <text class="text-class" style="color: {{colorC}};border-bottom: 3px solid {{colorc}}" @tap="classC">米面</text>
-        <text class="text-class" style="color: {{colorD}};border-bottom: 3px solid {{colord}}" @tap="classD">豆类</text>
-        <text class="text-class" style="color: {{colorE}};border-bottom: 3px solid {{colore}}" @tap="classE">酱乳类</text>
-        <text class="text-class" style="color: {{colorF}};border-bottom: 3px solid {{colorf}}" @tap="classF">火锅食材</text>
-        <text class="text-class" style="color: {{colorG}};border-bottom: 3px solid {{colorg}}" @tap="classG">餐具用品</text>
+      <scroll-view scroll-x="true" style="width: 85%; height: 100%">
+        <view class="view-class">
+          <view class="view-scroll" wx:for="{{tab}}" wx:key="index" id="{{index}}" @tap="tab">
+            <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 3px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
+          </view>
+        </view>
       </scroll-view>
       <view class="view-search" @tap="search">
         <image class="searchButtonPho" src="{{'../image/search.png'}}" />
@@ -174,24 +196,8 @@
     </view>
 
     <view class="class">
-      <!-- <view class="classline">
-        <view class="classIn" @tap="page1">
-          <image class="classStyle" src="{{icon.salt}}" />
-          <text class="classtext">调味品</text>
-        </view>
-        <view class="classIn" @tap="page2">
-          <image class="classStyle" src="{{icon.edibleOil}}" />
-          <text class="classtext">食用油</text>
-        </view>
-        <view class="classIn" @tap="page3">
-          <image class="classStyle" src="{{icon.rice}}" />
-          <text class="classtext">米面</text>
-        </view>
-        <view class="classIn" @tap="page4">
-          <image class="classStyle" src="{{icon.beans}}" />
-          <text class="classtext">豆类</text>
-        </view>
-      </view> -->
+      <view class="in1" />
+
     </view>
 
     <view class="view-list-commodity">
@@ -223,6 +229,8 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '超市'
   }
   data = {
+    tab: ['特价', '调味品', '米面', '豆类', '酱乳类', '火锅食材', '厨房餐具'],
+    currentTargetId: 0,
     photoposter: '../images/poster.jpg',
     indicatorDots: true,
     autoplay: true,
@@ -234,22 +242,6 @@ export default class Index extends wepy.page {
     price: 0.0,
     selected: '',
     Width: 0,
-    colorA: '#f56d11',
-    colorB: '',
-    colorC: '',
-    colorD: '',
-    colorE: '',
-    colorF: '',
-    colorG: '',
-    colorH: '',
-    colora: '#f56d11',
-    colorb: 'white',
-    colorc: 'white',
-    colord: 'white',
-    colore: 'white',
-    colorf: 'white',
-    colorg: 'white',
-    colorh: 'white',
     icon: {
       salt: '../image/salt.png',
       edibleOil: '../image/edibleOil.png',
@@ -289,6 +281,11 @@ export default class Index extends wepy.page {
         icon: 'success',
         duration: 1000
       })
+    },
+    tab(e) {
+      let self = this
+      self.currentTargetId = e.currentTarget.id
+      console.log(e.currentTarget.id, 'e中的东西')
     },
     search() {
       wepy.navigateTo({
@@ -362,158 +359,6 @@ export default class Index extends wepy.page {
         url: `./class/detail?id=${self.commodity[index].id}`
       })
       console.log(self.commodity[index].id, 'id')
-    },
-    classA() {
-      let self = this
-      self.colorA = '#f56d11'
-      self.colora = '#f56d11'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classB() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = '#f56d11'
-      self.colorb = '#f56d11'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classC() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = '#f56d11'
-      self.colorc = '#f56d11'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classD() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = '#f56d11'
-      self.colord = '#f56d11'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classE() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = '#f56d11'
-      self.colore = '#f56d11'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classF() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = '#f56d11'
-      self.colorf = '#f56d11'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classG() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = '#f56d11'
-      self.colorg = '#f56d11'
-      self.colorH = 'black'
-      self.colorh = 'white'
-    },
-    classH() {
-      let self = this
-      self.colorA = 'black'
-      self.colora = 'white'
-      self.colorB = 'black'
-      self.colorb = 'white'
-      self.colorC = 'black'
-      self.colorc = 'white'
-      self.colorD = 'black'
-      self.colord = 'white'
-      self.colorE = 'black'
-      self.colore = 'white'
-      self.colorF = 'black'
-      self.colorf = 'white'
-      self.colorG = 'black'
-      self.colorg = 'white'
-      self.colorH = '#f56d11'
-      self.colorh = '#f56d11'
     }
   }
   onShow() {

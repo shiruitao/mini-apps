@@ -1,14 +1,12 @@
 
   <view class="overall" style="width: {{Width}}px">
     <view class="view-top">
-      <scroll-view scroll-x="true" style="white-space: nowrap; display: block" class="view-class">
-        <text class="text-class" style="color: {{colorA}};border-bottom: 3px solid {{colora}}" bindtap="classA">特价</text>
-        <text class="text-class" style="color: {{colorB}};border-bottom: 3px solid {{colorb}}" bindtap="classB">调味品</text>
-        <text class="text-class" style="color: {{colorC}};border-bottom: 3px solid {{colorc}}" bindtap="classC">米面</text>
-        <text class="text-class" style="color: {{colorD}};border-bottom: 3px solid {{colord}}" bindtap="classD">豆类</text>
-        <text class="text-class" style="color: {{colorE}};border-bottom: 3px solid {{colore}}" bindtap="classE">酱乳类</text>
-        <text class="text-class" style="color: {{colorF}};border-bottom: 3px solid {{colorf}}" bindtap="classF">火锅食材</text>
-        <text class="text-class" style="color: {{colorG}};border-bottom: 3px solid {{colorg}}" bindtap="classG">餐具用品</text>
+      <scroll-view scroll-x="true" style="width: 85%; height: 100%">
+        <view class="view-class">
+          <view class="view-scroll"  wx:for="{{tab}}" wx:key="index" id="{{index}}" bindtap="tab">
+            <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 3px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
+          </view>
+        </view>
       </scroll-view>
       <view class="view-search" bindtap="search">
         <image class="searchButtonPho" src="{{'../image/search.png'}}"/>
@@ -26,28 +24,12 @@
     </view>
 
     <view class="class">
-      <!-- <view class="classline">
-        <view class="classIn" bindtap="page1">
-          <image class="classStyle" src="{{icon.salt}}" />
-          <text class="classtext">调味品</text>
-        </view>
-        <view class="classIn" bindtap="page2">
-          <image class="classStyle" src="{{icon.edibleOil}}" />
-          <text class="classtext">食用油</text>
-        </view>
-        <view class="classIn" bindtap="page3">
-          <image class="classStyle" src="{{icon.rice}}" />
-          <text class="classtext">米面</text>
-        </view>
-        <view class="classIn" bindtap="page4">
-          <image class="classStyle" src="{{icon.beans}}" />
-          <text class="classtext">豆类</text>
-        </view>
-      </view> -->
+      <view class="in1"/>
+
     </view>
 
     <view class="view-list-commodity">
-      <block  wx:for="{{commodity}}" wx:key="index">
+      <block wx:for="{{commodity}}" wx:key="index">
         <view wx:if="{{index !== 1}}" class="view-commdity" data-index="{{index}}" bindtap="detail">
           <image class="viewphoto" src="{{item.image}}"/>
           <view class="view-title">
