@@ -21,16 +21,9 @@ export default class extends wepy.app {
       'pages/news',
       'pages/shop',
       // class
-      'pages/class/salt',
-      'pages/class/edibleOil',
-      'pages/class/rice',
-      'pages/class/beans',
-      'pages/class/sauce',
-      'pages/class/hotPot',
-      'pages/class/snacks',
-      'pages/class/use',
       'pages/class/detail',
       'pages/class/search',
+      'pages/class/searchResult',
       // my
       'pages/my/indent',
       'pages/my/address',

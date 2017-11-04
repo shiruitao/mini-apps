@@ -5,6 +5,7 @@ module.exports = app => {
   app.post('/updata', 'home.updata');
   app.get('/getSelect', 'home.getSelect');
   app.post('/getGet', 'home.getGet');
+  app.post('/getClass', 'home.getClass');
   app.post('/delete', 'home.delete');
 
   app.post('/cartCreate', 'home.cartCreate');

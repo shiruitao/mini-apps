@@ -13,4 +13,7 @@
       </view>
     </view>
     <!-- </block> -->
+    <view>
+      <image src="http://api.dujin.org/bing/1920.php" alt="Bing每日图片超高清"/>
+    </view>
   </view>

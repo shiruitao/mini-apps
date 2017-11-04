@@ -31,6 +31,18 @@ module.exports = app => {
       }
       return res;
     }
+    * getClass(req) {
+      let res;
+      try {
+        res = yield app.mysql.select('commodity', {
+          where: { class: req.class },
+        });
+      } catch (e) {
+        this.ctx.logger.error(e);
+        return false;
+      }
+      return res;
+    }
     * delete(param) {
       try {
         yield app.mysql.delete('commodity', param);

@@ -16,7 +16,12 @@ module.exports = app => {
       this.ctx.body = yield this.service.home.getSelect(this.ctx.request.body);
     }
     * getGet() {
+      console.log(this.ctx.request.body);
       this.ctx.body = yield this.service.home.getGet(this.ctx.request.body);
+    }
+    * getClass() {
+      console.log(this.ctx.request.body, 'this.ctx.request.body');
+      this.ctx.body = yield this.service.home.getClass(this.ctx.request.body);
     }
     // 购物车表
     * cartCreate() {

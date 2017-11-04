@@ -13,9 +13,9 @@
       </view>
     </view>
   
-    <view class="view-swiper">
+    <view  wx:if="{{currentTargetId == 0}}" class="view-swiper">
       <swiper class="photo-swiper" indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
-        <block  wx:for="{{imgUrls}}" wx:key="index">
+        <block wx:for="{{imgUrls}}" wx:key="index">
           <swiper-item>
             <image src="{{item}}" class="photo-swiper"/>
           </swiper-item>
@@ -23,9 +23,9 @@
       </swiper>
     </view>
 
-    <view class="class">
+    <view wx:if="{{currentTargetId == 0}}" class="class">
       <view class="in1"/>
-
+      <text>留位</text>
     </view>
 
     <view class="view-list-commodity">

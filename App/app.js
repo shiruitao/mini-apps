@@ -16,6 +16,7 @@ module.exports = app => {
         table.float('price', 5, 1).notNullable().defaultTo(0.0);
         table.string('image').notNullable().defaultTo('');
         table.string('class').defaultTo('');
+        table.string('detail').defaultTo('');
         table.charset('utf8');
       });
       yield app.mysql.query(commoditySchema.toString());
@@ -31,6 +32,7 @@ module.exports = app => {
         table.string('image').notNullable().defaultTo('');
         table.boolean('selected').defaultTo(true);
         table.integer('num').defaultTo(1);
+        table.string('wechat').defaultTo('');
         table.charset('utf8');
       });
       yield app.mysql.query(cartSchema.toString());

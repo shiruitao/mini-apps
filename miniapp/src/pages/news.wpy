@@ -59,6 +59,9 @@
       </view>
     </view>
     <!-- </block> -->
+    <view>
+      <image src="http://api.dujin.org/bing/1920.php" alt="Bing每日图片超高清"/>
+    </view>
   </view>
 </template>
 
@@ -124,7 +127,9 @@ export default class news extends wepy.page {
       }
     })
   }
-  onShow() {
+  onShow(res) {
+    const pho = `${'http://api.dujin.org/bing/1920.php'}`
+    console.log(pho)
     // const _ = require('lodash')
     // let self = this
     // try {
