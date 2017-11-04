@@ -73,11 +73,8 @@
 }
 
 .class {
-  // display: flex;
-  // flex-direction: column;
   height: 3rem;
   width: 100%;
-  border-bottom: 0.5rem solid whitesmoke;
 }
 
 .classline {
@@ -109,6 +106,7 @@
 .view-list-commodity {
   display: flex;
   flex-wrap: wrap;
+  border-top: 0.5rem solid whitesmoke;
 }
 
 .view-commdity {
@@ -156,13 +154,15 @@
   height: 22px;
   width: 22px;
   border-radius: 50%;
-  animation: move 3s infinite linear normal;
+  animation: move 2.1s infinite linear normal;
 }
 @keyframes move{
   0% { background:red;}
-  40% {margin-top:0px; margin-left:94%; background:blue;}
-  50% {margin-top:10%; margin-left:94%; background:yellow;}
-  90% {margin-top:10%; margin-left:0px; background:green;}
+  20% {margin-top:3%; margin-left:40%; background:black;}
+  40% {margin-top:0; margin-left:94%; background:blue;}
+  50% {margin-top:3%; margin-left:94%; background:yellow;}
+  70% {margin-top:4%; margin-left:40%; background:lawngreen;}
+  90% {margin-top:3%; margin-left:0px; background:green;}
   100% {margin-top:0px; margin-left:0px; background:red;}
 }
 .in1{
@@ -185,7 +185,7 @@
       </view>
     </view>
   
-    <view class="view-swiper">
+    <view wx:if="{{currentTargetId == 0}}" class="view-swiper">
       <swiper class="photo-swiper" indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{indicatorActiveColor}}">
         <block wx:for="{{imgUrls}}" wx:key="index">
           <swiper-item>
@@ -195,9 +195,9 @@
       </swiper>
     </view>
 
-    <view class="class">
+    <view wx:if="{{currentTargetId == 0}}" class="class">
       <view class="in1" />
-
+      <text>留位</text>
     </view>
 
     <view class="view-list-commodity">
@@ -285,7 +285,23 @@ export default class Index extends wepy.page {
     tab(e) {
       let self = this
       self.currentTargetId = e.currentTarget.id
-      console.log(e.currentTarget.id, 'e中的东西')
+      var where = e.currentTarget.id
+      console.log(self.currentTargetId, '是不是特价')
+      console.log(self.tab[where], '类型')
+      wepy.request({
+        url: 'http://127.0.0.1:7001/getClass',
+        method: 'POST',
+        data: {
+          class: self.tab[where]
+        },
+        success: function(res) {
+          self.commodity = res.data
+          self.setData({
+            commodity: res.data
+          })
+          console.log(res.data, 'res.data')
+        }
+      })
     },
     search() {
       wepy.navigateTo({
@@ -312,46 +328,6 @@ export default class Index extends wepy.page {
         duration: e.detail.value
       })
     },
-    page1() {
-      wepy.navigateTo({
-        url: './class/salt'
-      })
-    },
-    page2() {
-      wepy.navigateTo({
-        url: './class/edibleOil'
-      })
-    },
-    page3() {
-      wepy.navigateTo({
-        url: './class/rice'
-      })
-    },
-    page4() {
-      wepy.navigateTo({
-        url: './class/beans'
-      })
-    },
-    page5() {
-      wepy.navigateTo({
-        url: './class/sauce'
-      })
-    },
-    page6() {
-      wepy.navigateTo({
-        url: './class/hotPot'
-      })
-    },
-    page7() {
-      wepy.navigateTo({
-        url: './class/snacks'
-      })
-    },
-    page8() {
-      wepy.navigateTo({
-        url: './class/use'
-      })
-    },
     detail(e) {
       let self = this
       const index = e.currentTarget.dataset.index
@@ -371,8 +347,11 @@ export default class Index extends wepy.page {
       }
     })
     wepy.request({
-      url: 'http://127.0.0.1:7001/getSelect',
-      method: 'GET',
+      url: 'http://127.0.0.1:7001/getClass',
+      method: 'POST',
+      data: {
+        class: '特价'
+      },
       success: function(res) {
         self.commodity = res.data
         self.setData({
