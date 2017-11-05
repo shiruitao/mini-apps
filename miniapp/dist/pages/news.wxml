@@ -1,5 +1,8 @@
 
   <view class="card" style="width: {{width}}px">
+    <view style="width: {{width}}px;">
+      <image style="width: {{width}}px;" bindtap="previewImageInter" src="http://api.dujin.org/bing/1366.php" alt="Bing每日图片超高清"/>
+    </view>
     <!-- <block wx:for="{{news}}" wx:key="index"> -->
     <view class="cards">
       <view class="card-view-information">
@@ -13,7 +16,4 @@
       </view>
     </view>
     <!-- </block> -->
-    <view>
-      <image src="http://api.dujin.org/bing/1920.php" alt="Bing每日图片超高清"/>
-    </view>
   </view>

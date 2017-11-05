@@ -153,6 +153,9 @@
   <view>
     <view wx:if="{{!carts.length}}">
       <view class="cart-no-data" style="height: {{height}}px; width: {{width}}px">购物车空~</view>
+      <view class="cart-toatl-count"  @tap="bill">
+          <text style="font-size: 30rpx;">结算({{cartNum}})</text>
+        </view>
     </view>
     <view wx:else>
       <view class="cart-box">
@@ -311,11 +314,14 @@ export default class Index extends wepy.page {
     },
 
     bill() {
-      let self = this
-      wepy.showModal({
-        title: '仅支持货到付款',
-        content: `共计: ${self.totalPrice}元`
+      // let self = this
+      wepy.navigateTo({
+        url: './class/submit'
       })
+      // wepy.showModal({
+      //   title: '仅支持货到付款',
+      //   content: `共计: ${self.totalPrice}元`
+      // })
     },
     cartsCount() {
       let self = this

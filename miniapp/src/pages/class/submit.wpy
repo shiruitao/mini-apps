@@ -1,0 +1,151 @@
+
+<style>
+.view-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #cceff5;
+  border-bottom: 10px solid #f5f6f8;
+  background:#fafcfd
+}
+.view-addr {
+  display: flex;
+  width: 93%;
+  align-items: center;
+}
+.image-icon-addr {
+  padding: 1rem 3% 1rem 3%;
+  height: 15px;
+  width: 15px;
+}
+.view-address {
+  font-size: 11px;
+  width: 80%;
+}
+.image-icon-arrow {
+  padding: 0 3% 0 3%;
+  height: 15px;
+  width: 15px;
+}
+.view-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-top: 1px solid grey;
+}
+.text-total {
+  font-size: 15px;
+}
+.view-pay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  border-top: 1px solid tomato;
+  background-color: tomato;
+  color: white;
+  height: 50px;
+  font-size: 15px;
+  width: 30%;
+}
+
+.text-addr {
+  font-size: 11px;
+}
+.view-addr-text {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.view-addr-top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.view-addr-bottom {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+</style>
+
+<template>
+  <view style="width: {{width}}px">
+    
+    <view class="view-top" @tap="address" wx:if="{{address.errMsg != 'chooseAddress:ok'}}" >
+      <view class="view-addr">
+        <image class="image-icon-addr" src="../../my/address.png" />
+        <view class="view-address">{{address}}</view>
+      </view>
+      <image class="image-icon-arrow" src="../../my/arrow.png" />
+    </view>
+
+    <view wx:else class="view-top" @tap="address">
+      <image class="image-icon-addr" src="../../my/address.png" />
+      <view class="view-addr-text">
+        <view class="view-addr-top">
+          <text class="text-addr">收货人: {{address.userName}}</text>
+          <text class="text-addr">{{address.telNumber}}</text>
+        </view>
+        <view class="view-addr-bottom">
+          <text class="text-addr">收货地址: {{address.provinceName}} {{address.cityName}} {{address.countyName}} {{address.detailInfo}}</text>
+        </view>
+      </view>
+      <image class="image-icon-arrow" src="../../my/arrow.png" />
+    </view>
+
+    <view class="view-bottom">
+      <text class="text-total" style="padding-left: 30rpx">总价: </text>
+      <text class="text-total" style="color: #EB2328">¥ {{total}}</text>
+      <view class="view-pay">提交订单</view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class submit extends wepy.page {
+  config = {
+    navigetionBarTitleText: '确认订单'
+  }
+  data = {
+    address: '添加收货地址',
+    width: 0,
+    height: 0,
+    total: 0
+  }
+  methods = {
+    address() {
+      let self = this
+      wepy.chooseAddress({
+        success: function (res) {
+          self.address = res
+          console.log(JSON.stringify(res), '地址是什么样的')
+        },
+        fail: function (err) {
+          console.log(JSON.stringify(err))
+        }
+      })
+      // wepy.navigateTo({
+      //   url: './my/address'
+      // })
+    }
+  }
+  onLoad() {
+    let self = this
+    wepy.getSystemInfo({
+      success(res) {
+        self.height = res.windowHeight
+        self.width = res.windowWidth
+      }
+    })
+  }
+}
+</script>

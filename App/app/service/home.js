@@ -43,6 +43,16 @@ module.exports = app => {
       }
       return res;
     }
+    * getSearch(req) {
+      let res;
+      try {
+        res = yield app.mysql.query('select * from commodity where title like ?', [ `%${req.title}%` ]);
+      } catch (e) {
+        this.ctx.logger.error(e);
+        return false;
+      }
+      return res;
+    }
     * delete(param) {
       try {
         yield app.mysql.delete('commodity', param);

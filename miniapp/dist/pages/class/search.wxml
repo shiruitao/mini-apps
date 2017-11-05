@@ -1,4 +1,5 @@
 
+<view>
   <view class="view-main" style="width: {{width}}px">
     <form bindsubmit="formSubmit" style="width: 100%">
       <view class="view-search">
@@ -10,7 +11,7 @@
         </view>
       </view>
     </form>
-    <view class="view-history">
+    <view  wx:if="{{searchText == ''}}" class="view-history">
       <view style="width: 95%; margin: 30rpx 0 20rpx 0">
         <text style="font-size: 15px; color: #333333 position: relative; left: 30rpx">搜索历史</text>
       </view>
@@ -40,4 +41,18 @@
         <!-- </block> -->
       </view>
     </view>
+    <view  wx:else class="overall" style="width: {{width}}px">
+      <view class="view-list-commodity">
+        <block wx:for="{{commodity}}" wx:key="index">
+          <view class="view-commdity" style="heigh: 650rpx" data-index="{{index}}" bindtap="detail">
+            <image class="viewphoto" src="{{item.image}}"/>
+            <view class="view-title">
+              <text class="text-title">{{item.title}}</text>
+            </view>
+              <text class="priceText">¥ {{item.price}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
   </view>
+</view>

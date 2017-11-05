@@ -46,6 +46,9 @@
 </style>
 <template>
   <view class="card" style="width: {{width}}px">
+    <view style="width: {{width}}px;">
+      <image style="width: {{width}}px;" @tap="previewImageInter" src="http://api.dujin.org/bing/1366.php" alt="Bing每日图片超高清"/>
+    </view>
     <!-- <block wx:for="{{news}}" wx:key="index"> -->
     <view class="cards">
       <view class="card-view-information">
@@ -59,9 +62,6 @@
       </view>
     </view>
     <!-- </block> -->
-    <view>
-      <image src="http://api.dujin.org/bing/1920.php" alt="Bing每日图片超高清"/>
-    </view>
   </view>
 </template>
 
@@ -104,6 +104,13 @@ export default class news extends wepy.page {
         urls: arr,
         current: `${self.imaUrl[index].url}`
       })
+    },
+    previewImageInter(e) {
+      console.log('点击')
+      wepy.previewImage({
+        urls: ['http://api.dujin.org/bing/1920.php']
+        // current: 'http://api.dujin.org/bing/1920.php'
+      })
     }
   }
   onPullDownRefresh() {
@@ -127,9 +134,7 @@ export default class news extends wepy.page {
       }
     })
   }
-  onShow(res) {
-    const pho = `${'http://api.dujin.org/bing/1920.php'}`
-    console.log(pho)
+  onShow() {
     // const _ = require('lodash')
     // let self = this
     // try {

@@ -15,6 +15,10 @@ module.exports = app => {
     * getSelect() {
       this.ctx.body = yield this.service.home.getSelect(this.ctx.request.body);
     }
+    * getSearch() {
+      console.log(this.ctx.request.body, 'search');
+      this.ctx.body = yield this.service.home.getSearch(this.ctx.request.body);
+    }
     * getGet() {
       console.log(this.ctx.request.body);
       this.ctx.body = yield this.service.home.getGet(this.ctx.request.body);

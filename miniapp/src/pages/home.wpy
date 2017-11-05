@@ -286,8 +286,6 @@ export default class Index extends wepy.page {
       let self = this
       self.currentTargetId = e.currentTarget.id
       var where = e.currentTarget.id
-      console.log(self.currentTargetId, '是不是特价')
-      console.log(self.tab[where], '类型')
       wepy.request({
         url: 'http://127.0.0.1:7001/getClass',
         method: 'POST',

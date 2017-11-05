@@ -24,6 +24,7 @@ export default class extends wepy.app {
       'pages/class/detail',
       'pages/class/search',
       'pages/class/searchResult',
+      'pages/class/submit',
       // my
       'pages/my/indent',
       'pages/my/address',
