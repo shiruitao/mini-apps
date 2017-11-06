@@ -10,7 +10,8 @@ module.exports = app => {
   app.post('/delete', 'home.delete');
 
   app.post('/cartCreate', 'home.cartCreate');
-  app.get('/cartGet', 'home.cartGet');
+  app.post('/cartGet', 'home.cartGet');
+  app.post('/cartSubmit', 'home.cartSubmit');
   app.post('/cartDelete', 'home.cartDelete');
   app.post('/cartUpdate', 'home.cartUpdate');
 

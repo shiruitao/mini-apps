@@ -3,7 +3,7 @@
 .view-top {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: ; */
   align-items: center;
   border-top: 1px solid #cceff5;
   border-bottom: 10px solid #f5f6f8;
@@ -15,16 +15,21 @@
   align-items: center;
 }
 .image-icon-addr {
-  padding: 1rem 3% 1rem 3%;
-  height: 15px;
-  width: 15px;
+  margin-left: 30rpx;
+  height: 40rpx;
+  width: 40rpx;
 }
 .view-address {
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  margin-left: 30rpx;
   font-size: 11px;
   width: 80%;
 }
 .image-icon-arrow {
-  padding: 0 3% 0 3%;
+  position: absolute;
+  right: 30rpx;
   height: 15px;
   width: 15px;
 }
@@ -35,7 +40,7 @@
   display: flex;
   align-items: center;
   height: 50px;
-  border-top: 1px solid grey;
+  border-top: 2px solid #f5f6f8;
 }
 .text-total {
   font-size: 15px;
@@ -59,20 +64,55 @@
 }
 .view-addr-text {
   display: flex;
-  width: 70%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  width: 75%;
+  margin: 30rpx 0 30rpx 30rpx;
 }
 .view-addr-top {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  align-items: center;
 }
 .view-addr-bottom {
   display: flex;
   align-items: center;
+}
+.view-commodity-list {
+  display: flex;
+  align-items: center;
   width: 100%;
+  height: 250rpx;
+  border-bottom: 3px solid #f5f6f8;
+}
+.image-photo {
+  height: 185rpx;
+  width: 185rpx;
+  margin: 30rpx;
+}
+.view-information {
+  height: 190rpx;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30rpx 0 30rpx 0;
+}
+.view-title {
+  height: 100%;
+  width: 330rpx;
+  overflow: scroll;
+}
+.view-price {
+  height: 100%;
+  width: 170rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.text-title {
+  font-size: 15px;
+}
+.text-price {
+  font-size: 13px;
+  text-align: center;
 }
 </style>
 
@@ -91,14 +131,27 @@
       <image class="image-icon-addr" src="../../my/address.png" />
       <view class="view-addr-text">
         <view class="view-addr-top">
-          <text class="text-addr">收货人: {{address.userName}}</text>
-          <text class="text-addr">{{address.telNumber}}</text>
+          <text class="text-addr">收货人: {{address.userName}}　　　</text>
+          <text class="text-addr">电话: {{address.telNumber}}</text>
         </view>
         <view class="view-addr-bottom">
           <text class="text-addr">收货地址: {{address.provinceName}} {{address.cityName}} {{address.countyName}} {{address.detailInfo}}</text>
         </view>
       </view>
       <image class="image-icon-arrow" src="../../my/arrow.png" />
+    </view>
+
+    <view wx:for="{{commodity}}" wx:key="index" class="view-commodity-list">
+      <image class="image-photo" src="{{item.image}}"/>
+      <view class="view-information">
+        <view class="view-title">
+          <text class="text-title">{{item.title}}</text>
+        </view>
+        <view class="view-price">
+          <text class="text-price">¥{{item.price}}</text>
+          <text class="text-price">X {{item.num}}</text>
+        </view>
+      </view>
     </view>
 
     <view class="view-bottom">
@@ -119,7 +172,8 @@ export default class submit extends wepy.page {
     address: '添加收货地址',
     width: 0,
     height: 0,
-    total: 0
+    total: 0.0,
+    commodity: []
   }
   methods = {
     address() {
@@ -133,19 +187,38 @@ export default class submit extends wepy.page {
           console.log(JSON.stringify(err))
         }
       })
-      // wepy.navigateTo({
-      //   url: './my/address'
-      // })
     }
   }
-  onLoad() {
+  async onLoad() {
     let self = this
+    let count = self.total
     wepy.getSystemInfo({
       success(res) {
         self.height = res.windowHeight
         self.width = res.windowWidth
       }
     })
+    await wepy.request({
+      url: 'http://127.0.0.1:7001/cartSubmit',
+      method: 'POST',
+      data: {
+        selected: true
+      },
+      success: function(res) {
+        self.setData({
+          commodity: res.data
+        })
+        self.commodity = res.data
+      }
+    })
+    this.$apply()
+    console.log(self.commodity, 'commodity')
+    console.log(self.commodity.length, '长度11')
+    for (var i = 0; i < self.commodity.length; i++) {
+      count += self.commodity[i].num * self.commodity[i].price
+    }
+    self.total = count.toFixed(1)
+    console.log(self.total, 'total')
   }
 }
 </script>

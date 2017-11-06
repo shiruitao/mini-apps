@@ -30,6 +30,7 @@
 .view-price {
   width: 93%;
   background-color: white;
+  margin-bottom: 20rpx;
 }
 .text-price {
   font-size: 15px;
@@ -74,12 +75,12 @@
 .text-detail-title {
   font-size: 15px;
   border-left: 4px solid black;
-  padding-left: 3px;
+  padding-left: 15px;
   margin-top: 3px;
 }
 .text-detail {
   font-size: 11px;
-  margin: 10rpx 20rpx 20rpx 20rpx;
+  margin: 10rpx 25rpx 20rpx 25rpx;
   color: #333333;
 }
 .view-detail-photo {

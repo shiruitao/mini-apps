@@ -16,15 +16,12 @@ module.exports = app => {
       this.ctx.body = yield this.service.home.getSelect(this.ctx.request.body);
     }
     * getSearch() {
-      console.log(this.ctx.request.body, 'search');
       this.ctx.body = yield this.service.home.getSearch(this.ctx.request.body);
     }
     * getGet() {
-      console.log(this.ctx.request.body);
       this.ctx.body = yield this.service.home.getGet(this.ctx.request.body);
     }
     * getClass() {
-      console.log(this.ctx.request.body, 'this.ctx.request.body');
       this.ctx.body = yield this.service.home.getClass(this.ctx.request.body);
     }
     // 购物车表
@@ -33,6 +30,10 @@ module.exports = app => {
     }
     * cartGet() {
       this.ctx.body = yield this.service.home.cartGet(this.ctx.request.body);
+    }
+    * cartSubmit() {
+      console.log(this.ctx.request.body, 'controller');
+      this.ctx.body = yield this.service.home.cartSubmit(this.ctx.request.body);
     }
     * cartDelete() {
       this.ctx.body = yield this.service.home.cartDelete(this.ctx.request.body);

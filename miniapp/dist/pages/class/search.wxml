@@ -1,16 +1,11 @@
 
 <view>
   <view class="view-main" style="width: {{width}}px">
-    <form bindsubmit="formSubmit" style="width: 100%">
-      <view class="view-search">
-        <view class="view-searchIn">
-          <input class="border-input" name="input" placeholder="请输入商品名" auto-focus/>
-        </view>
-        <view class="view-search-button">
-          <button bindtap="search" formType="submit" class="button">→</button>
-        </view>
+    <view class="view-search">
+      <view class="view-searchIn">
+        <input class="border-input" placeholder="请输入商品名" auto-focus bindinput="search"/>
       </view>
-    </form>
+    </view>
     <view  wx:if="{{searchText == ''}}" class="view-history">
       <view style="width: 95%; margin: 30rpx 0 20rpx 0">
         <text style="font-size: 15px; color: #333333 position: relative; left: 30rpx">搜索历史</text>

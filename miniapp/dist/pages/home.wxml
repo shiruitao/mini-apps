@@ -1,7 +1,7 @@
 
   <view class="overall" style="width: {{Width}}px">
     <view class="view-top">
-      <scroll-view scroll-x="true" style="width: 85%; height: 100%">
+      <scroll-view scroll-x style="width: 85%; height: 100%">
         <view class="view-class">
           <view class="view-scroll"  wx:for="{{tab}}" wx:key="index" id="{{index}}" bindtap="tab">
             <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 3px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
@@ -25,7 +25,6 @@
 
     <view wx:if="{{currentTargetId == 0}}" class="class">
       <view class="in1"/>
-      <text>留位</text>
     </view>
 
     <view class="view-list-commodity">

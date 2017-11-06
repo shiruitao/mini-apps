@@ -121,8 +121,6 @@
 .cart-toatl-price {
   position: absolute;
   float: right;
-  left: 350rpx;
-  color: tomato;
 }
 .cart-toatl-count {
   position: absolute;
@@ -177,7 +175,8 @@
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="tomato" class="total-select" bindtap="selectAll" />
         <icon wx:else type="circle" class="total-select" bindtap="selectAll" />
         <text class="selectAll" bindtap="selectAll">全选</text>
-        <text class="cart-toatl-price">￥ {{totalPrice}}</text>
+        <text class="cart-toatl-price" style="left: 250rpx; color: grey;">合计:</text>
+        <text class="cart-toatl-price" style="left: 350rpx; color: tomato;">￥ {{totalPrice}}</text>
         <view class="cart-toatl-count"  @tap="bill">
           <text style="font-size: 30rpx;">结算({{cartNum}})</text>
         </view>
@@ -206,16 +205,23 @@ export default class Index extends wepy.page {
     }
   }
   methods = {
-    selectList(e) {
+    async selectList(e) {
       let self = this
       const index = e.currentTarget.dataset.index
-      let carts = self.carts
       const selected = self.carts[index].selected
       self.carts[index].selected = !selected
-      self.setData({
-        carts: carts
+      await wepy.request({
+        url: 'http://127.0.0.1:7001/cartUpdate',
+        method: 'POST',
+        data: {
+          id: self.carts[index].id,
+          selected: self.carts[index].selected
+        }
       })
+      this.$apply()
       self.methods.getTotalPrice(self)
+      self.methods.cartsCount(self)
+      console.log(self.cartNum, '调用时')
     },
 
     getTotalPrice(self) {
@@ -243,6 +249,7 @@ export default class Index extends wepy.page {
       })
       await wepy.request({
         url: 'http://127.0.0.1:7001/cartGet',
+        method: 'POST',
         success: function(res) {
           console.log(res.data, 'res.data')
           self.carts = res.data
@@ -255,16 +262,29 @@ export default class Index extends wepy.page {
       })
     },
 
-    selectAll() {
+    async selectAll() {
       let self = this
       let selectAllStatus = self.selectAllStatus
       selectAllStatus = !selectAllStatus
       let carts = self.carts
       for (let i = 0; i < carts.length; i++) {
         carts[i].selected = selectAllStatus
+        await wepy.request({
+          url: 'http://127.0.0.1:7001/cartUpdate',
+          method: 'POST',
+          data: {
+            id: self.carts[i].id,
+            selected: self.carts[i].selected
+          }
+        })
       }
       self.selectAllStatus = selectAllStatus
+      this.$apply()
+      self.setData({
+        carts: carts
+      })
       self.methods.getTotalPrice(self)
+      self.methods.cartsCount(self)
     },
 
     addCount(e) {
@@ -314,19 +334,13 @@ export default class Index extends wepy.page {
     },
 
     bill() {
-      // let self = this
       wepy.navigateTo({
         url: './class/submit'
       })
-      // wepy.showModal({
-      //   title: '仅支持货到付款',
-      //   content: `共计: ${self.totalPrice}元`
-      // })
     },
-    cartsCount() {
-      let self = this
-      let NUM = self.cartNum
-      for (let i = 0; self.carts[i] < self.carts.length; i++) {
+    cartsCount(self) {
+      var NUM = 0
+      for (var i = 0; i < self.carts.length; i++) {
         if (self.carts[i].selected === true) {
           NUM += 1
         }
@@ -335,6 +349,7 @@ export default class Index extends wepy.page {
         cartNum: NUM
       })
       self.cartNum = NUM
+      console.log(self.cartNum, '函数中')
     }
   }
 
@@ -342,6 +357,7 @@ export default class Index extends wepy.page {
     let self = this
     await wepy.request({
       url: 'http://127.0.0.1:7001/cartGet',
+      method: 'POST',
       success: function(res) {
         self.carts = res.data
         self.setData({
@@ -351,8 +367,8 @@ export default class Index extends wepy.page {
         console.log(self.carts, 'cart-onShow')
         console.log(self.carts.length, '长度')
         var NUM = 0
-        for (let i = 0; i < self.carts.length; i++) {
-          if (self.carts[i].selected === 1) {
+        for (var i = 0; i < self.carts.length; i++) {
+          if (self.carts[i].selected === true) {
             NUM += 1
           }
         }
@@ -369,6 +385,7 @@ export default class Index extends wepy.page {
     let self = this
     wepy.request({
       url: 'http://127.0.0.1:7001/cartGet',
+      method: 'POST',
       success: function(res) {
         self.carts = res.data
         self.setData({

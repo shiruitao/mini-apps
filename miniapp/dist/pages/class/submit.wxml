@@ -13,14 +13,27 @@
       <image class="image-icon-addr" src="../../my/address.png"/>
       <view class="view-addr-text">
         <view class="view-addr-top">
-          <text class="text-addr">收货人: {{address.userName}}</text>
-          <text class="text-addr">{{address.telNumber}}</text>
+          <text class="text-addr">收货人: {{address.userName}}　　　</text>
+          <text class="text-addr">电话: {{address.telNumber}}</text>
         </view>
         <view class="view-addr-bottom">
           <text class="text-addr">收货地址: {{address.provinceName}} {{address.cityName}} {{address.countyName}} {{address.detailInfo}}</text>
         </view>
       </view>
       <image class="image-icon-arrow" src="../../my/arrow.png"/>
+    </view>
+
+    <view wx:for="{{commodity}}" wx:key="index" class="view-commodity-list">
+      <image class="image-photo" src="{{item.image}}"/>
+      <view class="view-information">
+        <view class="view-title">
+          <text class="text-title">{{item.title}}</text>
+        </view>
+        <view class="view-price">
+          <text class="text-price">¥{{item.price}}</text>
+          <text class="text-price">X {{item.num}}</text>
+        </view>
+      </view>
     </view>
 
     <view class="view-bottom">

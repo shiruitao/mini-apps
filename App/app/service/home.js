@@ -82,8 +82,22 @@ module.exports = app => {
       }
       return true;
     }
+    * cartSubmit(req) {
+      let res;
+      console.log(req.selected, 'service');
+      try {
+        res = yield app.mysql.select('carts', {
+          where: { selected: req.selected },
+        });
+      } catch (e) {
+        this.ctx.logger.error(e);
+        return false;
+      }
+      return res;
+    }
     * cartGet(req) {
       let res;
+      console.log(req.selected, 'service');
       try {
         res = yield app.mysql.select('carts', req);
       } catch (e) {

@@ -6,7 +6,7 @@
     <!-- <block wx:for="{{news}}" wx:key="index"> -->
     <view class="cards">
       <view class="card-view-information">
-        <text style="color: RoyalBlue">#10.30上新#</text>
+        <text style="color: RoyalBlue; margin-bottom: 15rpx">#10.30上新#</text>
         <text class="card-text">占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符</text>
         <view class="card-view-photo">
           <block  wx:for="{{imaUrl}}" wx:key="{{index}}">
@@ -16,4 +16,5 @@
       </view>
     </view>
     <!-- </block> -->
+    <text style="color: lightgrey; font-size: 11px; margin-bottom: 20rpx">----到底啦----</text>
   </view>
