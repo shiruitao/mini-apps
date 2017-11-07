@@ -54,7 +54,7 @@
     <view class="cards">
       <view class="card-view-information">
         <text style="color: RoyalBlue; margin-bottom: 15rpx">#10.30上新#</text>
-        <text class="card-text">占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符占字符</text>
+        <text class="card-text">新品到货! 快来抢购! 啦啦啦~~~</text>
         <view class="card-view-photo">
           <block wx:for="{{imaUrl}}" wx:key="{{index}}">
             <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item.url}}" />

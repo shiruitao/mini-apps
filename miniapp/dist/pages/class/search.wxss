@@ -10,13 +10,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 3rem;
+  height: 2.5rem;
 }
 .view-searchIn {
   width: 95%;
   height: 80%;
   border-radius: 25px;
-  border: 2px solid lightblue;
+  border: 1px solid lightblue;
   background-color: white;
 }
 .border-input {
@@ -53,7 +53,7 @@
 .view-list-commodity {
   display: flex;
   flex-wrap: wrap;
-  border-top: 0.5rem solid whitesmoke;
+  border-top: 2px solid whitesmoke;
 }
 .view-commdity {
   width: 45%;
@@ -93,5 +93,5 @@
 .overall {
   display: flex;
   flex-direction: column;
-  padding-top: 1.5rem;
+  padding-top: 0.5rem;
 }

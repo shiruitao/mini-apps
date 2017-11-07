@@ -97,7 +97,6 @@ module.exports = app => {
     }
     * cartGet(req) {
       let res;
-      console.log(req.selected, 'service');
       try {
         res = yield app.mysql.select('carts', req);
       } catch (e) {

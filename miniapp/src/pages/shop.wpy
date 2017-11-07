@@ -334,22 +334,40 @@ export default class Index extends wepy.page {
     },
 
     bill() {
-      wepy.navigateTo({
-        url: './class/submit'
-      })
+      let self = this
+      if (self.cartNum >= 1) {
+        wepy.navigateTo({
+          url: './class/submit'
+        })
+      } else {
+        wepy.showToast({
+          title: '请选择商品',
+          image: '../images/warn.png',
+          duration: 1000
+        })
+      }
     },
     cartsCount(self) {
-      var NUM = 0
-      for (var i = 0; i < self.carts.length; i++) {
-        if (self.carts[i].selected === true) {
-          NUM += 1
+      wepy.request({
+        url: 'http://127.0.0.1:7001/cartSubmit',
+        method: 'POST',
+        data: {
+          selected: true
+        },
+        success: function(res) {
+          var NUM = 0
+          console.log(res.data, 'data')
+          for (var i = 0; i < res.data.length; i++) {
+            if (res.data[i].selected === 1) {
+              NUM += 1
+            }
+          }
+          self.setData({
+            cartNum: NUM
+          })
+          self.cartNum = NUM
         }
-      }
-      self.setData({
-        cartNum: NUM
       })
-      self.cartNum = NUM
-      console.log(self.cartNum, '函数中')
     }
   }
 
@@ -366,17 +384,7 @@ export default class Index extends wepy.page {
         self.methods.getTotalPrice(self)
         console.log(self.carts, 'cart-onShow')
         console.log(self.carts.length, '长度')
-        var NUM = 0
-        for (var i = 0; i < self.carts.length; i++) {
-          if (self.carts[i].selected === true) {
-            NUM += 1
-          }
-        }
-        self.setData({
-          cartNum: NUM
-        })
-        self.cartNum = NUM
-        console.log(NUM, 'NUM')
+        self.methods.cartsCount(self)
       }
     })
     this.$apply()
@@ -392,6 +400,7 @@ export default class Index extends wepy.page {
           carts: res.data
         })
         self.methods.getTotalPrice(self)
+        self.methods.cartsCount(self)
       }
     })
     wepy.getSystemInfo({

@@ -157,7 +157,7 @@
     <view class="view-bottom">
       <text class="text-total" style="padding-left: 30rpx">总价: </text>
       <text class="text-total" style="color: #EB2328">¥ {{total}}</text>
-      <view class="view-pay">提交订单</view>
+      <view class="view-pay" @tap="submit">提交订单</view>
     </view>
   </view>
 </template>
@@ -187,6 +187,16 @@ export default class submit extends wepy.page {
           console.log(JSON.stringify(err))
         }
       })
+    },
+    submit() {
+      let self = this
+      if (self.address.errMsg !== 'chooseAddress:ok') {
+        wepy.showToast({
+          title: '请选择收货地址',
+          image: '../../images/warn.png',
+          duration: 1000
+        })
+      }
     }
   }
   async onLoad() {
@@ -209,16 +219,20 @@ export default class submit extends wepy.page {
           commodity: res.data
         })
         self.commodity = res.data
+
+        console.log(res.data[0].num, 'num')
+        console.log(res.data[0].price, '长度11')
+        for (var i = 0; i < res.data.length; i++) {
+          count += res.data[i].num * res.data[i].price
+        }
+        self.setData({
+          total: count.toFixed(1)
+        })
+        self.total = count.toFixed(1)
+        console.log(self.total, 'total')
       }
     })
     this.$apply()
-    console.log(self.commodity, 'commodity')
-    console.log(self.commodity.length, '长度11')
-    for (var i = 0; i < self.commodity.length; i++) {
-      count += self.commodity[i].num * self.commodity[i].price
-    }
-    self.total = count.toFixed(1)
-    console.log(self.total, 'total')
   }
 }
 </script>

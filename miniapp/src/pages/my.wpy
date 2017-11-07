@@ -120,7 +120,7 @@ export default class my extends wepy.page {
   methods = {
     pageOrder() {
       wepy.navigateTo({
-        url: './my/indent'
+        url: './class/order'
       })
     },
     pageAddress() {

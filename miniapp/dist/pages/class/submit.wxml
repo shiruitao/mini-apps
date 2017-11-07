@@ -39,6 +39,6 @@
     <view class="view-bottom">
       <text class="text-total" style="padding-left: 30rpx">总价: </text>
       <text class="text-total" style="color: #EB2328">¥ {{total}}</text>
-      <view class="view-pay">提交订单</view>
+      <view class="view-pay" bindtap="submit">提交订单</view>
     </view>
   </view>
