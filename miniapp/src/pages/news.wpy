@@ -111,7 +111,6 @@ export default class news extends wepy.page {
       console.log('点击')
       wepy.previewImage({
         urls: ['http://api.dujin.org/bing/1920.php']
-        // current: 'http://api.dujin.org/bing/1920.php'
       })
     }
   }
