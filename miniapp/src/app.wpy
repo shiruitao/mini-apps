@@ -23,10 +23,8 @@ export default class extends wepy.app {
       // class
       'pages/class/detail',
       'pages/class/search',
-      'pages/class/searchResult',
       'pages/class/submit',
       'pages/class/order',
-      // news
       'pages/class/newContent'
     ],
     window: {

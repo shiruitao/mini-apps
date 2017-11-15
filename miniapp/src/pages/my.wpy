@@ -27,8 +27,8 @@
 }
 .arrow {
   justify-content: flex-end;
-  height: 17px;
-  width: 17px;
+  height: 15px;
+  width: 15px;
   
 }
 .viewList {
@@ -125,7 +125,7 @@ export default class my extends wepy.page {
     shop: '../images/shop.png',
     phone: '../my/phone.png',
     arrow: '../my/arrow.png',
-    favorite: '../images/favorite.png'
+    favorite: '../images/favoriteMy.png'
   }
   methods = {
     pageOrder() {

@@ -27,8 +27,8 @@
 }
 .arrow {
   justify-content: flex-end;
-  height: 17px;
-  width: 17px;
+  height: 15px;
+  width: 15px;
   
 }
 .viewList {

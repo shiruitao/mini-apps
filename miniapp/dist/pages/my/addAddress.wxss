@@ -1,1 +1,0 @@
-.viewListIn{display:flex;flex-direction:row;align-items:center;height:10%;width:100%;margin-left:1rem;border-bottom:1px solid lightgrey}.textName{font-size:15px;width:18rem}.button{display:flex;align-items:center;justify-content:center;background-color:#e8884d;height:10%;width:25%;margin-top:1.5rem}

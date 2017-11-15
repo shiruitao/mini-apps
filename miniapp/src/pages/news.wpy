@@ -21,6 +21,7 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 }
 .card-view-information {
   margin-top: 20rpx;
@@ -44,26 +45,40 @@
   margin-left: 20rpx;
   margin-top: 20rpx;
 }
+.view-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f6f8;
+}
+.text-bottom {
+  margin-top: 30rpx;
+  color: lightgrey;
+  font-size: 11px;
+  margin-bottom: 20rpx;
+}
 </style>
 <template>
   <view class="card" style="width: {{width}}px">
-    <view style="width: {{width}}px;">
-      <image style="width: {{width}}px;" @tap="previewImageInter" src="http://api.dujin.org/bing/1366.php" alt="Bing每日图片超高清"/>
-    </view>
+    <!-- <view style="width: {{width}}px;">
+      <image style="width: {{width}}px;" @tap="previewImageInter" src="https://farm4.staticflickr.com/3348/3257755954_2eb6e7c291_o.jpg&quot" alt="Bing每日图片超高清"/>
+    </view> -->
     <!-- <block wx:for="{{news}}" wx:key="index"> -->
-    <view class="cards">
-      <view class="card-view-information">
-        <text style="color: RoyalBlue; margin-bottom: 15rpx">#10.30上新#</text>
-        <text class="card-text">新品到货! 快来抢购! 啦啦啦~~~</text>
-        <view class="card-view-photo">
-          <block wx:for="{{imaUrl}}" wx:key="{{index}}">
-            <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item.url}}" />
-          </block>
+    <view class="view-block" style="width: {{width}}px; height: {{height}}px;">
+      <view class="cards">
+        <view class="card-view-information">
+          <text style="color: RoyalBlue; margin-bottom: 15rpx">#10.30上新#</text>
+          <text class="card-text">新品到货! 快来抢购! 啦啦啦~~~</text>
+          <view class="card-view-photo">
+            <block wx:for="{{imaUrl}}" wx:key="{{index}}">
+              <image class="card-photo" data-index="{{index}}" @tap="previewImage" src="{{item.url}}" />
+            </block>
+          </view>
         </view>
       </view>
-    </view>
     <!-- </block> -->
-    <text style="color: lightgrey; font-size: 11px; margin-bottom: 20rpx">----到底啦----</text>
+      <text class="text-bottom">----到底啦----</text>
+    </view>
   </view>
 </template>
 

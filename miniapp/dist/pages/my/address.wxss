@@ -1,1 +1,0 @@
-.view-name-phone{display:flex;justify-content:space-between;margin-top:15rpx;padding-left:30rpx;padding-right:30rpx}.allText{font-size:35rpx}.view-address{border-bottom:1px solid grey;padding:15rpx 30rpx}.view-button{display:flex;justify-content:center;align-items:center;position:fixed;bottom:0;width:100%;height:100rpx;font-size:30rpx;background-color:lightsalmon;color:white}

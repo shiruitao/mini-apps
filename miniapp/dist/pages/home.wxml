@@ -4,7 +4,7 @@
       <scroll-view scroll-x style="width: 85%; height: 100%">
         <view class="view-class">
           <view class="view-scroll"  wx:for="{{tab}}" wx:key="index" id="{{index}}" bindtap="tab">
-            <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 3px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
+            <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 2px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
           </view>
         </view>
       </scroll-view>

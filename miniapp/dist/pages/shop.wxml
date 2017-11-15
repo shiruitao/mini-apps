@@ -23,7 +23,9 @@
         </block>
       </view>
     </view>
-    <view  wx:else>
+
+
+    <view  wx:else style="height: {{height}}px; background-color: #f5f6f8">
       <view class="cart-box">
         <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
           <icon wx:if="{{item.selected}}" type="success_circle" color="tomato" data-index="{{index}}" class="cart-pro-select" bindtap="selectList"/>
