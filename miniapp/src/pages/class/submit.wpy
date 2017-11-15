@@ -196,6 +196,44 @@ export default class submit extends wepy.page {
           image: '../../images/warn.png',
           duration: 1000
         })
+      } else {
+        wepy.showModal({
+          title: '提示',
+          content: '仅支持货到付款,是否确定下单',
+          success: function(res) {
+            if (res.confirm) {
+              console.log(self.commodity.length, '长度')
+              for (var i = 0; i < self.commodity.length; i++) {
+                wepy.request({
+                  url: 'http://127.0.0.1:7001/orderCreate',
+                  method: 'POST',
+                  data: {
+                    title: self.commodity[i].title,
+                    price: self.commodity[i].price,
+                    image: self.commodity[i].image,
+                    num: self.commodity[i].num,
+                    name: self.address.userName,
+                    phone: self.address.telNumber,
+                    address: `${self.address.provinceName + self.address.cityName + self.address.countyName + self.address.detailInfo}`
+                  }
+                })
+              }
+              wepy.navigateTo({
+                url: './order'
+              })
+              wepy.request({
+                url: 'http://127.0.0.1:7001/cartDelete',
+                method: 'POST'
+              })
+            } else if (res.cancel) {
+              wepy.showToast({
+                title: '已取消',
+                icon: 'success',
+                duration: 1000
+              })
+            }
+          }
+        })
       }
     }
   }

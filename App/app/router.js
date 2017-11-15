@@ -15,10 +15,10 @@ module.exports = app => {
   app.post('/cartDelete', 'home.cartDelete');
   app.post('/cartUpdate', 'home.cartUpdate');
 
-  app.post('/addressCreate', 'home.addressCreate');
-  app.get('/addressGet', 'home.addressGet');
-  app.post('/addressDelete', 'home.addressDelete');
-  app.post('/addressUpdate', 'home.addressUpdate');
+  app.post('/orderCreate', 'home.orderCreate');
+  app.get('/orderGet', 'home.orderGet');
+  app.post('/orderDelete', 'home.orderDelete');
+  app.post('/orderUpdate', 'home.orderUpdate');
 
 
 };

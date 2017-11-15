@@ -126,7 +126,7 @@
         <text class="text-bottom">{{favor}}</text>
       </view>
       <view class="view-bottom-all" style="flex: 2; background-color: tomato" @tap="carts">
-        <text class="text-bottom" style="color: white">{{tip}}</text>
+        <text class="text-bottom" style="color: white">加入购物车</text>
       </view>
     </view>
   </view>
@@ -143,9 +143,9 @@ export default class detail extends wepy.page {
     cart: [],
     height: 0,
     width: 0,
+    favoriteIcon: false,
     favorite: '../../images/favorite.png',
     cartIcon: '../../images/shop.png',
-    tip: '购物车',
     favor: '收藏'
   }
   methods = {
@@ -169,12 +169,12 @@ export default class detail extends wepy.page {
         icon: 'success',
         duration: 1000
       })
-      self.tip = '已加入购物车'
     },
     favorite() {
       let self = this
-      self.favorite = '../../images/favoriteclick.png'
-      self.favor = '已收藏'
+      self.favoriteIcon = !self.favoriteIcon
+      self.favorite = self.favoriteIcon === true ? '../../images/favoriteclick.png' : '../../images/favorite.png'
+      self.favor = self.favoriteIcon === true ? '已收藏' : '收藏'
     }
   }
   async onLoad(data) {

@@ -41,18 +41,19 @@ module.exports = app => {
     * cartUpdate() {
       this.ctx.body = yield this.service.home.cartUpdate(this.ctx.request.body);
     }
-    // 收货地址
-    * addressCreate() {
-      this.ctx.body = yield this.service.home.addressCreate(this.ctx.request.body);
+    // 最终订单
+    * orderCreate() {
+      console.log(this.ctx.request.body, 'order.....');
+      this.ctx.body = yield this.service.home.orderCreate(this.ctx.request.body);
     }
-    * addressGet() {
-      this.ctx.body = yield this.service.home.addressGet(this.ctx.request.body);
+    * orderGet() {
+      this.ctx.body = yield this.service.home.orderGet(this.ctx.request.body);
     }
-    * addressDelete() {
-      this.ctx.body = yield this.service.home.addressDelete(this.ctx.request.body);
+    * orderDelete() {
+      this.ctx.body = yield this.service.home.orderDelete(this.ctx.request.body);
     }
-    * addressUpdate() {
-      this.ctx.body = yield this.service.home.addressUpdate(this.ctx.request.body);
+    * orderUpdate() {
+      this.ctx.body = yield this.service.home.orderUpdate(this.ctx.request.body);
     }
   }
   return HomeController;

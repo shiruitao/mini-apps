@@ -27,8 +27,7 @@ export default class order extends wepy.page {
   onLoad() {
     let self = this
     wepy.request({
-      url: 'http://127.0.0.1:7001/cartGet',
-      method: 'POST',
+      url: 'http://127.0.0.1:7001/orderGet',
       success: function(res) {
         self.commodity = res.data
         self.setData({

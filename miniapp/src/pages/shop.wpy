@@ -11,7 +11,6 @@
   padding: 20rpx 20rpx 20rpx 285rpx;
   height: 185rpx;
   border-bottom: 3px solid #e9e9e9;
-  // background-color: #f5f6f8;
 }
 
 .cart-list .cart-pro-select {
@@ -119,15 +118,13 @@
 }
 
 .cart-toatl-price {
-  position: absolute;
-  float: right;
+  position: relative;
 }
 .cart-toatl-count {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  // border: 1px solid tomato;
   border-radius: 5px;
   background-color: tomato;
   width: 25%;
@@ -137,23 +134,109 @@
 }
 
 .cart-no-data {
+  display: flex;
+  flex-direction: column;
   padding: 40rpx 0;
   color: #999;
-  text-align: center;
+  align-items: center;
   background-color: #f5f6f8;
 }
 .selectAll {
   padding-left: 10rpx;
   color: grey;
 }
+.view-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: tomato;
+  width: 30%;
+  height: 6%;
+  position: relative;
+  top: 20rpx;
+  border-radius: 5px;
+}
+.text-button {
+  font-size: 12px;
+  color: white;
+}
+.image-empty {
+  height: 350rpx;
+  width: 400rpx;
+  padding: 50rpx;
+}
+.view-recommend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 100rpx;
+  width: 100%;
+}
+.text-line {
+  background-color: lightgray;
+  height: 1px;
+  width: 20%;
+}
+.view-list-commodity {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 0.5rem solid whitesmoke;
+  position: relative;
+  top: 100rpx;
+  width: 100%;
+}
+.viewphoto {
+  height: 80%;
+  width: 100%;
+}
+.view-title {
+  display: flex;
+  align-items: center;
+  margin: 0 10rpx;
+  width: 100%;
+  height: 10%;
+}
+.view-commdity {
+  width: 45%;
+  height: 500rpx;
+  display: flex;
+  flex-direction: column;
+  margin: 13rpx 0rpx 0 25rpx;
+  position: static;
+}
+.priceText {
+  position: relative;
+  bottom: 0;
+  font-size: 30rpx;
+  color: red;
+  padding-left: 10rpx;
+}
 </style>
 <template>
   <view>
-    <view wx:if="{{!carts.length}}">
-      <view class="cart-no-data" style="height: {{height}}px; width: {{width}}px">购物车空~</view>
-      <view class="cart-toatl-count"  @tap="bill">
-          <text style="font-size: 30rpx;">结算({{cartNum}})</text>
-        </view>
+    <view wx:if="{{!carts.length}}" class="cart-no-data" style="width: {{width}}px">
+      <image class="image-empty" src="../images/empty.png" />
+      <text style="color: #282826; font-size: 14px">购物车是空的哦~</text>
+      <view class="view-button" @tap="home">
+        <text class="text-button">去逛逛</text>
+      </view>
+      <view class="view-recommend">
+        <text class="text-line" />
+        <text style="font-size: 11px; margin: 10rpx">特价商品</text>
+        <text class="text-line" />
+      </view>
+      <view class="view-list-commodity">
+        <block wx:for="{{commodity}}" wx:key="index">
+          <view class="view-commodity" style="heigh: 650rpx" data-index="{{index}}" @tap="detail">
+            <image class="viewphoto" src="{{item.image}}" />
+            <view class="view-title">
+              <text class="text-title">{{item.title}}</text>
+            </view>
+              <text class="priceText">¥ {{item.price}}</text>
+          </view>
+        </block>
+      </view>
     </view>
     <view wx:else>
       <view class="cart-box">
@@ -175,8 +258,8 @@
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="tomato" class="total-select" bindtap="selectAll" />
         <icon wx:else type="circle" class="total-select" bindtap="selectAll" />
         <text class="selectAll" bindtap="selectAll">全选</text>
-        <text class="cart-toatl-price" style="left: 250rpx; color: grey;">合计:</text>
-        <text class="cart-toatl-price" style="left: 350rpx; color: tomato;">￥ {{totalPrice}}</text>
+        <text class="cart-toatl-price" style="left: 80rpx; color: grey;">合计:</text>
+        <text class="cart-toatl-price" style="left: 85rpx; color: tomato;">￥ {{totalPrice}}</text>
         <view class="cart-toatl-count"  @tap="bill">
           <text style="font-size: 30rpx;">结算({{cartNum}})</text>
         </view>
@@ -193,6 +276,7 @@ export default class Index extends wepy.page {
   }
   data = {
     carts: [],
+    commodity: [],
     delete: '../my/delete.png',
     totalPrice: 0.0,
     num: 1,
@@ -368,6 +452,11 @@ export default class Index extends wepy.page {
           self.cartNum = NUM
         }
       })
+    },
+    home() {
+      wepy.switchTab({
+        url: '../pages/home'
+      })
     }
   }
 
@@ -401,6 +490,20 @@ export default class Index extends wepy.page {
         })
         self.methods.getTotalPrice(self)
         self.methods.cartsCount(self)
+      }
+    })
+    wepy.request({
+      url: 'http://127.0.0.1:7001/getClass',
+      method: 'POST',
+      data: {
+        class: '特价'
+      },
+      success: function(res) {
+        self.commodity = res.data
+        self.setData({
+          commodity: res.data
+        })
+        console.log(res.data, 'res.data')
       }
     })
     wepy.getSystemInfo({

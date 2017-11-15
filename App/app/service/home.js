@@ -123,38 +123,38 @@ module.exports = app => {
       }
       return true;
     }
-    // 收货地址
-    * addressCreate(param) {
+    // 最终订单
+    * orderCreate(param) {
       try {
-        yield app.mysql.insert('address', param);
+        yield app.mysql.insert('order', param);
       } catch (e) {
         this.ctx.logger.error(e);
         return false;
       }
       return true;
     }
-    * addressGet(req) {
+    * orderGet(req) {
       let res;
       try {
-        res = yield app.mysql.select('address', req);
+        res = yield app.mysql.select('order', req);
       } catch (e) {
         this.ctx.logger.error(e);
         return false;
       }
       return res;
     }
-    * addressDelete(param) {
+    * orderDelete(param) {
       try {
-        yield app.mysql.delete('address', param);
+        yield app.mysql.delete('order', param);
       } catch (e) {
         this.ctx.logger.error(e);
         return false;
       }
       return true;
     }
-    * addressUpdate(parm) {
+    * orderUpdate(parm) {
       try {
-        yield app.mysql.update('address', parm);
+        yield app.mysql.update('order', parm);
       } catch (e) {
         this.ctx.logger.update(e);
         return false;

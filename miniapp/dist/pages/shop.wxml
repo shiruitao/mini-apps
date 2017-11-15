@@ -1,10 +1,27 @@
 
   <view>
-    <view  wx:if="{{!carts.length}}">
-      <view class="cart-no-data" style="height: {{height}}px; width: {{width}}px">购物车空~</view>
-      <view class="cart-toatl-count" bindtap="bill">
-          <text style="font-size: 30rpx;">结算({{cartNum}})</text>
-        </view>
+    <view  wx:if="{{!carts.length}}" class="cart-no-data" style="width: {{width}}px">
+      <image class="image-empty" src="../images/empty.png"/>
+      <text style="color: #282826; font-size: 14px">购物车是空的哦~</text>
+      <view class="view-button" bindtap="home">
+        <text class="text-button">去逛逛</text>
+      </view>
+      <view class="view-recommend">
+        <text class="text-line"/>
+        <text style="font-size: 11px; margin: 10rpx">特价商品</text>
+        <text class="text-line"/>
+      </view>
+      <view class="view-list-commodity">
+        <block wx:for="{{commodity}}" wx:key="index">
+          <view class="view-commodity" style="heigh: 650rpx" data-index="{{index}}" bindtap="detail">
+            <image class="viewphoto" src="{{item.image}}"/>
+            <view class="view-title">
+              <text class="text-title">{{item.title}}</text>
+            </view>
+              <text class="priceText">¥ {{item.price}}</text>
+          </view>
+        </block>
+      </view>
     </view>
     <view  wx:else>
       <view class="cart-box">
@@ -26,8 +43,8 @@
         <icon wx:if="{{selectAllStatus}}" type="success_circle" color="tomato" class="total-select" bindtap="selectAll"/>
         <icon wx:else type="circle" class="total-select" bindtap="selectAll"/>
         <text class="selectAll" bindtap="selectAll">全选</text>
-        <text class="cart-toatl-price" style="left: 250rpx; color: grey;">合计:</text>
-        <text class="cart-toatl-price" style="left: 350rpx; color: tomato;">￥ {{totalPrice}}</text>
+        <text class="cart-toatl-price" style="left: 80rpx; color: grey;">合计:</text>
+        <text class="cart-toatl-price" style="left: 85rpx; color: tomato;">￥ {{totalPrice}}</text>
         <view class="cart-toatl-count" bindtap="bill">
           <text style="font-size: 30rpx;">结算({{cartNum}})</text>
         </view>

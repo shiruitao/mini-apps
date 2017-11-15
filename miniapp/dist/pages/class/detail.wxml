@@ -29,7 +29,7 @@
         <text class="text-bottom">{{favor}}</text>
       </view>
       <view class="view-bottom-all" style="flex: 2; background-color: tomato" bindtap="carts">
-        <text class="text-bottom" style="color: white">{{tip}}</text>
+        <text class="text-bottom" style="color: white">加入购物车</text>
       </view>
     </view>
   </view>

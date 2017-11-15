@@ -78,6 +78,15 @@
           <image class="arrow" src="{{arrow}}" />
         </view>
       </view>
+      <view class="viewListIn" @tap="pageFavorite">
+        <view class="view-arrow">
+          <image class="listPhoto" src="{{favorite}}" />
+          <text class="textName">我的收藏</text>
+        </view>
+        <view class="view-arrow" style="justify-content: flex-end; padding-right: 10px">
+          <image class="arrow" src="{{arrow}}" />
+        </view>
+      </view>
       <view class="viewListIn" @tap="pageAddress">
         <view class="view-arrow">
           <image class="listPhoto" src="{{address}}" />
@@ -115,12 +124,18 @@ export default class my extends wepy.page {
     address: '../my/address.png',
     shop: '../images/shop.png',
     phone: '../my/phone.png',
-    arrow: '../my/arrow.png'
+    arrow: '../my/arrow.png',
+    favorite: '../images/favorite.png'
   }
   methods = {
     pageOrder() {
       wepy.navigateTo({
         url: './class/order'
+      })
+    },
+    pageFavorite() {
+      wepy.navigateTo({
+        url: './class/favorite'
       })
     },
     pageAddress() {
