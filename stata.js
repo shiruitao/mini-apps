@@ -126,5 +126,4 @@ function tick() {
     document.getElementById('root')
   );
 }
-
 setInterval(tick, 1000);
