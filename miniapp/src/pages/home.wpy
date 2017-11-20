@@ -31,7 +31,7 @@
 .view-scroll {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   height: 100%;
 }
 
@@ -46,12 +46,16 @@
   align-items: center;
 }
 .view-search {
-  height: 70%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 15%;
-  border-left: 0.5px solid lightgrey;
+  // position: absolute;
+  width: 10%;
+  background-color: white;
+  // border-left: 0.5px solid lightgrey;
+  // border-radius: 50%;
+  box-shadow: -10px -10px 20px 10px rgba(254, 67, 101, 0.5);
 }
 
 .searchButtonPho {
@@ -175,10 +179,10 @@
 <template>
   <view class="overall" style="width: {{Width}}px">
     <view class="view-top">
-      <scroll-view scroll-x style="width: 85%; height: 100%">
+      <scroll-view scroll-x style="width: 90%; height: 100%">
         <view class="view-class">
           <view class="view-scroll" wx:for="{{tab}}" wx:key="index" id="{{index}}" @tap="tab">
-            <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 2px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
+            <text class="text-class" style="color: {{index == currentTargetId ? '#f56d11' : '#333333'}}; border-bottom: 1px solid {{index == currentTargetId ? '#f56d11' : 'white'}}">{{item}}</text>
           </view>
         </view>
       </scroll-view>
@@ -230,7 +234,7 @@ export default class Index extends wepy.page {
     navigationBarTitleText: '超市'
   }
   data = {
-    tab: ['特价', '调味品', '米面', '豆类', '酱乳类', '火锅食材', '厨房餐具'],
+    tab: ['特价', '调味品', '米面', '豆类', '酱乳类', '火锅料', '餐具'],
     currentTargetId: 0,
     photoposter: '../images/poster.jpg',
     indicatorDots: true,
