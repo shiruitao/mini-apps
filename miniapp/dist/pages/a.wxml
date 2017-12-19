@@ -1,0 +1,7 @@
+
+<view class="main">
+    <view class="view">
+        <text class="text">123是否</text>
+        <text class="text">123是否</text>
+    </view>
+</view>
