@@ -238,7 +238,7 @@
       </view>
       <view class="view-recommend">
         <text class="text-line" />
-        <text style="font-size: 11px; margin: 10rpx">特价商品</text>
+        <text style="font-size: 11px; margin: 10rpx">推荐商品</text>
         <text class="text-line" />
       </view>
       <view class="view-list-commodity">
@@ -357,7 +357,6 @@ export default class Index extends wepy.page {
           self.setData({
             carts: res.data
           })
-          console.log(self.carts.length, '长度')
           self.methods.getTotalPrice(self)
         }
       })
@@ -488,8 +487,6 @@ export default class Index extends wepy.page {
           carts: res.data
         })
         self.methods.getTotalPrice(self)
-        console.log(self.carts, 'cart-onShow')
-        console.log(self.carts.length, '长度')
         self.methods.cartsCount(self)
       }
     })
@@ -513,7 +510,7 @@ export default class Index extends wepy.page {
       url: 'http://127.0.0.1:7001/getClass',
       method: 'POST',
       data: {
-        class: '特价'
+        class: '推荐'
       },
       success: function(res) {
         self.commodity = res.data

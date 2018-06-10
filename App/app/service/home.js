@@ -84,7 +84,6 @@ module.exports = app => {
     }
     * cartSubmit(req) {
       let res;
-      console.log(req.selected, 'service');
       try {
         res = yield app.mysql.select('carts', {
           where: { selected: req.selected },
