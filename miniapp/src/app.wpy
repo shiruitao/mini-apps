@@ -20,7 +20,7 @@ export default class extends wepy.app {
       'pages/my',
       'pages/news',
       'pages/shop',
-      // class
+      'pages/class/collection',
       'pages/class/detail',
       'pages/class/search',
       'pages/class/submit',

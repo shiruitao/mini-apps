@@ -354,7 +354,7 @@ export default class Index extends wepy.page {
       url: 'http://127.0.0.1:7001/getClass',
       method: 'POST',
       data: {
-        class: '特价'
+        class: '推荐'
       },
       success: function(res) {
         self.commodity = res.data

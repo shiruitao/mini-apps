@@ -135,7 +135,7 @@ export default class my extends wepy.page {
     },
     pageFavorite() {
       wepy.navigateTo({
-        url: './class/favorite'
+        url: './class/collection'
       })
     },
     pageAddress() {

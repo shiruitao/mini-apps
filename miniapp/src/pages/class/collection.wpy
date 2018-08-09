@@ -1,0 +1,81 @@
+<template>
+  <view>
+    <view wx:for="{{commodity}}" wx:key="index" class="view-commodity-list" @tap="tab">
+      <image class="image-photo" src="{{item.image}}"/>
+      <view class="view-information">
+        <view class="view-title">
+          <text class="text-title">{{item.title}}</text>
+        </view>
+        <view class="view-price">
+          <text class="text-price">¥{{item.price}}</text>
+          <text class="text-price">X {{item.num}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class order extends wepy.page {
+  config = {
+    navigationBarTitleText: '收藏'
+  }
+  data = {
+    commodity: []
+  }
+
+  onLoad() {
+    let self = this
+    wepy.request({
+      url: 'http://127.0.0.1:7001/orderGet',
+      success: function(res) {
+        self.commodity = res.data
+        self.setData({
+          commodity: res.data
+        })
+      }
+    })
+  }
+}
+</script>
+
+<style>
+.view-commodity-list {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 250rpx;
+  border-bottom: 3px solid #f5f6f8;
+}
+.image-photo {
+  height: 185rpx;
+  width: 185rpx;
+  margin: 30rpx;
+}
+.view-information {
+  height: 190rpx;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30rpx 0 30rpx 0;
+}
+.view-title {
+  height: 100%;
+  width: 330rpx;
+  overflow: scroll;
+}
+.view-price {
+  height: 100%;
+  width: 170rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.text-title {
+  font-size: 15px;
+}
+.text-price {
+  font-size: 13px;
+  text-align: center;
+}
+</style>

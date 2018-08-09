@@ -1,0 +1,38 @@
+
+.view-commodity-list {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 250rpx;
+  border-bottom: 3px solid #f5f6f8;
+}
+.image-photo {
+  height: 185rpx;
+  width: 185rpx;
+  margin: 30rpx;
+}
+.view-information {
+  height: 190rpx;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30rpx 0 30rpx 0;
+}
+.view-title {
+  height: 100%;
+  width: 330rpx;
+  overflow: scroll;
+}
+.view-price {
+  height: 100%;
+  width: 170rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.text-title {
+  font-size: 15px;
+}
+.text-price {
+  font-size: 13px;
+  text-align: center;
+}

@@ -1,0 +1,15 @@
+
+  <view>
+    <view  wx:for="{{commodity}}" wx:key="index" class="view-commodity-list" bindtap="tab">
+      <image class="image-photo" src="{{item.image}}"/>
+      <view class="view-information">
+        <view class="view-title">
+          <text class="text-title">{{item.title}}</text>
+        </view>
+        <view class="view-price">
+          <text class="text-price">¥{{item.price}}</text>
+          <text class="text-price">X {{item.num}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
